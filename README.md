@@ -98,6 +98,7 @@ git push origin --delete Dev/YourName/NewFeature  # Delete remote branch
 ✔️ **Write clear commit messages** that describe your changes.  
 ✔️ **Resolve merge conflicts carefully** and test after rebasing.  
 ✔️ **Avoid pushing directly to `main`**—always use feature branches and PRs.  
+<<<<<<< HEAD
 ✔️ **Keep your branches small** and focused on a single feature or bug fix.
 
 ## Django commands:
@@ -107,3 +108,14 @@ To make a new app:
 ```python manage.py startapp name-of-the-app```
 
 
+=======
+✔️ **Keep your branches small** and focused on a single feature or bug fix.  
+
+## Django commands:
+- To install the chores headers:
+```pip install django-cors-headers```
+- To run the django server:
+```python manage.py runserver```
+- To creat a new app:
+```python manage.py startapp name-of-the-app```
+>>>>>>> main
