@@ -101,9 +101,12 @@ git push origin --delete Dev/YourName/NewFeature  # Delete remote branch
 ✔️ **Keep your branches small** and focused on a single feature or bug fix.
 
 ## Django commands:
-To run the server:
+**To use the api:
+```pip install django-cors-headers```
+**To run the server:
 ```python manage.py runserver```
-To make a new app:
+**To make a new app:
 ```python manage.py startapp name-of-the-app```
+
 
 
