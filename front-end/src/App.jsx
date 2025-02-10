@@ -1,19 +1,42 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [data, setData] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/")
-      .then((response) => response.json())
-      .then((data) => setData(data.message))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  return (
+    <div className="container">
+      <nav className="navbar">
+        <h1 className="logo">AllExercises</h1>
+        <button className="login-btn">Login</button>
+      </nav>
+      
+      <section className="search-section">
+        <h2>Find Exercise Events</h2>
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search for events..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button className="search-btn">Search</button>
+        </div>
+      </section>
 
-  return <div>{data ? data : "Loading..."}</div>;
+      <section className="event-list">
+        <h3>Popular Events</h3>
+        <ul>
+          <li><strong>Basketball</strong></li>
+          <li><strong>Tennis</strong></li>
+          <li><strong>Swimming</strong></li>
+          <li><strong>Golf</strong></li>
+          <li><strong>Dodgeball</strong></li>
+          <li><strong>Weight Training</strong></li>
+          <li><strong>Pilates</strong></li>
+        </ul>
+      </section>
+    </div>
+  );
 }
-
 export default App;
