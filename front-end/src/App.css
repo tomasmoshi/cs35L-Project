@@ -42,6 +42,8 @@ body {
   color: #2b86d6;
 }
 
+.home-btn,
+.discover-btn,
 .login-btn {
   background: linear-gradient(135deg, #2b86d6, #1e65a5);
   color: white;
@@ -51,8 +53,12 @@ body {
   border-radius: 25px;
   font-size: 16px;
   transition: 0.3s ease-in-out;
+  margin-right: 10px;
+  /* Add space between buttons */
 }
 
+.home-btn:hover,
+.discover-btn:hover,
 .login-btn:hover {
   transform: scale(1.05);
   background: linear-gradient(135deg, #1e65a5, #2b86d6);

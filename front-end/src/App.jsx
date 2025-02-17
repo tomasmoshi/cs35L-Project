@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Login from "./login"; // Corrected import statement
+import Login from "./login";
+import Discover from "./Discover";
 import "./App.css";
 
 function App() {
@@ -11,7 +12,11 @@ function App() {
       <div className="container">
         <nav className="navbar">
           <h1 className="logo">AllExercises</h1>
-          <Link to="/login" className="login-btn">Login</Link>
+          <div className="nav-links">
+            <Link to="/" className="home-btn">Home </Link>
+            <Link to="/discover" className="discover-btn">Discover</Link>
+            <Link to="/login" className="login-btn">Login</Link>
+          </div>
         </nav>
 
         <Routes>
@@ -47,6 +52,7 @@ function App() {
               </>
             }
           />
+          <Route path="/discover" element={<Discover />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </div>
