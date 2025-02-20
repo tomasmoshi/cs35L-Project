@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 
@@ -115,15 +115,46 @@ function NeedHelpButton() {
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSignUpMode, setIsSignUpMode] = useState(false);
+
+  const openLogin = () => {
+    setIsLoginOpen(true);
+    setIsSignUpMode(false);
+  };
+
+  const openSignUp = () => {
+    setIsLoginOpen(true);
+    setIsSignUpMode(true);
+  };
+
+  const closeLogin = () => {
+    setIsLoginOpen(false);
+    setIsSignUpMode(false);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        closeLogin();
+      }
+    };
+    if (isLoginOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.removeEventListener("keydown", handleKeyDown);
+    }
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isLoginOpen]);
 
   return (
     <div className="container">
       <nav className="navbar">
         <h1 className="logo">AllExercises</h1>
-        <button className="login-btn">Login</button>
+        <button className="login-btn" onClick={openLogin}>Login</button>
       </nav>
       
-      <section className="search-section">
+      <section className={`search-section ${isLoginOpen ? "blur-background" : ""}`}>
         <h2>Find Exercise Events</h2>
         <div className="search-container">
           <input
@@ -136,7 +167,7 @@ function App() {
         </div>
       </section>
 
-      <section className="event-list">
+      <section className={`event-list ${isLoginOpen ? "blur-background" : ""}`}>
         <h3>Popular Events</h3>
         <ul>
           <li><strong>Basketball</strong></li>
