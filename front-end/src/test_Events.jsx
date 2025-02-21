@@ -9,29 +9,10 @@ const Events = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+      setImage(file);
     }
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (!image || !description.trim()) return;
-
-  //   const newEvent = {
-  //     id: Date.now(),
-  //     image,
-  //     description,
-  //   };
-
-  //   setEvents([newEvent, ...events]);
-  //   setImage(null);
-  //   setDescription("");
-  //   document.getElementById("imageInput").value = ""; // Reset file input
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!image || !description.trim()) return;
@@ -54,6 +35,7 @@ const Events = () => {
       })
       .catch((error) => console.error("Error:", error));
   };
+
   return (
     <div className="events-container">
       <h2> Share an Event</h2>
@@ -65,10 +47,10 @@ const Events = () => {
             accept="image/*"
             onChange={handleImageChange}
           />
-           Upload Image
+          Upload Image
         </label>
 
-        {image && <img src={image} alt="Preview" className="image-preview" />}
+        {image && <img src={URL.createObjectURL(image)} alt="Preview" className="image-preview" />}
 
         <textarea
           placeholder="Write a short event description..."
@@ -76,7 +58,7 @@ const Events = () => {
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
 
-        <button type="submit" className="submit-btn"> Post Event</button>
+        <button type="submit" className="submit-btn">Post Event</button>
       </form>
 
       <div className="events-list">
@@ -86,7 +68,7 @@ const Events = () => {
           events.map((event) => (
             <div key={event.id} className="event-card">
               <img src={event.image} alt="Event" className="event-image" />
-              <p className="event-text">{event.description}</p>
+              <p className="event-text">{event.content}</p>
             </div>
           ))
         )}
@@ -96,4 +78,3 @@ const Events = () => {
 };
 
 export default Events;
-
