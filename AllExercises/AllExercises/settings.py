@@ -18,8 +18,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Media handler
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/Media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
