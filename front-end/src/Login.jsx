@@ -1,55 +1,61 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./App.css"; // Import App.css for styling
-import { pass } from "three/tsl";
+import "./App/App.css"; // Ensure this path is correct
 
-function Login() {
+function Login({ isSignUpMode, onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleEmailChange = (event) => setEmail(event.target.value);
+  const handlePasswordChange = (event) => setPassword(event.target.value);
+  const handleConfirmPasswordChange = (event) => setConfirmPassword(event.target.value);
 
-    e.preventDefault();
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@(g\.ucla\edu|ucla\.edu)$/;
-    if(!emailPattern.test(email)){
-        alert("email must include a @g.ucla.edu or a @ucla.edu");
-        return;
-    }
-
-    const passwordPattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
-    if(!passwordPattern.test(password)){
-        alert("password must be 8 characters with one number and symbol.")
-    }
-    console.log(email, password);
-    navigate("/");
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Add your login/sign-up logic here
+    onClose();
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
-      <h4> to make a login, you must have a @ucla account and password must be of length 8 with One capital letter, one number, and one special character.</h4>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
+    <div className="login">
+      <div className="login-box">
+        <button className="close-btn" onClick={onClose}>&times;</button>
+        <h2>{isSignUpMode ? "Sign Up" : "Login"}</h2>
+        <form onSubmit={handleSubmit}>
           <input
             type="email"
+            placeholder="Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={handleEmailChange}
             required
           />
-        </div>
-        <div>
-          <label>Password:</label>
           <input
             type="password"
+            placeholder="Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
             required
           />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+          {isSignUpMode && (
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+              required
+            />
+          )}
+          <button type="submit" className="submit-btn">
+            {isSignUpMode ? "Sign Up" : "Login"}
+          </button>
+        </form>
+        <p>
+          {isSignUpMode ? "Already have an account? " : "Don't have an account? "}
+          <a href="#" onClick={isSignUpMode ? onClose : onClose}>
+            {isSignUpMode ? "Login" : "Sign up"}
+          </a>
+        </p>
+      </div>
     </div>
   );
 }
