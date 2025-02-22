@@ -1,10 +1,23 @@
-import React, { useState } from "react";
-import "./App/App.css"; // Ensure this path is correct
+// src/Features/Home/Login.jsx
+import React, { useState, useEffect } from "react";
+import "./Style/HelpModal.css"
 
-function Login({ isSignUpMode, onClose }) {
+function Login({ onClose }) {
+  const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
 
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
@@ -12,13 +25,12 @@ function Login({ isSignUpMode, onClose }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Add your login/sign-up logic here
     onClose();
   };
 
   return (
-    <div className="login">
-      <div className="login-box">
+    <div className="modal">
+      <div className="modal-content">
         <button className="close-btn" onClick={onClose}>&times;</button>
         <h2>{isSignUpMode ? "Sign Up" : "Login"}</h2>
         <form onSubmit={handleSubmit}>
@@ -51,7 +63,7 @@ function Login({ isSignUpMode, onClose }) {
         </form>
         <p>
           {isSignUpMode ? "Already have an account? " : "Don't have an account? "}
-          <a href="#" onClick={isSignUpMode ? onClose : onClose}>
+          <a href="#" onClick={() => setIsSignUpMode(!isSignUpMode)}>
             {isSignUpMode ? "Login" : "Sign up"}
           </a>
         </p>

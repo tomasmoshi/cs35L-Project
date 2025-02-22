@@ -1,78 +1,21 @@
-import { useState, useEffect } from "react";
+// src/App/App.jsx
+import React, { useState } from "react";
 import "./App.css";
-import Login from "../Login.jsx"; // Ensure this path matches the actual file name
-import Home from "../Features/AboutUs/AboutUs.jsx";
-import Home from "../Features/AboutUs/AboutUsButton.jsx";
-import Home from "../Features/AboutUs/HelpModal.jsx";
+import ModalButton from "../Features/Home/ModalButton.jsx";
+
 function App() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isSignUpMode, setIsSignUpMode] = useState(false);
-
-  const openLogin = () => {
-    setIsLoginOpen(true);
-    setIsSignUpMode(false);
-  };
-
-  const openSignUp = () => {
-    setIsLoginOpen(true);
-    setIsSignUpMode(true);
-  };
-
-  const closeLogin = () => {
-    setIsLoginOpen(false);
-    setIsSignUpMode(false);
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        closeLogin();
-      }
-    };
-    if (isLoginOpen) {
-      document.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.removeEventListener("keydown", handleKeyDown);
-    }
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isLoginOpen]);
-
   return (
-    <div className="container">
-      <nav className="navbar">
-        <h1 className="logo">AllExercises</h1>
-        <button className="login-btn" onClick={openLogin}>Login</button>
-      </nav>
-      
-      <section className={`search-section ${isLoginOpen ? "blur-background" : ""}`}>
-        <h2>Find Exercise Events</h2>
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search for events..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button className="search-btn">Search</button>
-        </div>
-      </section>
-
-      <section className={`event-list ${isLoginOpen ? "blur-background" : ""}`}>
-        <h3>Popular Events</h3>
-        <ul>
-          <li><strong>Basketball</strong></li>
-          <li><strong>Tennis</strong></li>
-          <li><strong>Swimming</strong></li>
-          <li><strong>Golf</strong></li>
-          <li><strong>Dodgeball</strong></li>
-          <li><strong>Weight Training</strong></li>
-          <li><strong>Pilates</strong></li>
-        </ul>
-      </section>
-      {isLoginOpen && <Login isSignUpMode={isSignUpMode} onClose={closeLogin} />}
-      <NeedHelpButton />
-      <AboutUsButton />
+    <div>
+      <div className="container">
+        <nav className="navbar">
+          <h1 className="logo">AllExercises</h1>
+          <div className="nav-buttons">
+            <ModalButton label="Login" modalType="login" />
+            <ModalButton label="Help" modalType="help" />
+            <ModalButton label="About Us" modalType="about" />
+          </div>
+        </nav>
+      </div>
     </div>
   );
 }
