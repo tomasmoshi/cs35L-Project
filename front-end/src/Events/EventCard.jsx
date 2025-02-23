@@ -1,6 +1,7 @@
 // EventCard.js
 import React from "react";
-import "./test_Events.css";
+import "./EventCard.css";
+import { formatDate } from "../Utils/DateHelper";
 
 const EventCard = ({ event }) => {
 
@@ -12,6 +13,7 @@ const EventCard = ({ event }) => {
   return (
     <div className="event-card">
       <h3 className="event-title">Title:{event.title}</h3>
+      <span className="event-user">By: {event.author}</span>
       {event.image && (
         <img
           src={imageUrl}
@@ -19,17 +21,16 @@ const EventCard = ({ event }) => {
           className="event-image"
         />
       )}
-      
+      <p className="event-text">{event.content}</p>
       <div className="event-header">
-        <span className="event-user">By: {event.author}</span>
         {/* Only display date if it exists */}
         {event.date_posted && (
           <span className="event-date">
-            {new Date(event.date_posted).toLocaleString()}
+            <div >Date posted: </div> 
+            {formatDate(event.date_posted)}
           </span>
         )}
       </div>
-      <p className="event-text">{event.content}</p>
     </div>
   );
 };

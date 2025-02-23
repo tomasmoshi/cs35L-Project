@@ -1,6 +1,6 @@
 /* eventCard.css */
-
 /* Event Card Container */
+
 .event-card {
     background: white;
     padding: 20px;
@@ -55,5 +55,6 @@
     font-size: 15px;
     color: #333;
     line-height: 1.5;
+    white-space: pre-wrap;
   }
   

@@ -1,7 +1,7 @@
 // EventsList.js
 import React, { useState, useEffect } from "react";
-import "./test_Events.css";
-import { sendRequest } from "../Utils/Events_utils"; // Adjust the path as needed
+import "./EventList.css";
+import { sendRequest } from "../Utils/EventsUtils"; // Adjust the path as needed
 import EventCard from "./EventCard";
 import EventForm from "./EventForm";
 
@@ -22,16 +22,14 @@ const EventsList = () => {
   // Callback to update the events list when a new event is submitted
   const handleEventSubmitted = (newEvent) => {
     // Option 1: Prepend the new event to the current list
-    setEvents((prevEvents) => [newEvent, ...prevEvents]);
+    // setEvents((prevEvents) => [newEvent, ...prevEvents]);
     // Option 2: Re-fetch the entire list if needed
-    // fetchEvents();
+    fetchEvents();
   };
 
   return (
     <div className="events-container">
       <h2>Events</h2>
-      {/* Render the form for submitting a new event
-      <EventForm onEventSubmitted={handleEventSubmitted} /> */}
       <div className="events-list">
         {events.length === 0 ? (
           <p className="no-events">No events found.</p>
