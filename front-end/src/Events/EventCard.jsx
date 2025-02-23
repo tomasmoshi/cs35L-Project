@@ -21,24 +21,23 @@ const EventCard = ({ event }) => {
         />
       )}
       <p className="event-text">{event.content}</p>
-      <div className="event-header">
-        <span className="event-user">By: {event.author}</span>
-        {event.date_posted && (
-          <span className="event-date">
-            <div >Date posted: </div> 
-            {formatDate(event.date_posted)}
-          </span>
-        )}
-      </div>
       {event.tags && event.tags.length > 0 && (
         <div className="event-tags">
-          {event.tags.map((tag, index) => (
+          <p>Tags: {event.tags.map((tag, index) => (
             <span key={index} className="event-tag">
               {tag}
             </span>
           ))}
+          </p>
         </div>
       )}
+      <div className="event-header">
+        <div >Date posted: {event.date_posted && (
+          <span className="event-date">
+            {formatDate(event.date_posted)}
+          </span>
+        )}</div> 
+      </div>
     </div>
   );
 };

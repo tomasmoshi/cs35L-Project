@@ -7,7 +7,7 @@ const EventForm = ({ onEventSubmitted }) => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null); // Store the file object
   const [content, setContent] = useState("");
-  const [preview, setPreview] = useState(null); // For displaying image preview
+  const [preview, setPreview] = useState();
   const [tags, setTags] = useState("");
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -27,14 +27,9 @@ const EventForm = ({ onEventSubmitted }) => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("image", image);
-    const tagsList = tags
-      .split(",")
-      .map((tag) => tag.trim())
-      .filter((tag) => tag.length > 0);
-    formData.append("tags", JSON.stringify(tagsList));
-    for (let [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
+
+    formData.append("tags", JSON.stringify(tags));
+
     // Post event data (date_posted will be handled by the backend)
     const data = await sendRequest("http://127.0.0.1:8000/api/events/", "POST", formData);
     if (data) {
@@ -59,7 +54,7 @@ const EventForm = ({ onEventSubmitted }) => {
         className="title-input"
       />
 
-      <label className="custom-file-upload">
+      <label className="submit-btn">
         <input
           type="file"
           id="imageInput"
