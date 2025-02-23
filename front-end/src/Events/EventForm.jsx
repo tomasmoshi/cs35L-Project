@@ -8,7 +8,7 @@ const EventForm = ({ onEventSubmitted }) => {
   const [image, setImage] = useState(null); // Store the file object
   const [content, setContent] = useState("");
   const [preview, setPreview] = useState(null); // For displaying image preview
-
+  const [tags, setTags] = useState("");
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -27,7 +27,11 @@ const EventForm = ({ onEventSubmitted }) => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("image", image);
-    
+    const tagsList = tags
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter((tag) => tag.length > 0);
+    formData.append("tags", JSON.stringify(tagsList));
     for (let [key, value] of formData.entries()) {
       console.log(key, value);
     }
@@ -39,6 +43,7 @@ const EventForm = ({ onEventSubmitted }) => {
       setTitle("");
       setContent("");
       setImage(null);
+      setTags("");
       setPreview(null);
       e.target.reset(); // Resets the file input
     }
@@ -72,7 +77,13 @@ const EventForm = ({ onEventSubmitted }) => {
         value={content}
         onChange={(e) => setContent(e.target.value)}
       ></textarea>
-
+      <input
+        type="text"
+        placeholder="Tags (comma separated)"
+        value={tags}
+        onChange={(e) => setTags(e.target.value)}
+        className="title-input"
+      />
       <button type="submit" className="submit-btn">
         Post Event
       </button>

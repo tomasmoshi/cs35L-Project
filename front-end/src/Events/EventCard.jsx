@@ -12,8 +12,9 @@ const EventCard = ({ event }) => {
   
   return (
     <div className="event-card">
-      <h3 className="event-title">Title:{event.title}</h3>
-      <span className="event-user">By: {event.author}</span>
+      <h3 className="event-title">{event.title}</h3>
+      <br/>
+      <span className="event-user">Posted by: {event.author}</span>
       {event.image && (
         <img
           src={imageUrl}
@@ -31,6 +32,15 @@ const EventCard = ({ event }) => {
           </span>
         )}
       </div>
+      {event.tags && event.tags.length > 0 && (
+        <div className="event-tags">
+          {event.tags.map((tag, index) => (
+            <span key={index} className="event-tag">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
