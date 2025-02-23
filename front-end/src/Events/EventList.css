@@ -19,4 +19,13 @@
     margin-bottom: 20px;
     font-weight: bold;
   }
+  textarea {
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    resize: none;
+    padding: auto;
+  }
   

@@ -1,14 +1,14 @@
 // EventForm.js
 import React, { useState } from "react";
 import "./EventForm.css";
-import { sendRequest } from "../Utils/Events_utils"; // Adjust the path as needed
+import { sendRequest } from "../Utils/EventsUtils"; // Adjust the path as needed
 
 const EventForm = ({ onEventSubmitted }) => {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState(null); // Store the file object
   const [content, setContent] = useState("");
-  const [preview, setPreview] = useState(null); // For displaying image preview
-
+  const [preview, setPreview] = useState();
+  const [tags, setTags] = useState("");
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -27,10 +27,9 @@ const EventForm = ({ onEventSubmitted }) => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("image", image);
-    
-    for (let [key, value] of formData.entries()) {
-      console.log(key, value);
-    }
+
+    formData.append("tags", JSON.stringify(tags));
+
     // Post event data (date_posted will be handled by the backend)
     const data = await sendRequest("http://127.0.0.1:8000/api/events/", "POST", formData);
     if (data) {
@@ -39,6 +38,7 @@ const EventForm = ({ onEventSubmitted }) => {
       setTitle("");
       setContent("");
       setImage(null);
+      setTags("");
       setPreview(null);
       e.target.reset(); // Resets the file input
     }
@@ -54,7 +54,7 @@ const EventForm = ({ onEventSubmitted }) => {
         className="title-input"
       />
 
-      <label className="custom-file-upload">
+      <label className="submit-btn">
         <input
           type="file"
           id="imageInput"
@@ -72,7 +72,13 @@ const EventForm = ({ onEventSubmitted }) => {
         value={content}
         onChange={(e) => setContent(e.target.value)}
       ></textarea>
-
+      <input
+        type="text"
+        placeholder="Tags (comma separated)"
+        value={tags}
+        onChange={(e) => setTags(e.target.value)}
+        className="title-input"
+      />
       <button type="submit" className="submit-btn">
         Post Event
       </button>

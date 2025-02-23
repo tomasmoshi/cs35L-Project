@@ -107,7 +107,15 @@ git push origin --delete Dev/YourName/NewFeature  # Delete remote branch
 ```python manage.py runserver```
 - To creat a new app:
 ```python manage.py startapp name-of-the-app```
-- Install Pillow for the backend to store images: 
-```python -m pip install Pillow```
-- Install djangorestframework: 
-```pip install djangorestframework```
+- Install django-taggit:
+```pip install django-taggit```
+- Install django-taggit-serializer:
+```pip install django-taggit-serializer```
+- Locate the file in your virtual environment:
+```.../lib/python3.13/site-packages/taggit_serializer/serializers.py```
+edit the following line:
+```from django.utils.translation import ugettext_lazy as _```
+to 
+```from django.utils.translation import gettext_lazy as _```
+
+
