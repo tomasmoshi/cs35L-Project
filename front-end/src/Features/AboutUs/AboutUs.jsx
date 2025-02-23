@@ -1,5 +1,5 @@
 import React from "react";
-import "./Style/AboutUs.css";
+import "./AboutUs.css";
 function AboutUs({ onClose }) {
   return (
     <div className="modal">

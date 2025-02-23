@@ -1,6 +1,8 @@
-// src/Features/Home/Login.jsx
 import React, { useState, useEffect } from "react";
-import "./Style/HelpModal.css"
+import "../Help/HelpModal.css";
+
+
+//next steps are to make a forgot password and make a user
 
 function Login({ onClose }) {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
