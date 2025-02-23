@@ -1,11 +1,9 @@
-// EventCard.js
 import React from "react";
 import "./EventCard.css";
 import { formatDate } from "../Utils/DateHelper";
 
 const EventCard = ({ event }) => {
 
-  // console.log("Event object:", event); // Check if title exists
   const imageUrl = event.image && event.image.startsWith("http")
     ? event.image
     : `http://localhost:8000${event.image}`;
@@ -24,7 +22,7 @@ const EventCard = ({ event }) => {
       )}
       <p className="event-text">{event.content}</p>
       <div className="event-header">
-        {/* Only display date if it exists */}
+        <span className="event-user">By: {event.author}</span>
         {event.date_posted && (
           <span className="event-date">
             <div >Date posted: </div> 
