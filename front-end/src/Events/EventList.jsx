@@ -1,6 +1,6 @@
 // EventsList.js
 import React, { useState, useEffect } from "react";
-import "./test_Events.css";
+import "./EventList.css";
 import { sendRequest } from "../Utils/Events_utils"; // Adjust the path as needed
 import EventCard from "./EventCard";
 import EventForm from "./EventForm";
