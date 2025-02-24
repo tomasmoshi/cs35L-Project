@@ -1,6 +1,5 @@
 import React from "react";
-import "./Style/HelpModal.css"
-
+import "./HelpModal.css";
 function Help({ onClose }) {
   return (
     <div className="modal">

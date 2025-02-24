@@ -1,6 +1,6 @@
 /* eventCard.css */
-
 /* Event Card Container */
+
 .event-card {
     background: white;
     padding: 20px;
@@ -20,8 +20,9 @@
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    color: #777;
+    color: #000000;
     margin-bottom: 10px;
+    
   }
   
   /* Event User */
@@ -32,7 +33,7 @@
   /* Event Date */
   .event-date {
     font-size: 13px;
-    color: #999;
+    color: #000000;
   }
   
   /* Event Title */
@@ -40,6 +41,7 @@
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
+    text-align: center;
   }
   
   /* Event Image */
@@ -53,7 +55,8 @@
   .event-text {
     margin-top: 12px;
     font-size: 15px;
-    color: #333;
+    color: #000000;
     line-height: 1.5;
+    white-space: pre-wrap;
   }
   
