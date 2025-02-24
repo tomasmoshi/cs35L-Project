@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views
+from .views import CreateEventView
 
 urlpatterns = [
-    path("", views.home, name='events-home'),
+    # Add the path for the event submission
+    path('events/', CreateEventView.as_view(), name='create-event'),
 ]
