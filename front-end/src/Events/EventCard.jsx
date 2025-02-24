@@ -1,6 +1,6 @@
 // EventCard.js
 import React from "react";
-import "./test_Events.css";
+import "./EventCard.css";
 
 const EventCard = ({ event }) => {
 
