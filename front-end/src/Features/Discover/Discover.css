@@ -82,3 +82,23 @@
     font-size: 14px;
     margin-top: 10px;
 }
+
+.category-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.categories button {
+    margin: 5px;
+    padding: 10px 15px;
+    border: none;
+    background: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.categories button:hover {
+    background: #0056b3;
+}
