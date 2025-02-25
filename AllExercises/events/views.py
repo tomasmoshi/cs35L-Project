@@ -6,27 +6,26 @@ import json
 from .models import Post
 from .serializers import PostSerializer
 
+
 class CreateEventView(APIView):
     parser_classes = (MultiPartParser, FormParser)  # Allow image uploads
-    def seperate_tags(self, tags):
-        pass
+
     def post(self, request, *args, **kwargs):
         data = request.data.copy()
-        data['tags'] = json.loads(data['tags'])
+        data["tags"] = json.loads(data["tags"])
         serializer = PostSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        print(serializer.errors)  # Log errors to your console
+        print(serializer.errors) 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # def get(self, request, *args, **kwargs):
     def get(self, request, *args, **kwargs):
-        tag = request.query_params.get('tags', None)
-        print(tag)
-
+        tag = request.query_params.get("tags", None)
         if tag:
-            posts = Post.objects.filter(tags__name__icontains=tag).order_by("-date_posted")
+            posts = Post.objects.filter(tags__name__icontains=tag).order_by(
+                "-date_posted"
+            )
             serializer = PostSerializer(posts, many=True)
             return Response(serializer.data)
         else:
@@ -34,5 +33,3 @@ class CreateEventView(APIView):
             posts = Post.objects.all().order_by("-date_posted")
             serializer = PostSerializer(posts, many=True)
             return Response(serializer.data)
-
-

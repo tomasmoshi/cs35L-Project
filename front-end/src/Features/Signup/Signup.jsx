@@ -33,14 +33,14 @@ const Signup = () => {
     const formData = new FormData();
     formData.append("username", username);
     formData.append("password", password);
-    formData.append("firstName", firstName);
-    formData.append("lastName", lastName);
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
     formData.append("email", email);
     if (profileImage) {
-      formData.append("profileImage", profileImage);
+      formData.append("profile_Image", profileImage);
     }
-
-    const data = await sendRequest("http://127.0.0.1:8000/api/signup/", "POST", formData);
+    
+    const data = await sendRequest("http://127.0.0.1:8000/api/users/", "POST", formData);
     if (data) {
       console.log("Signup successful", data);
       // Reset form fields
@@ -83,10 +83,10 @@ const Signup = () => {
         />
         <div className="password-instructions">
           <ul>
-            <li>Your password can’t be too similar to your other personal information.</li>
+            <li>Your password can't be too similar to your other personal information.</li>
             <li>Your password must contain at least 8 characters.</li>
-            <li>Your password can’t be a commonly used password.</li>
-            <li>Your password can’t be entirely numeric.</li>
+            <li>Your password can't be a commonly used password.</li>
+            <li>Your password can't be entirely numeric.</li>
           </ul>
         </div>
         <input 
