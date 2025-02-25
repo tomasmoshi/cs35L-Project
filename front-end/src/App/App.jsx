@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ModalButton from "../Features/ModalButton/ModalButton.jsx";
 import Discover from "../Features/Discover/Discover.jsx";
 import "./App.css";
+import EventDisplay from "../Events/EventDisplay.jsx";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         </nav>
         <Routes>
           <Route path="/discover" element = {<Discover />}/>
+          <Route path="/event/:id" element={<EventDisplay />}/>
         </Routes>
       </div>
     </div>
