@@ -2,7 +2,7 @@ import React from "react";
 import "./EventCard.css";
 import { formatDate } from "../Utils/DateHelper";
 
-const EventCard = ({ event }) => {
+const EventCard = ({ event, preview = false }) => {
 
   const imageUrl = event.image && event.image.startsWith("http")
     ? event.image
@@ -20,7 +20,7 @@ const EventCard = ({ event }) => {
           className="event-image"
         />
       )}
-      <p className="event-text">{event.content}</p>
+      {!preview && <p className="event-text">{event.content}</p>}
       {event.tags && event.tags.length > 0 && (
         <div className="event-tags">
           <p>Tags: {event.tags.map((tag, index) => (
