@@ -39,7 +39,7 @@ const Signup = () => {
     if (profileImage) {
       formData.append("profile_Image", profileImage);
     }
-
+    
     const data = await sendRequest("http://127.0.0.1:8000/api/users/", "POST", formData);
     if (data) {
       console.log("Signup successful", data);
