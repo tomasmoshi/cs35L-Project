@@ -6,6 +6,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
 import json
 from .serializers import UserSerializer
+from .models import UserProfile
 
 
 # Create your views here.
@@ -18,4 +19,11 @@ class CreateUserView(APIView, UserCreationForm):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
         print(user)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    def get(self, request, *args, **kwargs):
+        user = UserProfile()
+        serializer = UserSerializer(user, many=True)
+        return Response(serializer.data)

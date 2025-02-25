@@ -17,10 +17,9 @@ class CreateEventView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        print(serializer.errors)  # Log errors to your console
+        print(serializer.errors) 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # def get(self, request, *args, **kwargs):
     def get(self, request, *args, **kwargs):
         tag = request.query_params.get("tags", None)
         if tag:
