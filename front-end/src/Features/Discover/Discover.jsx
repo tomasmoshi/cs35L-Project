@@ -1,7 +1,7 @@
 // src/Features/Home/Discover.jsx
 import React, { useState, useEffect } from "react";
 import EventCard from "../../Events/EventCard";
-import { sendRequest } from "../../Utils/Events_utils";
+import { sendRequest } from "../../Utils/EventsUtils";
 import "./Discover.css";
 
 const Discover = () => {
