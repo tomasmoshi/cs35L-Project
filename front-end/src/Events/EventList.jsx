@@ -1,42 +1,52 @@
-// EventsList.js
+// EventList.jsx
 import React, { useState, useEffect } from "react";
-import "./test_Events.css";
-import { sendRequest } from "../Utils/Events_utils"; // Adjust the path as needed
+import "./EventList.css";
+import { sendRequest } from "../Utils/EventsUtils";
 import EventCard from "./EventCard";
 import EventForm from "./EventForm";
+import { Link } from "react-router-dom";
 
 const EventsList = () => {
   const [events, setEvents] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  // Fetch events from the backend
-  const fetchEvents = async () => {
-    const data = await sendRequest("http://127.0.0.1:8000/api/events/", "GET", null);
-    if (data) {
-      setEvents(data);
+  const fetchEvents = async (url) => {
+    try {
+      const data = await sendRequest(url, "GET", null);
+      if (data) {
+        setEvents(data);
+      }
+    } catch (err) {
+      console.error("Fetch error:", err);
     }
   };
-  useEffect(() => {
-    fetchEvents();
-  }, []);
 
-  // Callback to update the events list when a new event is submitted
-  const handleEventSubmitted = (newEvent) => {
-    // Option 1: Prepend the new event to the current list
-    setEvents((prevEvents) => [newEvent, ...prevEvents]);
-    // Option 2: Re-fetch the entire list if needed
-    // fetchEvents();
+  const handleChange = (e) => {
+    const newValue = e.target.value;
+    setSearchQuery(newValue);
+    fetchEvents(`http://127.0.0.1:8000/api/events/?tags=${newValue}`);
   };
 
   return (
     <div className="events-container">
       <h2>Events</h2>
-      {/* Render the form for submitting a new event
-      <EventForm onEventSubmitted={handleEventSubmitted} /> */}
+      <input
+        className="textarea"
+        type="text"
+        placeholder="Search by tag..."
+        value={searchQuery}
+        onChange={handleChange} 
+      />
       <div className="events-list">
         {events.length === 0 ? (
           <p className="no-events">No events found.</p>
         ) : (
-          events.map((event) => <EventCard key={event.id} event={event} />)
+          events.map((event) => (
+            // Wrap the event card with a Link that passes the event data via state
+            <Link to={`/event/${event.id}`} state={{ event }} key={event.id}>
+              <EventCard event={event} />
+            </Link>
+          ))
         )}
       </div>
     </div>
