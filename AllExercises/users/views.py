@@ -16,12 +16,16 @@ class CreateUserView(APIView, UserCreationForm):
     def post(self, request, *args, **kwargs):
         user = request.data
         serializer = UserSerializer(data=user)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        try:
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            
+            print(user)
+        except:
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-        print(user)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
     def get(self, request, *args, **kwargs):
         user = UserProfile()
