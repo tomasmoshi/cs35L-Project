@@ -4,18 +4,13 @@ import { sendRequest } from "../../Utils/EventsUtils";
 import "../Help/HelpModal.css";
 
 const Signup = () => {
-  const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState("");
-  const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
 
   const handleImageChange = (e) => {
+    
     const file = e.target.files[0];
     if (file) {
       setProfileImage(file);
@@ -24,39 +19,32 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
+    localStorage.removeItem("token");
     e.preventDefault();
-
     // Clear previous errors
     setUsernameError("");
     setPasswordError("");
 
     // Client-side check for matching passwords
-    if (password !== confirmPassword) {
+
+
+    const formData = new FormData(e.currentTarget);
+    if (formData.get("password") !== formData.get("confirm_password")) {
       setPasswordError("Passwords do not match!");
       return;
     }
-
-    const formData = new FormData();
-    formData.append("username", username);
-    formData.append("password", password);
-    formData.append("confirm_password", confirmPassword);
-    formData.append("first_name", firstName);
-    formData.append("last_name", lastName);
-    formData.append("email", email);
     if (profileImage) {
-      formData.append("profile_Image", profileImage);
+      formData.append("profile_image", profileImage);
     }
 
     try {
       const data = await sendRequest("http://127.0.0.1:8000/api/users/", "POST", formData);
       console.log("Response data:", data);
-
       // If no data is returned, treat it as a username error.
       if (!data) {
         setUsernameError("Username already taken.");
         return;
       }
-
       // Check for errors returned from the backend (using "error" or "detail" keys)
       if (data.error || data.detail) {
         const errMsg = (data.error || data.detail).toLowerCase();
@@ -70,18 +58,15 @@ const Signup = () => {
         }
         return;
       }
-
-      // On success (assuming data.success is returned), clear the form
+      if (data.token && data.username){
+        localStorage.setItem("token", data.token)
+        localStorage.setItem("username", data.username)
+      }
       if (data.success) {
-        console.log("Signup successful", data);
-        setUsername("");
-        setPassword("");
-        setConfirmPassword("");
-        setFirstName("");
-        setLastName("");
-        setEmail("");
         setProfileImage(null);
         setPreview(null);
+        e.target.reset();
+        // document.querySelector("form").reset(); // Ensures all fields are cleared
       }
     } catch (error) {
       console.log("Error in signup:", error);
@@ -104,23 +89,20 @@ const Signup = () => {
         <input 
           type="text" 
           placeholder="Username" 
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          name="username"
           required
         />
         {passwordError && <p className="error">{passwordError}</p>}
         <input 
           type="password" 
           placeholder="Password" 
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
           required
         />
         <input 
           type="password" 
-          placeholder="Confirm Password" 
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          placeholder="Confirm Password"
+          name="confirm_password" 
           required
         />
         <div className="password-instructions">
@@ -131,31 +113,32 @@ const Signup = () => {
             <li>Your password can't be entirely numeric.</li>
           </ul>
         </div>
-        <input 
-          type="file" 
-          accept="image/*" 
-          onChange={handleImageChange}
-        />
         {preview && <img src={preview} alt="Profile Preview" className="image-preview" />}
+        <label className="submit-btn">
+          <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+          Upload Image
+        </label>
         <input 
           type="text" 
           placeholder="First Name" 
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          name="first_name"
           required
         />
         <input 
           type="text" 
           placeholder="Last Name" 
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          name="last_name"
           required
         />
         <input 
           type="email" 
           placeholder="Email" 
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="email"
           required
         />
         <button type="submit" className="submit-btn">Sign Up</button>
