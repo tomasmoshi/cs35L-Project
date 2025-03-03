@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import images from "../images/user.png";
-import "../AccountPage/user.css";
-import apiUsers from "../Utils/apiUsers";
+import images from "../../assets/images/user.png";
+import apiUsers from "../../Utils/apiUsers";
 
 const Account = () => {
   const [user, setUser] = useState(null);
