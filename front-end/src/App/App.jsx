@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ModalButton from "../Features/ModalButton/ModalButton.jsx";
 import Discover from "../Features/Discover/Discover.jsx";
 import "./App.css";
+import Login from "../Features/Login/Login"; // Adjust the path as needed
+import Home from "../Features/Home"; // Import Home
+
 
 
 function App() {
