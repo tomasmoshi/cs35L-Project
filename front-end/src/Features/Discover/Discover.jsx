@@ -1,9 +1,12 @@
+// Discover.jsx
 import React, { useState, useEffect } from "react";
 import EventCard from "../../Events/EventCard";
-import { sendRequest } from "../../Utils/EventsUtils";
+import { sendRequest } from "../../Utils/apiEvents";
 import "./Discover.css";
+import { Link } from "react-router-dom";
 
 const Discover = () => {
+  console.log("Discover component rendered");
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -23,7 +26,7 @@ const Discover = () => {
     }
   };
 
-  // New function: fetch events based on selected category
+  // Fetch events based on category
   const handleCategoryClick = async (category) => {
     try {
       setLoading(true);
@@ -56,7 +59,6 @@ const Discover = () => {
         Explore popular events near you, browse by category, or check out community events.
       </h3>
 
-      {/* New Browse by Category Container */}
       <div className="category-container">
         <h2>Browse by Category</h2>
         <div className="categories">
@@ -72,10 +74,13 @@ const Discover = () => {
       
       {!loading && filteredEvents.length > 0 && (
         <div className="event-grid">
-          {filteredEvents.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
-        </div>
+         {filteredEvents.map((event) => (
+          // Pass event data via state and set preview to true (so description is hidden)
+          <Link to={`/event/${event.id}`} state={{ event }} key={event.id}>
+            <EventCard event={event} preview={true} />
+          </Link>
+        ))}
+      </div>
       )}
     </div>
   );

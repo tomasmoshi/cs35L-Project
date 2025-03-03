@@ -59,4 +59,6 @@
     line-height: 1.5;
     white-space: pre-wrap;
   }
-  
+  .preview .event-text {
+    display: none;
+  }
