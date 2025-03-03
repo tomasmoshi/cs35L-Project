@@ -6,6 +6,7 @@ import "./Discover.css";
 import { Link } from "react-router-dom";
 
 const Discover = () => {
+  console.log("Discover component rendered");
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [loading, setLoading] = useState(false);
 

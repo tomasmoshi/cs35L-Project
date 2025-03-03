@@ -7,21 +7,29 @@
  * @returns {Promise<object|null>} - The response data or null if there's an error.
  */
 export const sendRequest = async (url, method, formData = null) => {
-    try {
-      const response = await fetch(url, {
-        method: method,
-        body: formData,
-      });
-  
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error:", error);
-      return null;
+  try {
+    // Retrieve token from localStorage
+    const token = localStorage.getItem("token");
+
+    // Create headers and include the token if present
+    const headers = token ? { "Authorization": `Token ${token}` } : {};
+
+    const response = await fetch(url, {
+      method,
+      headers,
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
-  };
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    return null;
+  }
+};
+
   

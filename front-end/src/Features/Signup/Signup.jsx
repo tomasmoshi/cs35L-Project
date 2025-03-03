@@ -10,6 +10,7 @@ const Signup = () => {
   const [preview, setPreview] = useState(null);
 
   const handleImageChange = (e) => {
+    
     const file = e.target.files[0];
     if (file) {
       setProfileImage(file);
@@ -18,8 +19,8 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
+    localStorage.removeItem("token");
     e.preventDefault();
-
     // Clear previous errors
     setUsernameError("");
     setPasswordError("");
@@ -39,7 +40,6 @@ const Signup = () => {
     try {
       const data = await sendRequest("http://127.0.0.1:8000/api/users/", "POST", formData);
       console.log("Response data:", data);
-
       // If no data is returned, treat it as a username error.
       if (!data) {
         setUsernameError("Username already taken.");
@@ -58,15 +58,15 @@ const Signup = () => {
         }
         return;
       }
-
-      // On success (assuming data.success is returned), clear the form
+      if (data.token && data.username){
+        localStorage.setItem("token", data.token)
+        localStorage.setItem("username", data.username)
+      }
       if (data.success) {
-        console.log("Signup successful", data);
         setProfileImage(null);
         setPreview(null);
         e.target.reset();
-        formData.reset();
-        document.querySelector("form").reset(); // Ensures all fields are cleared
+        // document.querySelector("form").reset(); // Ensures all fields are cleared
       }
     } catch (error) {
       console.log("Error in signup:", error);

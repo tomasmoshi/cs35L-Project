@@ -11,9 +11,9 @@ class Post(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     image = models.ImageField(upload_to="event_images/", null=True, blank=True)
-    # author = models.ForeignKey(
-    #     User, on_delete=models.CASCADE
-    # )  # models.CASCADE will delete all the posts for a user when the user is deleted
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE
+    )  # models.CASCADE will delete all the posts for a user when the user is deleted
     tags = TaggableManager()  # Adds tagging support
 
     def __str__(self):

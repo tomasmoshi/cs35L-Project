@@ -4,9 +4,7 @@ import "./EventForm.css";
 import { sendRequest } from "../Utils/EventsUtils"; // Adjust the path as needed
 
 const EventForm = ({ onEventSubmitted }) => {
-  const [title, setTitle] = useState("");
   const [image, setImage] = useState(null); // Store the file object
-  const [content, setContent] = useState("");
   const [preview, setPreview] = useState();
   const [tags, setTags] = useState("");
   const handleImageChange = (e) => {
@@ -25,8 +23,6 @@ const EventForm = ({ onEventSubmitted }) => {
     formData.append("tags", JSON.stringify(tags));
     formData.append("image", image);
     if (!formData.get("title")|| !formData.get("content") || !image || !tags) return;
-
-
     // Post event data (date_posted will be handled by the backend)
     const data = await sendRequest("http://127.0.0.1:8000/api/events/", "POST", formData);
     if (data) {
