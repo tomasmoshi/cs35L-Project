@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./EventForm.css";
 import { sendRequest } from "../Utils/apiEvents"; // Adjust the path as needed
 
-const EventForm = ({ onEventSubmitted }) => {
+const EventForm = ({ onEventSubmitted, onClose }) => {
   const [image, setImage] = useState(null); // Store the file object
   const [preview, setPreview] = useState();
   const [tags, setTags] = useState("");
@@ -32,6 +32,10 @@ const EventForm = ({ onEventSubmitted }) => {
       setTags("");
       setPreview(null);
       e.target.reset(); // Resets the file input
+      console.log(onClose)
+      if (onClose){
+        onClose();
+      }
     }
   };
 
