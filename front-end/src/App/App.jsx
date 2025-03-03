@@ -23,7 +23,6 @@ function App() {
             <ModalButton label ="Discover" modalType="discover"/>
           </div>
         </nav>
-        <EventForm onEventSubmitted={console.log}/>
         <Routes>
           <Route path="/discover" element = {<Discover />}/>
           <Route path="/event/:id" element={<EventDisplay />}/>
