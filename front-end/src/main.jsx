@@ -13,7 +13,7 @@ const handleEventSubmitted = (newEvent) => {
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
-    {/* <EventForm onEventSubmitted={handleEventSubmitted}/>
-    <EventList /> */}
+    <EventForm onEventSubmitted={handleEventSubmitted}/>
+    <EventList />
   </StrictMode>
 );
