@@ -1,12 +1,20 @@
 // Login.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import apiService from "../../Utils/apiService";
 import "../Help/HelpModal.css";
 import Signup from "../Signup/Signup";
+import { UserContext } from "../Context/UserContext.jsx";
+
 
 function Login({ onClose }) {
+  const {setUser} = useContext(UserContext);
+  const [error, setError] = useState("");
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleEmailChange = (event) => setEmail(event.target.value);
+  const handlePasswordChange = (event) => setPassword(event.target.value);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -19,13 +27,22 @@ function Login({ onClose }) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
-  const handleEmailChange = (event) => setEmail(event.target.value);
-  const handlePasswordChange = (event) => setPassword(event.target.value);
-
-  const handleLoginSubmit = (event) => {
-    event.preventDefault();
-    // Add your login logic here
-    onClose();
+  // the handles for the email and password are used to update the state of the email and password fields
+  const handleLoginSubmit = async (event) => {
+    event.preventDefault(); // prevents the default form submission behavior
+    try{
+      // send a POST request to the login endpoint with the email and password
+      const data = await apiService("/login/", "POST", {
+        email: email,
+        password: password,
+      });
+    // if the login is successful, set the user state to the response data
+    setUser(data);
+    // close the modal
+    onClose("Login successful");
+    } catch (error) {
+      setError("Invalid email or password");
+    }
   };
 
   return (
@@ -63,9 +80,7 @@ function Login({ onClose }) {
           </>
         )}
         <p>
-          {isSignUpMode
-            ? "Already have an account? "
-            : "Don't have an account? "}
+          {isSignUpMode ? "Don't have an account? " : "Already have an account? "}
           <a
             href="#"
             onClick={() => setIsSignUpMode(!isSignUpMode)}
@@ -77,5 +92,6 @@ function Login({ onClose }) {
     </div>
   );
 }
+
 
 export default Login;
