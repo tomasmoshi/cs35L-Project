@@ -1,23 +1,32 @@
 // PostEvent.jsx
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import EventForm from "../../Events/EventForm"; // Adjust the path as needed
 import Login from "../Login/Login"; // Adjust the path as needed
 import "../Help/HelpModal.css";
-const PostEvent = ({ onClose, onEventSubmitted }) => {
-  // Check if a token exists in localStorage
+
+const PostEvent = ({ onEventSubmitted, onClose }) => {
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    } else {
+      navigate("/account");
+    }
+  };
+
   return (
     <div className="modal">
-        {/* <button className="close-btn" onClick={onClose}>&times;</button> */}
-            {token ? (
-                // Render the EventForm if the user is authenticated.
-                <EventForm onEventSubmitted={onEventSubmitted} />
-            ) : (
-                // Otherwise, prompt the user to log in.
-                <Login onClose={onClose} />
-            )}
+      {token ? (
+        <EventForm onEventSubmitted={onEventSubmitted} onClose={handleClose} />
+      ) : (
+        <Login onClose={handleClose} />
+      )}
     </div>
   );
 };
 
 export default PostEvent;
+

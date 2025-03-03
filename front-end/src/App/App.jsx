@@ -35,7 +35,7 @@ function App() {
               </div>
             </nav>
             <Routes>
-              <Route path="/post" element={<PostEvent />} />
+              <Route path="/post" element={<PostEvent onEventSubmitted={() => {}} />} />
               <Route path="/discover" element={<Discover />} />
               <Route path="/event/:id" element={<EventDisplay />} />
               <Route path="/signup" element={<Signup />} />
