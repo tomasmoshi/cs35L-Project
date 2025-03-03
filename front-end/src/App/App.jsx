@@ -3,16 +3,16 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ModalButton from "../Features/ModalButton/ModalButton.jsx";
 import Discover from "../Features/Discover/Discover.jsx";
-import Account from "../Pages/Account.jsx";
+import Account from "../Features/UserProfile/Account.jsx";
 import { UserProvider } from "../Features/Context/UserContext.jsx";
 import "./App.css";
 import Login from "../Features/Login/Login"; // Adjust the path as needed
-import Home from "../Features/Home/Home.jsx"; // Import Home
+import Home from "../Features/Home/Home"; // Import Home
 
 
 import EventDisplay from "../Events/EventDisplay.jsx";
 import Signup from "../Features/Signup/Signup.jsx";
-import images from "../images/user.png";
+import images from "../assets/images/user.png";
 
 function App() {
   return (
