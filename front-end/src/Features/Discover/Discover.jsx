@@ -1,7 +1,7 @@
 // Discover.jsx
 import React, { useState, useEffect } from "react";
 import EventCard from "../../Events/EventCard";
-import { sendRequest } from "../../Utils/EventsUtils";
+import { sendRequest } from "../../Utils/apiEvents";
 import "./Discover.css";
 import { Link } from "react-router-dom";
 

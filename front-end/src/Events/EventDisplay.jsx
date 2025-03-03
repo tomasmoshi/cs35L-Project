@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import EventCard from "./EventCard";
-import { sendRequest } from "../Utils/EventsUtils";
-import CommentList from "../Comments/CommentList.jsx";  // Adjust the path as needed
+import { sendRequest } from "../Utils/apiEvents";
 import "./EventDisplay.css";
 
 const EventDisplay = () => {

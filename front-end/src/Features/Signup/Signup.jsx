@@ -1,13 +1,23 @@
 // Signup.jsx
-import React, { useState } from "react";
-import { sendRequest } from "../../Utils/EventsUtils";
+import React, { useState, useEffect } from "react";
+import { sendRequest } from "../../Utils/apiEvents";
 import "../Help/HelpModal.css";
 
-const Signup = () => {
+const Signup = ({onClose}) => {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
 
   const handleImageChange = (e) => {
     
@@ -58,15 +68,13 @@ const Signup = () => {
         }
         return;
       }
-      if (data.token && data.username){
-        localStorage.setItem("token", data.token)
-        localStorage.setItem("username", data.username)
-      }
-      if (data.success) {
+      if (data.token && data.username && data.success){
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", data.username);
         setProfileImage(null);
         setPreview(null);
         e.target.reset();
-        // document.querySelector("form").reset(); // Ensures all fields are cleared
+        onClose();
       }
     } catch (error) {
       console.log("Error in signup:", error);
