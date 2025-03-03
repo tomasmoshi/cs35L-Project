@@ -6,11 +6,14 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework import status
 import json
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserDetailSerializer
 from .models import UserProfile
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
+
 
 class LoginUserView(APIView):
     permission_classes = [AllowAny]
@@ -19,18 +22,24 @@ class LoginUserView(APIView):
         # Retrieve credentials from the request
         username = request.data.get("username")
         password = request.data.get("password")
-        
+
         user = authenticate(request, username=username, password=password)
         if user is not None:
             token, created = Token.objects.get_or_create(user=user)
-            return Response({
-                "token": token.key,
-                "username": user.username,
-                "success": True,
-            }, status=status.HTTP_200_OK)
+            return Response(
+                {
+                    "token": token.key,
+                    "username": user.username,
+                    "success": True,
+                },
+                status=status.HTTP_200_OK,
+            )
         else:
-            return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
-        
+            return Response(
+                {"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+
 class CreateUserView(APIView, UserCreationForm):
     permission_classes = [AllowAny]
     parser_classes = (MultiPartParser, FormParser)  # Allow image uploads
@@ -44,12 +53,12 @@ class CreateUserView(APIView, UserCreationForm):
                 profile = serializer.save()
                 # Create or retrieve the token for the new user
                 token, created = Token.objects.get_or_create(user=profile.user)
-                
+
                 # Prepare response data with token included
                 response_data = serializer.data
-                response_data['token'] = token.key
-                response_data['username'] = profile.user.username
-                response_data['success'] = True
+                response_data["token"] = token.key
+                response_data["username"] = profile.user.username
+                response_data["success"] = True
                 return Response(response_data, status=status.HTTP_201_CREATED)
             else:
                 # Return serializer errors if data is invalid
@@ -65,3 +74,16 @@ class CreateUserView(APIView, UserCreationForm):
         serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
 
+
+class getUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        try:
+            user_profile = UserProfile.objects.get(user=request.user)
+            serializer = UserDetailSerializer(user_profile)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except UserProfile.DoesNotExist:
+            return Response(
+                {"error": "User profile not found"}, status=status.HTTP_404_NOT_FOUND
+            )

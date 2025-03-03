@@ -1,50 +1,53 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import images from "../images/user.png";
 import "../AccountPage/user.css";
-import { UserContext } from "../Features/Context/UserContext.jsx";
-import Signup from "../Features/Signup/Signup.jsx";
+import apiUsers from "../Utils/apiUsers";
+
 const Account = () => {
-  const { user, setUser } = useContext(UserContext);
-
+  const [user, setUser] = useState(null);
+  const token = localStorage.getItem("token");
+  console.log("token: ", token);
   useEffect(() => {
-    if (!user) {
-      const fetchUserData = async () => {
-        const response = await fetch("http://127.0.0.1:8000/api/user/");
-        const data = await response.json();
-        setUser(data);
-      };
-      fetchUserData();
-    }
-  }, [user, setUser]);
+    const fetchUserData = async () => {
+      if (!token) return; //  Stop if no token
 
-  if (!user) {
-    return <p>Loading...</p>;
-  }
+      try {
+        const data = await apiUsers("http://127.0.0.1:8000/api/users/me/", "GET"); // Updated URL
+        console.log("Fetched User Data:", data);
+
+        if (data) {
+          setUser(data); //  Set user after fetching
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, [token]);
+  console.log("user: ", user);
+  if (!user) return <p>Loading...</p>;
+
   return (
     <div className="account">
-      <div className="account-info">
-        <h1>Profile Settings</h1>
-        <p>Update your profile information and preferences.</p>
-      </div>
+      <h1>Profile Settings</h1>
+      <p>Update your profile information and preferences.</p>
+
       <div className="account-box">
-        <div className="account-image">
-          <img
-            src={user.profile_image || images}
-            alt="Account Upload"
-            width={150}
-            height={150}
-            className="account-image"
-          />
-          <p className="account-box-img-para">Change Image</p>
-        </div>
-        <div className="account-box-form">
-        </div>
+        <img 
+          src={user.profile_image || images} 
+          alt="Profile" 
+          width={150} 
+          height={150} 
+        />
+        <p>Change Image</p>
       </div>
+
       <div className="account-details">
-        <p><strong>Username:</strong> {Signup.username}</p>
-        <p><strong>Email:</strong> {Signup.email}</p>
-        <p><strong>First Name:</strong> {Signup.first_name}</p>
-        <p><strong>Last Name:</strong> {Signup.last_name}</p>
+        <p><strong>Username:</strong> {user.username}</p>
+        <p><strong>Email:</strong> {user.email}</p>
+        <p><strong>First Name:</strong> {user.first_name}</p>
+        <p><strong>Last Name:</strong> {user.last_name}</p>
       </div>
     </div>
   );
