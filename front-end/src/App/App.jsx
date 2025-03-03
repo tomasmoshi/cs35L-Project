@@ -7,7 +7,7 @@ import Account from "../Pages/Account.jsx";
 import { UserProvider } from "../Features/Context/UserContext.jsx";
 import "./App.css";
 import Login from "../Features/Login/Login"; // Adjust the path as needed
-import Home from "../Features/Home"; // Import Home
+import Home from "../Features/Home/Home"; // Import Home
 
 
 import EventDisplay from "../Events/EventDisplay.jsx";
