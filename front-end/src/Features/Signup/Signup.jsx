@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { sendRequest } from "../../Utils/EventsUtils";
 import "../Help/HelpModal.css";
+import { UserContext } from "../Context/UserContext";
 
 const Signup = () => {
   const [usernameError, setUsernameError] = useState("");

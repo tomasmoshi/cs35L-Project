@@ -1,13 +1,19 @@
+
 import React, { useState, useEffect } from "react";
 import "../Help/HelpModal.css";
 import Signup from "../Signup/Signup";
 import { sendRequest } from "../../Utils/EventsUtils";
 
 function Login({ onClose }) {
+  const {setUser} = useContext(UserContext);
+  const [error, setError] = useState("");
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+
+  const handleEmailChange = (event) => setEmail(event.target.value);
+  const handlePasswordChange = (event) => setPassword(event.target.value);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -19,7 +25,6 @@ function Login({ onClose }) {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
-
   const handleUsernameChange = (event) => setUsername(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
 
@@ -88,6 +93,5 @@ function Login({ onClose }) {
     </div>
   );
 }
-
 export default Login;
 
