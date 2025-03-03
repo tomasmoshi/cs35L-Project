@@ -1,7 +1,7 @@
 // EventForm.js
 import React, { useState } from "react";
 import "./EventForm.css";
-import { sendRequest } from "../Utils/EventsUtils"; // Adjust the path as needed
+import { sendRequest } from "../Utils/apiEvents"; // Adjust the path as needed
 
 const EventForm = ({ onEventSubmitted }) => {
   const [image, setImage] = useState(null); // Store the file object
