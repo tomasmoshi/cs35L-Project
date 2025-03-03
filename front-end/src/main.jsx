@@ -10,10 +10,10 @@ const handleEventSubmitted = (newEvent) => {
   // You can update state or perform any other actions here
 };
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App />
     {/* <EventForm onEventSubmitted={handleEventSubmitted}/>
     <EventList /> */}
   </StrictMode>
-)
+);
