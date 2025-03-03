@@ -1,8 +1,8 @@
 // src/Pages/Home.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../Features/Help/HelpModal.css"; 
-import "../Features/Home/Home.css"; 
+import "../Help/HelpModal.css"; 
+import "./Home.css"; 
 
 function Home() {
   const navigate = useNavigate();
