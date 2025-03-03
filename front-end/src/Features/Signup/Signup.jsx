@@ -2,8 +2,11 @@
 import React, { useState } from "react";
 import { sendRequest } from "../../Utils/EventsUtils";
 import "../Help/HelpModal.css";
+import { UserContext } from "../Context/UserContext";
 
 const Signup = () => {
+  // Access the setUser function from UserContext
+  const [setUser] = useContext(UserContext);
   const [username, setUsername] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [password, setPassword] = useState("");
