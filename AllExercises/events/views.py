@@ -6,13 +6,13 @@ import json
 from .models import Post
 from .serializers import PostSerializer
 
-
 class CreateEventView(APIView):
     parser_classes = (MultiPartParser, FormParser)  # Allow image uploads
 
     def post(self, request, *args, **kwargs):
         data = request.data.copy()
         data["tags"] = json.loads(data["tags"])
+        print(data["tags"])
         serializer = PostSerializer(data=data)
         if serializer.is_valid():
             serializer.save()

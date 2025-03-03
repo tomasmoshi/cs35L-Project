@@ -6,6 +6,7 @@ import Discover from "../Features/Discover/Discover.jsx";
 import "./App.css";
 import EventDisplay from "../Events/EventDisplay.jsx";
 import Signup from "../Features/Signup/Signup.jsx";
+import EventForm from "../Events/EventForm.jsx";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <ModalButton label ="Discover" modalType="discover"/>
           </div>
         </nav>
+        <EventForm onEventSubmitted={console.log}/>
         <Routes>
           <Route path="/discover" element = {<Discover />}/>
           <Route path="/event/:id" element={<EventDisplay />}/>

@@ -15,5 +15,5 @@ class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
             "image",
             "date_posted",
             "tags",
-            "author",
+            # "author",
         ]
