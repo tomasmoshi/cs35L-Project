@@ -1,6 +1,6 @@
 // Signup.jsx
 import React, { useState } from "react";
-import { sendRequest } from "../../Utils/EventsUtils";
+import { sendRequest } from "../../Utils/apiEvents";
 import "../Help/HelpModal.css";
 
 const Signup = () => {

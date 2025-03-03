@@ -24,11 +24,8 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        # Extract nested user data.
         user_data = validated_data.pop("user")
-        # Create the User with the provided data.
         user = User.objects.create_user(**user_data)
-        # Create the profile linked to the user.
         profile = UserProfile.objects.create(user=user, **validated_data)
         return profile
 
