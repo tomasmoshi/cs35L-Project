@@ -1,9 +1,10 @@
-//EventList.jsx
+// EventList.jsx
 import React, { useState, useEffect } from "react";
 import "./EventList.css";
 import { sendRequest } from "../Utils/EventsUtils";
 import EventCard from "./EventCard";
 import EventForm from "./EventForm";
+import { Link } from "react-router-dom";
 
 const EventsList = () => {
   const [events, setEvents] = useState([]);
@@ -20,14 +21,11 @@ const EventsList = () => {
     }
   };
 
-  // If you want to fetch on every keystroke:
   const handleChange = (e) => {
     const newValue = e.target.value;
     setSearchQuery(newValue);
-    // Trigger fetch on every change:
     fetchEvents(`http://127.0.0.1:8000/api/events/?tags=${newValue}`);
   };
-
 
   return (
     <div className="events-container">
@@ -38,13 +36,17 @@ const EventsList = () => {
         placeholder="Search by tag..."
         value={searchQuery}
         onChange={handleChange} 
-        // If you only want to search on button click, remove the fetch call from handleChange
       />
       <div className="events-list">
         {events.length === 0 ? (
           <p className="no-events">No events found.</p>
         ) : (
-          events.map((event) => <EventCard key={event.id} event={event} />)
+          events.map((event) => (
+            // Wrap the event card with a Link that passes the event data via state
+            <Link to={`/event/${event.id}`} state={{ event }} key={event.id}>
+              <EventCard event={event} />
+            </Link>
+          ))
         )}
       </div>
     </div>

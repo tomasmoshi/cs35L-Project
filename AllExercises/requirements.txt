@@ -1,10 +1,16 @@
 asgiref==3.8.1
+black==25.1.0
+click==8.1.8
 Django==5.1.4
 django-cors-headers==4.7.0
 django-extensions==3.2.3
 django-taggit==6.1.0
 django-taggit-serializer==0.1.7
 djangorestframework==3.15.2
+mypy-extensions==1.0.0
+packaging==24.2
+pathspec==0.12.1
 pillow==11.1.0
+platformdirs==4.3.6
 six==1.17.0
 sqlparse==0.5.3

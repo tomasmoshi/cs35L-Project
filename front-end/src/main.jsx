@@ -1,13 +1,13 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import CommentList from "./Comments/CommentList.jsx";
+//main.jsx
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App/App.jsx'
+
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <div className="comment-container">
-      <h2>Comments</h2>
-      <CommentList />
-    </div>
+    <App />
   </StrictMode>
 );

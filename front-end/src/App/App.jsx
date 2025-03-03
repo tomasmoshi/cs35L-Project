@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ModalButton from "../Features/ModalButton/ModalButton.jsx";
 import Discover from "../Features/Discover/Discover.jsx";
 import "./App.css";
+import EventDisplay from "../Events/EventDisplay.jsx";
+import Signup from "../Features/Signup/Signup.jsx";
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         </nav>
         <Routes>
           <Route path="/discover" element = {<Discover />}/>
+          <Route path="/event/:id" element={<EventDisplay />}/>
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
     </div>
