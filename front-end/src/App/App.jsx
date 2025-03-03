@@ -8,7 +8,6 @@ import { UserProvider } from "../Features/Context/UserContext.jsx";
 import "./App.css";
 import EventDisplay from "../Events/EventDisplay.jsx";
 import Signup from "../Features/Signup/Signup.jsx";
-import images from "../images/user.png";
 
 function App() {
   return (
@@ -35,6 +34,15 @@ function App() {
               <Route path="/account" element={<Account />} />
             </Routes>
           </div>
+        </nav>
+        <Routes>
+          <Route path="/discover" element = {<Discover />}/>
+          <Route path="/event/:id" element={<EventDisplay />}/>
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </div>
+    </div>
+    </Router>
         </div>
       </Router>
     </UserProvider>

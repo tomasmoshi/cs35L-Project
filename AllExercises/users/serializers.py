@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = UserProfile
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password','profile_image']
     
     def create(self, validated_data):
         # Extract nested user data.

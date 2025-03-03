@@ -1,17 +1,16 @@
-// Login.jsx
-import React, { useState, useEffect, useContext } from "react";
-import apiService from "../../Utils/apiService";
+
+import React, { useState, useEffect } from "react";
 import "../Help/HelpModal.css";
 import Signup from "../Signup/Signup";
-import { UserContext } from "../Context/UserContext.jsx";
-
+import { sendRequest } from "../../Utils/EventsUtils";
 
 function Login({ onClose }) {
   const {setUser} = useContext(UserContext);
   const [error, setError] = useState("");
   const [isSignUpMode, setIsSignUpMode] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
@@ -26,22 +25,26 @@ function Login({ onClose }) {
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
+  const handleUsernameChange = (event) => setUsername(event.target.value);
+  const handlePasswordChange = (event) => setPassword(event.target.value);
 
-  // the handles for the email and password are used to update the state of the email and password fields
   const handleLoginSubmit = async (event) => {
-    event.preventDefault(); // prevents the default form submission behavior
-    try{
-      // send a POST request to the login endpoint with the email and password
-      const data = await apiService("/login/", "POST", {
-        email: email,
-        password: password,
-      });
-    // if the login is successful, set the user state to the response data
-    setUser(data);
-    // close the modal
-    onClose("Login successful");
-    } catch (error) {
-      setError("Invalid email or password");
+    event.preventDefault();
+    setErrorMsg("");
+
+    // Use sendRequest helper to post the JSON payload
+    const data = await sendRequest(
+      "http://127.0.0.1:8000/api/users/login/",
+      "POST",
+      JSON.stringify({ username, password })
+    );
+
+    if (data && data.token) {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.username);
+      onClose();
+    } else {
+      setErrorMsg(data && data.error ? data.error : "Login failed. Please try again.");
     }
   };
 
@@ -52,18 +55,17 @@ function Login({ onClose }) {
           &times;
         </button>
         {isSignUpMode ? (
-          <>
-            <Signup />
-          </>
+          <Signup />
         ) : (
           <>
             <h2>Login</h2>
+            {errorMsg && <p className="error">{errorMsg}</p>}
             <form onSubmit={handleLoginSubmit}>
               <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={handleEmailChange}
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={handleUsernameChange}
                 required
               />
               <input
@@ -80,11 +82,10 @@ function Login({ onClose }) {
           </>
         )}
         <p>
-          {isSignUpMode ? "Don't have an account? " : "Already have an account? "}
-          <a
-            href="#"
-            onClick={() => setIsSignUpMode(!isSignUpMode)}
-          >
+          {isSignUpMode
+            ? "Already have an account? "
+            : "Don't have an account? "}
+          <a href="#" onClick={() => setIsSignUpMode(!isSignUpMode)}>
             {isSignUpMode ? "Login" : "Sign up"}
           </a>
         </p>
@@ -92,6 +93,5 @@ function Login({ onClose }) {
     </div>
   );
 }
-
-
 export default Login;
+
