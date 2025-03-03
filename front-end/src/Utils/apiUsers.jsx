@@ -2,7 +2,7 @@
 const apiUsers = async (url, method, formData = null) => {
     try {
       const token = localStorage.getItem("token");
-  
+      
       // Ensure headers include authentication & content type
       const headers = {
         "Content-Type": "application/json",
