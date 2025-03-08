@@ -6,9 +6,8 @@ import Discover from "../Features/Discover/Discover.jsx";
 import Account from "../Features/UserProfile/Account.jsx";
 import { UserProvider } from "../Features/Context/UserContext.jsx";
 import "./App.css";
-import Login from "../Features/Login/Login"; // Adjust the path as needed
-import Home from "../Features/Home/Home"; // Import Home
-
+import Login from "../Features/Login/Login"; 
+import Home from "../Features/Home/Home.jsx"
 
 import EventDisplay from "../Events/EventDisplay.jsx";
 import Signup from "../Features/Signup/Signup.jsx";
@@ -33,6 +32,7 @@ function App() {
               </div>
             </nav>
             <Routes>
+            <Route path="/" element={<Home />} />
               <Route path="/discover" element={<Discover />} />
               <Route path="/event/:id" element={<EventDisplay />} />
               <Route path="/signup" element={<Signup />} />
