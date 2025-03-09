@@ -1,7 +1,7 @@
 // EventList.jsx
 import React, { useState, useEffect } from "react";
 import "./EventList.css";
-import { sendRequest } from "../Utils/EventsUtils";
+import { sendRequest } from "../Utils/apiEvents";
 import EventCard from "./EventCard";
 import EventForm from "./EventForm";
 import { Link } from "react-router-dom";

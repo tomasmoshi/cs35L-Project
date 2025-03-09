@@ -17,23 +17,19 @@ from rest_framework.permissions import IsAuthenticated
 
 class LoginUserView(APIView):
     permission_classes = [AllowAny]
-
     def post(self, request, *args, **kwargs):
-        # Retrieve credentials from the request
+        # Retrieve credentials from the request data
         username = request.data.get("username")
         password = request.data.get("password")
-
+        
         user = authenticate(request, username=username, password=password)
         if user is not None:
             token, created = Token.objects.get_or_create(user=user)
-            return Response(
-                {
-                    "token": token.key,
-                    "username": user.username,
-                    "success": True,
-                },
-                status=status.HTTP_200_OK,
-            )
+            return Response({
+                "token": token.key,
+                "username": user.username,
+                "success": True,
+            }, status=status.HTTP_200_OK)
         else:
             return Response(
                 {"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST
@@ -67,15 +63,9 @@ class CreateUserView(APIView, UserCreationForm):
             print("Error:", e)
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-    def get(self, request, *args, **kwargs):
-        # This method seems to be intended to list users, adjust as needed.
-        # For now, we'll leave it as is.
-        user = UserProfile()
-        serializer = UserSerializer(user, many=True)
-        return Response(serializer.data)
 
 
-class getUserView(APIView):
+class GetUserView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
