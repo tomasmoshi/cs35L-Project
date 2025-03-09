@@ -1,12 +1,10 @@
 // EventForm.js
 import React, { useState } from "react";
 import "./EventForm.css";
-import { sendRequest } from "../Utils/EventsUtils"; // Adjust the path as needed
+import { sendRequest } from "../Utils/apiEvents"; // Adjust the path as needed
 
-const EventForm = ({ onEventSubmitted }) => {
-  const [title, setTitle] = useState("");
+const EventForm = ({ onEventSubmitted, onClose }) => {
   const [image, setImage] = useState(null); // Store the file object
-  const [content, setContent] = useState("");
   const [preview, setPreview] = useState();
   const [tags, setTags] = useState("");
   const handleImageChange = (e) => {
@@ -20,27 +18,24 @@ const EventForm = ({ onEventSubmitted }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title.trim() || !content.trim() || !image) return;
-
     // Prepare form data; note that we pass the file object directly
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", content);
-    formData.append("image", image);
-
+    const formData = new FormData(e.currentTarget);
     formData.append("tags", JSON.stringify(tags));
-
+    formData.append("image", image);
+    if (!formData.get("title")|| !formData.get("content") || !image || !tags) return;
     // Post event data (date_posted will be handled by the backend)
     const data = await sendRequest("http://127.0.0.1:8000/api/events/", "POST", formData);
     if (data) {
       onEventSubmitted(data);
       // Reset the form fields
-      setTitle("");
-      setContent("");
       setImage(null);
       setTags("");
       setPreview(null);
       e.target.reset(); // Resets the file input
+      console.log(onClose)
+      if (onClose){
+        onClose();
+      }
     }
   };
 
@@ -48,9 +43,8 @@ const EventForm = ({ onEventSubmitted }) => {
     <form onSubmit={handleSubmit} className="event-form">
       <input
         type="text"
+        name="title"
         placeholder="Event Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
         className="title-input"
       />
 
@@ -69,15 +63,14 @@ const EventForm = ({ onEventSubmitted }) => {
 
       <textarea
         placeholder="Write a short event description..."
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
+        name="content"
       ></textarea>
       <input
         type="text"
         placeholder="Tags (comma separated)"
+        className="title-input"
         value={tags}
         onChange={(e) => setTags(e.target.value)}
-        className="title-input"
       />
       <button type="submit" className="submit-btn">
         Post Event

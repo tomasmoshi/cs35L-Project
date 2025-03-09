@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from "react";
 import "../Help/HelpModal.css";
 import Signup from "../Signup/Signup";
+import { sendLogin } from "../../Utils/apiLogin";
 
 function Login({ onClose }) {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -19,13 +21,29 @@ function Login({ onClose }) {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
-  const handleEmailChange = (event) => setEmail(event.target.value);
+  const handleUsernameChange = (event) => setUsername(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
 
-  const handleLoginSubmit = (event) => {
+  const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    // Add your login logic here
-    onClose();
+    setErrorMsg("");
+
+    // Use sendRequest helper to post the JSON payload
+    const data = await sendLogin(
+      "http://127.0.0.1:8000/api/users/login/",
+      "POST",
+      JSON.stringify({ username, password })
+    );
+
+    if (data && data.token) {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("username", data.username);
+      onClose();
+    } else {
+      setErrorMsg(
+        data && data.error ? data.error : "Login failed. Please try again."
+      );
+    }
   };
 
   return (
@@ -35,18 +53,17 @@ function Login({ onClose }) {
           &times;
         </button>
         {isSignUpMode ? (
-          <>
-            <Signup />
-          </>
+          <Signup onClose={onClose} />
         ) : (
           <>
             <h2>Login</h2>
+            {errorMsg && <p className="error">{errorMsg}</p>}
             <form onSubmit={handleLoginSubmit}>
               <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={handleEmailChange}
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={handleUsernameChange}
                 required
               />
               <input
@@ -66,10 +83,7 @@ function Login({ onClose }) {
           {isSignUpMode
             ? "Already have an account? "
             : "Don't have an account? "}
-          <a
-            href="#"
-            onClick={() => setIsSignUpMode(!isSignUpMode)}
-          >
+          <a href="#" onClick={() => setIsSignUpMode(!isSignUpMode)}>
             {isSignUpMode ? "Login" : "Sign up"}
           </a>
         </p>

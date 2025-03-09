@@ -14,7 +14,10 @@ function AboutUs({ onClose }) {
           <li><strong>Amaras Issagholian</strong>: 3rd year Computer Science major</li>
           <li><strong>Shervin Shahidi Asl</strong>: 3rd year Computer Science major</li>
         </ul>
+       
         <p>
+          
+          
           As students, we understand the challenges of maintaining a healthy balance 
           between academics and lifestyle. We built this platform to help students 
           find fun exercises like tennis, basketball, and yoga, fostering connections 

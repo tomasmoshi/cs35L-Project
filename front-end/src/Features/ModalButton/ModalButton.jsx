@@ -13,7 +13,11 @@ function ModalButton({ label, modalType }) {
   const toggleModal = () => {
     if (modalType === "discover") {
       navigate("/Discover");
-    } else {
+    } 
+    if (modalType === "post"){
+      navigate("/post");
+    }
+    else {
       setIsModalOpen(!isModalOpen);
     }
   };
@@ -35,7 +39,6 @@ function ModalButton({ label, modalType }) {
         {label}
       </button>
 
-      {/* Conditional Rendering for Modals */}
       {isModalOpen && modalType === "login" && (
         <Login onClose={toggleModal} />
       )}
