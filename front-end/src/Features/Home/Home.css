@@ -7,7 +7,7 @@
 
 body {
   font-family: "Helvetica Neue", sans-serif;
-  background-color: #000; 
+  background-color: #000;
   color: #fff;
 }
 
@@ -17,8 +17,15 @@ body {
   justify-content: space-between;
   min-height: 100vh;
   padding: 0 5%;
-  background: radial-gradient(circle at 30% 50%, #1c1c1c 0%, #000000 70%);
+  
+  background: radial-gradient(
+    circle at 30% 50%, 
+    #2e2e2e 0%, 
+    #000000 60%, 
+    #2e2e2e 100%
+  );
 }
+
 
 
 .hero-content {
@@ -58,8 +65,26 @@ body {
 
 .hero-image {
   position: relative;
-  max-width: 500px; 
+  max-width: 700px; 
   margin-left: 2rem;
+}
+
+
+.floating-container {
+  animation: float 4s ease-in-out infinite;
+}
+
+
+@keyframes float {
+  0% {
+    transform: perspective(1000px) rotateY(15deg) rotateX(5deg) translateY(0);
+  }
+  50% {
+    transform: perspective(1000px) rotateY(15deg) rotateX(5deg) translateY(-20px);
+  }
+  100% {
+    transform: perspective(1000px) rotateY(15deg) rotateX(5deg) translateY(0);
+  }
 }
 
 
@@ -67,12 +92,17 @@ body {
   width: 100%;
   height: auto;
   display: block;
-
- 
-  transform: perspective(1000px) rotateY(15deg) rotateX(5deg);
-  transform-style: preserve-3d;
-
-  
+  animation: spin 8s linear infinite;
   filter: drop-shadow(0 10px 30px rgba(255, 0, 255, 0.3))
           drop-shadow(0 0 30px rgba(255, 0, 255, 0.2));
+}
+
+
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
