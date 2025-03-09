@@ -1,4 +1,4 @@
-// src/App/App.jsx
+
 import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import ModalButton from "../Features/ModalButton/ModalButton.jsx";
@@ -7,9 +7,8 @@ import Account from "../Features/UserProfile/Account.jsx";
 import PostEvent from "../Features/PostEvent/PostEvent.jsx";
 import { UserProvider } from "../Features/Context/UserContext.jsx";
 import "./App.css";
-import Login from "../Features/Login/Login"; // Adjust the path as needed
-import Home from "../Features/Home/Home"; // Import Home
-
+import Login from "../Features/Login/Login"; 
+import Home from "../Features/Home/Home.jsx"
 
 import EventDisplay from "../Events/EventDisplay.jsx";
 import Signup from "../Features/Signup/Signup.jsx";
@@ -35,6 +34,7 @@ function App() {
               </div>
             </nav>
             <Routes>
+              <Route path="/" element={<Home />} />
               <Route path="/post" element={<PostEvent onEventSubmitted={() => {}} />} />
               <Route path="/discover" element={<Discover />} />
               <Route path="/event/:id" element={<EventDisplay />} />
