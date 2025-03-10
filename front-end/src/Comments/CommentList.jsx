@@ -7,24 +7,7 @@ import { sendRequest } from "../Utils/apiEvents";
 const CommentList = ({ eventId }) => {
   const [comments, setComments] = useState([]);
 
-  // Fetch comments for this event from the backend
-  useEffect(() => {
-    if (eventId) {
-      const fetchComments = async () => {
-        try {
-          const data = await sendRequest(
-            `http://127.0.0.1:8000/api/comments/?event=${eventId}`,
-            "GET",
-            null
-          );
-          setComments(data);
-        } catch (err) {
-          console.error("Error fetching comments:", err);
-        }
-      };
-      fetchComments();
-    }
-  }, [eventId]);
+
 
   const addComment = (newComment) => {
     setComments((prevComments) => [newComment, ...prevComments]);
