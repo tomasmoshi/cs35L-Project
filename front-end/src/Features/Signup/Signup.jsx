@@ -32,13 +32,18 @@ const Signup = ({onClose}) => {
   };
 
   const triggerButtonShake = () => {
-    const button = document.querySelector(".submit-btn");
-    button.classList.add("shake-btn");
+    const buttons = document.querySelectorAll(".submit-btn");
+    //This line fixed a the big where the upload image would shake, and now it looks for the last button instead of the first one automatically.
+    const signUpButton = buttons[buttons.length - 1]; 
   
-    setTimeout(() => {
-      button.classList.remove("shake-btn");
-    }, 1000);
+    if (signUpButton) {
+      signUpButton.classList.add("shake-btn");
+      setTimeout(() => {
+        signUpButton.classList.remove("shake-btn");
+      }, 1000);
+    }
   };
+  
   
   const validatePassword = (password, username) => {
     if (password.length < 8) {
