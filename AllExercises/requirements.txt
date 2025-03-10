@@ -12,12 +12,10 @@ mypy-extensions==1.0.0
 nltk==3.9.1
 packaging==24.2
 pathspec==0.12.1
-pillow @ file:///private/var/folders/k1/30mswbxs7r1g6zwn8y4fyt500000gp/T/abs_85xj2lenf1/croot/pillow_1738010251686/work
+pillow==11.1.0
 platformdirs==4.3.6
 rake-nltk==1.0.6
 regex==2024.11.6
-setuptools==75.8.0
 six==1.17.0
 sqlparse==0.5.3
 tqdm==4.67.1
-wheel==0.44.0
