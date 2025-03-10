@@ -7,16 +7,14 @@ import { sendRequest } from "../Utils/apiEvents";
 const CommentList = ({ eventId }) => {
   const [comments, setComments] = useState([]);
 
-  // Fetch comments for this event from the backend
+  // Fetch comments for the given event
   useEffect(() => {
     if (eventId) {
       const fetchComments = async () => {
         try {
-          const data = await sendRequest(
-            `http://127.0.0.1:8000/api/comments/?event=${eventId}`,
-            "GET",
-            null
-          );
+          const url = `http://127.0.0.1:8000/api/comments/?event=${eventId}`;
+          const data = await sendRequest(url, "GET", null);
+          console.log(data);
           setComments(data);
         } catch (err) {
           console.error("Error fetching comments:", err);
@@ -33,18 +31,16 @@ const CommentList = ({ eventId }) => {
   return (
     <div>
       <div className="comment-list">
-        {comments.length === 0 ? (
-          <p className="no-comments">There are no comments yet, put the first comment!</p>
-        ) : (
-          comments.map((comment) => (
-            <CommentCard key={comment.id} comment={comment} />
-          ))
-        )}
+        {comments && comments.map((comment) => (
+          <CommentCard key={comment.id} comment={comment} />
+        ))}
       </div>
-      {/* Pass eventId to CommentForm */}
+      {/* Pass eventId to CommentForm so it can send the associated event */}
       <CommentForm commentAdd={addComment} eventId={eventId} />
     </div>
   );
 };
 
 export default CommentList;
+
+
