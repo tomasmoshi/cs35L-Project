@@ -29,14 +29,13 @@
 }
 
 @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
+    0% { transform: translateX(0); background-color: #e42f29; }
+    25% { transform: translateX(-5px); background-color: #e42f29; }
+    50% { transform: translateX(5px); background-color: #e42f29; }
+    75% { transform: translateX(-5px); background-color: #e42f29; }
+    100% { transform: translateX(0); background-color: #2b86d6; }
 }
 
 .shake-btn {
     animation: shake 0.25s ease-in-out 2.5;
 }
-
