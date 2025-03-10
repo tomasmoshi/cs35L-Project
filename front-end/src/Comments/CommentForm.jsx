@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Comment.css";
 import { sendRequest } from "../Utils/apiEvents"; // adjust the path if needed
 
-const CommentForm = ({ commentAdd }) => {
+const CommentForm = ({ commentAdd, eventId }) => {
   const [comment, setComment] = useState("");
   const [user, setUser] = useState(null);
 
@@ -20,20 +20,33 @@ const CommentForm = ({ commentAdd }) => {
     fetchUser();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!comment.trim()) return;
 
-    const newComment = {
-      id: Date.now(),
-      // Use the fetched username or default to "Anonymous" if not available
-      user: user ? user.username : "Anonymous",
+    // Prepare the comment payload including the event id
+    const commentData = {
       text: comment,
-      date: new Date().toLocaleString(),
+      event: eventId,
+      // The backend will associate the user if authenticated
     };
 
-    commentAdd(newComment);
-    setComment("");
+    try {
+      // Post the comment to the backend
+      const data = await sendRequest(
+        "http://127.0.0.1:8000/api/comments/",
+        "POST",
+        JSON.stringify(commentData),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      // Add the returned comment (with backend-generated id and date) to the list
+      commentAdd(data);
+      setComment("");
+    } catch (err) {
+      console.error("Error posting comment", err);
+    }
   };
 
   return (
