@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import EventCard from "./EventCard";
 import { sendRequest } from "../Utils/apiEvents.jsx";
-import CommentList from "../Comments/CommentList.jsx";  // Adjust the path as needed
+import CommentList from "../Comments/CommentList.jsx";
 import "./EventDisplay.css";
 
 const EventDisplay = () => {
@@ -37,8 +37,8 @@ const EventDisplay = () => {
   return (
     <div className="display-event-container">
       <EventCard event={event} preview={false} />
-      {/* Render the comment section */}
-      <CommentList />
+      {/* Pass the event id to CommentList */}
+      <CommentList eventId={event.id} />
     </div>
   );
 };
