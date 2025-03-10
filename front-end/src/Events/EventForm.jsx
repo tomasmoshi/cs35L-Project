@@ -17,6 +17,7 @@ const EventForm = ({ onEventSubmitted, onClose }) => {
   };
 
   const handleSubmit = async (e) => {
+    if (!localStorage.getItem("token") && !localStorage.getItem("username")) return;
     e.preventDefault();
     // Prepare form data; note that we pass the file object directly
     const formData = new FormData(e.currentTarget);
