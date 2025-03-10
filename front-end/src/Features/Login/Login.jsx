@@ -1,6 +1,7 @@
 // Login.jsx
 import React, { useState, useEffect } from "react";
 import "../Help/HelpModal.css";
+import "./Login.css";
 import Signup from "../Signup/Signup";
 import { sendLogin } from "../../Utils/apiLogin";
 
@@ -40,9 +41,16 @@ function Login({ onClose }) {
       localStorage.setItem("username", data.username);
       onClose();
     } else {
-      setErrorMsg(
-        data && data.error ? data.error : "Login failed. Please try again."
-      );
+        setErrorMsg(data && data.error ? data.error : "Login failed. Please try again.");
+       
+        //Shake button added
+        const button = document.querySelector(".submit-btn");
+        button.classList.add("shake-btn");
+
+        //Timeout for shake button 1s
+        setTimeout(() => {
+          button.classList.remove("shake-btn");
+        }, 1000);
     }
   };
 
@@ -59,23 +67,27 @@ function Login({ onClose }) {
             <h2>Login</h2>
             {errorMsg && <p className="error">{errorMsg}</p>}
             <form onSubmit={handleLoginSubmit}>
-              <input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={handleUsernameChange}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-              />
-              <button type="submit" className="submit-btn">
-                Login
-              </button>
+              <div className="input-container">
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={username}
+                  onChange={handleUsernameChange}
+                  required
+                />
+              </div>
+              <div className="input-container">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  required
+                />
+              </div>
+              <div className="button-container">
+                <button type="submit" className="submit-btn">Login</button>
+              </div>
             </form>
           </>
         )}
