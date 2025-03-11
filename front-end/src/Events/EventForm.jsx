@@ -60,39 +60,44 @@ const EventForm = ({ onEventSubmitted, onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="event-form">
-      <input
-        type="text"
-        name="title"
-        placeholder="Event Title"
-        className="title-input"
-      />
+    <div className="event-form-container">
+      <button className="close-btn" onClick={onClose}>&times;</button>
+      <form onSubmit={handleSubmit} className="event-form">
+        <input 
+          type="text"
+          name="title"
+          placeholder="Event Title"
+          className="title-input" />
+        
+        <label className="submit-btn">
+          <input 
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            onChange={handleImageChange} />
+            Upload Image
+        </label>
+        
+        {preview && <img src={preview} alt="Preview" className="image-preview" />}
+        
+        <textarea
+          placeholder="Write a short event description..."
+          name="content">
 
-      <label className="submit-btn">
-        <input
-          type="file"
-          id="imageInput"
-          accept="image/*"
-          onChange={handleImageChange}
+        </textarea>
+        
+        <input type="text"
+          placeholder="Tags (comma separated)"
+          className="title-input"
+          value={tags}
+          onChange={(e) => setTags(e.target.value)} 
         />
-        Upload Image
-      </label>
-      {preview && <img src={preview} alt="Preview" className="image-preview" />}
-
-      <textarea placeholder="Write a short event description..." name="content"></textarea>
-
-      <input
-        type="text"
-        placeholder="Tags (comma separated)"
-        className="title-input"
-        value={tags}
-        onChange={(e) => setTags(e.target.value)}
-      />
-
-      <button type="submit" className="submit-btn" disabled={isSubmitting}>
-        {isSubmitting ? "Posting..." : "Post Event"}
-      </button>
-    </form>
+        
+        <button type="submit" className="submit-btn" disabled={isSubmitting}>
+          {isSubmitting ? "Posting..." : "Post Event"}
+        </button>
+      </form>
+    </div>
   );
 };
 
