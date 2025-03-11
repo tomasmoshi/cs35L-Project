@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./AboutUs.css";
 function AboutUs({ onClose }) {
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+  
   return (
     <div className="modal">
       <div className="modal-content">

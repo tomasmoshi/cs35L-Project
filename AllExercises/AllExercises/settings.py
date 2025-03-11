@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "events",
     "corsheaders",
     "taggit",
+    "comments",
 ]
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

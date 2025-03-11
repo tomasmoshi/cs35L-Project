@@ -1,53 +1,55 @@
 import React, { useEffect, useState } from "react";
 import images from "../../assets/images/user.png";
 import apiUsers from "../../Utils/apiUsers";
+import "../../App/App.css";
+import ProfileHeader from "./Profile_Header";
+import EventTabs from "./User_Events";
 
 const Account = () => {
   const [user, setUser] = useState(null);
+  const [events, setEvents] = useState([]); // ✅ Store user's events
+  const [error, setError] = useState(null);
   const token = localStorage.getItem("token");
-  console.log("token: ", token);
+
   useEffect(() => {
     const fetchUserData = async () => {
-      if (!token) return; //  Stop if no token
-
+      if (!token) return;
       try {
-        const data = await apiUsers("http://127.0.0.1:8000/api/users/me/", "GET"); // Updated URL
-        console.log("Fetched User Data:", data);
-
+        const data = await apiUsers("http://127.0.0.1:8000/api/users/me/", "GET");
         if (data) {
-          setUser(data); //  Set user after fetching
+          setUser(data);
+          fetchUserEvents(data.id); // ✅ Fetch events created by the user
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
+        setError("Failed to fetch user data.");
+      }
+    };
+
+    const fetchUserEvents = async (userId) => {
+      try {
+        const eventData = await apiUsers(`http://127.0.0.1:8000/api/events/?creator=${userId}`, "GET");
+        setEvents(eventData);
+      } catch (error) {
+        console.error("Error fetching user events:", error);
       }
     };
 
     fetchUserData();
   }, [token]);
-  console.log("user: ", user);
+
   if (!user) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
-    <div className="account">
-      <h1>Profile Settings</h1>
-      <p>Update your profile information and preferences.</p>
+    <div className="account-container">
+      {/* Profile Header */}
+      <ProfileHeader user={user} />
 
-      <div className="account-box">
-        <img 
-          src={user.profile_image || images} 
-          alt="Profile" 
-          width={150} 
-          height={150} 
-        />
-        <p>Change Image</p>
-      </div>
+      {/* Show User's Events */}
+      <h2 className="section-title">My Created Events</h2>
+      <EventTabs events={events} />
 
-      <div className="account-details">
-        <p><strong>Username:</strong> {user.username}</p>
-        <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>First Name:</strong> {user.first_name}</p>
-        <p><strong>Last Name:</strong> {user.last_name}</p>
-      </div>
     </div>
   );
 };

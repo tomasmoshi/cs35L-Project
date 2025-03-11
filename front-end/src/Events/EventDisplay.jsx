@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import EventCard from "./EventCard";
 import { sendRequest } from "../Utils/apiEvents.jsx";
-import CommentList from "../Comments/CommentList.jsx";  // Adjust the path as needed
+import CommentList from "../Comments/CommentList.jsx";
 import "./EventDisplay.css";
 
 const EventDisplay = () => {
   const { id } = useParams();
   const location = useLocation();
   const [event, setEvent] = useState(location.state?.event || null);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (event) return;
@@ -17,28 +16,23 @@ const EventDisplay = () => {
       try {
         setLoading(true);
         const data = await sendRequest(
-          `http://127.0.0.1:8000/api/events/${id}/`,
+          `http://127.0.0.1:8000/api/events/`,
           "GET"
         );
         setEvent(data);
       } catch (error) {
         console.error("Error fetching event:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchEvent();
-  }, [id, event]);
-
-  if (loading) return <p>Loading event...</p>;
-  if (!event) return <p>Event not found.</p>;
+  }, [event]);
 
   return (
     <div className="display-event-container">
       <EventCard event={event} preview={false} />
-      {/* Render the comment section */}
-      <CommentList />
+      {/* Pass the event id to CommentList */}
+      <CommentList eventId={event.id} />
     </div>
   );
 };

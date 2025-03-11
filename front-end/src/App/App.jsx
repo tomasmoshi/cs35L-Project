@@ -7,12 +7,10 @@ import Account from "../Features/UserProfile/Account.jsx";
 import PostEvent from "../Features/PostEvent/PostEvent.jsx";
 import { UserProvider } from "../Features/Context/UserContext.jsx";
 import "./App.css";
-import Login from "../Features/Login/Login"; 
 import Home from "../Features/Home/Home.jsx"
-
 import EventDisplay from "../Events/EventDisplay.jsx";
 import Signup from "../Features/Signup/Signup.jsx";
-import images from "../assets/images/user.png";
+import UserMenu from "../Features/UserProfile/userMenu.jsx";
 
 function App() {
   return (
@@ -32,24 +30,27 @@ function App() {
                 <ModalButton label="About Us" modalType="about" />
                 <ModalButton label="Discover" modalType="discover" />
                 <ModalButton label="Post event" modalType="post" />
-                <Link to="/account">
+                <div className="profile-icon nav-button-size">
+                  <UserMenu />
+                </div>                
+                {/* <Link to="/account">
                   <img src={images} alt="Profile" className="profile-icon nav-button-size" />
-                </Link>
-              </div>
-            </nav>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/post" element={<PostEvent onEventSubmitted={() => {}} />} />
-              <Route path="/discover" element={<Discover />} />
-              <Route path="/event/:id" element={<EventDisplay />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/account" element={<Account />} />
-            </Routes>
-          </div>
-        </div>
-      </Router> } */
-    //</UserProvider>
-  );
-}
+                </Link> }*/
+//               </div>
+//             </nav>
+//             <Routes>
+//               <Route path="/" element={<Home />} />
+//               <Route path="/post" element={<PostEvent onEventSubmitted={() => {}} />} />
+//               <Route path="/discover" element={<Discover />} />
+//               <Route path="/event/:id" element={<EventDisplay />} />
+//               <Route path="/signup" element={<Signup />} />
+//               <Route path="/account" element={<Account />} />
+//             </Routes>
+//           </div>
+//         </div>
+//       </Router> } */
+//     //</UserProvider>
+   );
+ }
 
 export default App;

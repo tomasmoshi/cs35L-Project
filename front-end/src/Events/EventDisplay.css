@@ -2,7 +2,7 @@
     max-width: 800px;
     margin: 40px auto;
     padding: 30px;
-    background-color: #ffffff;
+    background: rgb(165, 165, 165);
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
@@ -15,8 +15,12 @@
   }
   
   .display-event-container .event-image {
-    width: 100%;
+    width: auto;
     height: auto;
+    max-height: 500px;
+    max-width: 500px;
+    min-width: 200px;
+    min-height: 200px;
     border-radius: 8px;
     margin-bottom: 20px;
   }
