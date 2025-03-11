@@ -1,7 +1,8 @@
+// Login.jsx
 import React, { useState, useEffect } from "react";
 import "../Help/HelpModal.css";
 import Signup from "../Signup/Signup";
-import { sendRequest } from "../../Utils/EventsUtils";
+import { sendLogin } from "../../Utils/apiLogin";
 
 
 function Login({ onClose }) {
@@ -29,7 +30,7 @@ function Login({ onClose }) {
     setErrorMsg("");
 
     // Use sendRequest helper to post the JSON payload
-    const data = await sendRequest(
+    const data = await sendLogin(
       "http://127.0.0.1:8000/api/users/login/",
       "POST",
       JSON.stringify({ username, password })
@@ -40,7 +41,9 @@ function Login({ onClose }) {
       localStorage.setItem("username", data.username);
       onClose();
     } else {
-      setErrorMsg(data && data.error ? data.error : "Login failed. Please try again.");
+      setErrorMsg(
+        data && data.error ? data.error : "Login failed. Please try again."
+      );
     }
   };
 
@@ -51,7 +54,7 @@ function Login({ onClose }) {
           &times;
         </button>
         {isSignUpMode ? (
-          <Signup />
+          <Signup onClose={onClose} />
         ) : (
           <>
             <h2>Login</h2>

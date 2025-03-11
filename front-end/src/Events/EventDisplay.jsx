@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import EventCard from "./EventCard";
-import { sendRequest } from "../Utils/EventsUtils";
+import { sendRequest } from "../Utils/apiEvents.jsx";
+import CommentList from "../Comments/CommentList.jsx";  // Adjust the path as needed
 import "./EventDisplay.css";
 
 const EventDisplay = () => {
   const { id } = useParams();
   const location = useLocation();
-  // Use the event data from state if available
   const [event, setEvent] = useState(location.state?.event || null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // If event data is already provided, do not fetch again
     if (event) return;
     const fetchEvent = async () => {
       try {
@@ -37,8 +36,9 @@ const EventDisplay = () => {
 
   return (
     <div className="display-event-container">
-      {/* Render the full event details (description is shown because preview is false) */}
       <EventCard event={event} preview={false} />
+      {/* Render the comment section */}
+      <CommentList />
     </div>
   );
 };
