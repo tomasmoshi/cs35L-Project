@@ -1,0 +1,41 @@
+/*Log in button spacing and container spacing */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50px;
+    align-items: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.submit-btn {
+    width: 50%;
+}
+
+
+/*Styling for shake feature and login fail color*/
+.error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); background-color: #e42f29; }
+    25% { transform: translateX(-5px); background-color: #e42f29; }
+    50% { transform: translateX(5px); background-color: #e42f29; }
+    75% { transform: translateX(-5px); background-color: #e42f29; }
+    100% { transform: translateX(0); background-color: #2b86d6; }
+}
+
+.shake-btn {
+    animation: shake 0.25s ease-in-out 2.5;
+}
