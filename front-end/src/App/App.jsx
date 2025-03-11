@@ -16,8 +16,12 @@ import images from "../assets/images/user.png";
 
 function App() {
   return (
-    <UserProvider>
-      <Router>
+    //<UserProvider>
+     
+    <>
+      <Home />
+     </>
+     /* { <Router>
         <div>
           <div className="container">
             <nav className="navbar">
@@ -43,8 +47,8 @@ function App() {
             </Routes>
           </div>
         </div>
-      </Router>
-    </UserProvider>
+      </Router> } */
+    //</UserProvider>
   );
 }
 
