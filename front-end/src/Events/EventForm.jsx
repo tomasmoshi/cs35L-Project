@@ -63,6 +63,7 @@ const EventForm = ({ onEventSubmitted, onClose }) => {
     <div className="event-form-container">
       <button className="close-btn" onClick={onClose}>&times;</button>
       <form onSubmit={handleSubmit} className="event-form">
+      <h2 className="event-form-title">Post an event!</h2> 
         <input 
           type="text"
           name="title"
