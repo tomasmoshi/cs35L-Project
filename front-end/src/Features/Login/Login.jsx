@@ -3,6 +3,7 @@ import "../Help/HelpModal.css";
 import Signup from "../Signup/Signup";
 import { sendRequest } from "../../Utils/EventsUtils";
 
+
 function Login({ onClose }) {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [username, setUsername] = useState("");
