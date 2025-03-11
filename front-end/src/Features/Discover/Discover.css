@@ -1,8 +1,18 @@
 .discover-container {
-    max-width: 1200px;
+    max-width: auto;
     margin: auto;
     padding: 20px;
     text-align: center;
+    
+    /* Background from Home.css copy pasted */
+    min-height: 100vh;
+    background: radial-gradient(
+        circle at 30% 50%, 
+        #2e2e2e 0%, 
+        #000000 60%, 
+        #2e2e2e 100%
+    );
+    color: #fff;
 }
 
 .search-container {
@@ -36,7 +46,7 @@
 }
 
 .event-card {
-    background: white;
+    background-color: #3b3536;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
