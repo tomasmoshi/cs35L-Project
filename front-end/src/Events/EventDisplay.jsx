@@ -30,9 +30,11 @@ const EventDisplay = () => {
 
   return (
     <div className="display-event-container">
-      <EventCard event={event} preview={false} />
-      {/* Pass the event id to CommentList */}
-      <CommentList eventId={event.id} />
+      <div className="display-event-card">
+        <EventCard  event={event} preview={false} />
+        {/* Pass the event id to CommentList */}
+        <CommentList eventId={event.id} />
+      </div>
     </div>
   );
 };

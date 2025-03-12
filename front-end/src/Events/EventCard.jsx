@@ -21,7 +21,7 @@ const EventCard = ({ event, preview = false }) => {
         />
       )}
       {!preview && <p className="event-text">{event.content}</p>}
-      {event.tags && event.tags.length > 0 && (
+      {/* {event.tags && event.tags.length > 0 && (
         <div className="event-tags">
           <p>Tags: {event.tags.map((tag, index) => (
             <span key={index} className="event-tag">
@@ -30,8 +30,8 @@ const EventCard = ({ event, preview = false }) => {
           ))}
           </p>
         </div>
-      )}
-      <div className="event-header">
+      )} */}
+      <div className="event-header-date">
         <div >Date posted: {event.date_posted && (
           <span className="event-date">
             {formatDate(event.date_posted)}

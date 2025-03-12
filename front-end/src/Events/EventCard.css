@@ -2,12 +2,14 @@
 /* Event Card Container */
 
 .event-card {
-    background: white;
+    background: rgba(9, 12, 1, 0.254);
     padding: 20px;
     margin-top: 15px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 12px rgba(156, 177, 190, 0.12);
     text-align: left;
+    backdrop-filter: blur(10px);
+    opacity: 0.8;
     transition: transform 0.3s ease;
   }
   
@@ -16,24 +18,26 @@
   }
   
   /* Event Header (User + Date) */
-  .event-header {
+  .event-header-date {
     display: flex;
     justify-content: space-between;
     font-size: 14px;
-    color: #000000;
+    color: #ffffff;
     margin-bottom: 10px;
     
   }
   
   /* Event User */
   .event-user {
+    text-align: left;
     font-weight: bold;
+    color: #ffffff;
   }
   
   /* Event Date */
   .event-date {
     font-size: 13px;
-    color: #000000;
+    color: #ffffff;
   }
   
   /* Event Title */
@@ -42,6 +46,7 @@
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
+    color: #4788e4;
   }
   
   /* Event Image */
@@ -55,9 +60,10 @@
   .event-text {
     margin-top: 12px;
     font-size: 15px;
-    color: #000000;
+    color: #ffffff;
     line-height: 1.5;
     white-space: pre-wrap;
+    
   }
   .preview .event-text {
     display: none;
