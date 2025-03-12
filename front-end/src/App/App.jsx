@@ -13,6 +13,7 @@ import Signup from "../Features/Signup/Signup.jsx";
 import UserMenu from "../Features/UserProfile/user_menu.jsx";
 import Login from "../Features/Login/Login"; 
 import SearchBar from "../Features/SearchBar/SearchBar.jsx";
+import AccountSettings from "../Features/UserProfile/settings/Account_Settings.jsx";
 
 function App() {
   const handleSearch = (query) => {
@@ -47,6 +48,7 @@ function App() {
             <Route path="/event/:id" element={<EventDisplay />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/settings" element={<AccountSettings />} />
           </Routes>
         </div>
       </Router>
