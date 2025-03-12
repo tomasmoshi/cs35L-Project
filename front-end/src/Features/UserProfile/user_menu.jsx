@@ -7,7 +7,7 @@ import apiUsers from "../../Utils/apiUsers";
 
 const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const {user} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext); // Get user and setUser from UserContext
   const menuRef = useRef(null);
   const navigate = useNavigate();
   const profileImageUrl = user?.profile_image ? `http://127.0.0.1:8000${user.profile_image}` : images;
@@ -24,7 +24,7 @@ const UserMenu = () => {
       }
     };
     fetchUserData();
-  }, []);
+  }, [setUser]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
