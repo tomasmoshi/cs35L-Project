@@ -10,7 +10,7 @@ import "./App.css";
 import Home from "../Features/Home/Home.jsx"
 import EventDisplay from "../Events/EventDisplay.jsx";
 import Signup from "../Features/Signup/Signup.jsx";
-import UserMenu from "../Features/UserProfile/userMenu.jsx";
+import UserMenu from "../Features/UserProfile/user_menu.jsx";
 
 function App() {
   return (
