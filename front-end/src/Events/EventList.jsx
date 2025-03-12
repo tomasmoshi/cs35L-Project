@@ -42,7 +42,6 @@ const EventsList = () => {
           <p className="no-events">No events found.</p>
         ) : (
           events.map((event) => (
-            // Wrap the event card with a Link that passes the event data via state
             <Link to={`/event/${event.id}`} state={{ event }} key={event.id}>
               <EventCard event={event} />
             </Link>

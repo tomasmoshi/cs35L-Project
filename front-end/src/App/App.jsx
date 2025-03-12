@@ -12,6 +12,9 @@ import EventDisplay from "../Events/EventDisplay.jsx";
 import Signup from "../Features/Signup/Signup.jsx";
 import UserMenu from "../Features/UserProfile/userMenu.jsx";
 import Login from "../Features/Login/Login"; 
+import SearchBar from "../Features/SearchBar/SearchBar.jsx";
+
+
 
 function App() {
   return (
@@ -19,13 +22,16 @@ function App() {
       <Router>
         <div className="container">
           <nav className="navbar">
-            <h1 className="logo">AllExercises</h1>
+            <div className="navbar-brand">
+              <h1 className="logo">AllExercises</h1>
+              </div>
             <div className="nav-buttons">
               <ModalButton label="Login" modalType="login" />
               <ModalButton label="Help" modalType="help" />
               <ModalButton label="About Us" modalType="about" />
               <ModalButton label="Discover" modalType="discover" />
               <ModalButton label="Post event" modalType="post" />
+              <SearchBar onSearch={(query) => console.log("Search query:", query)} />
               <div className="profile-icon nav-button-size">
                 <UserMenu />
               </div>
