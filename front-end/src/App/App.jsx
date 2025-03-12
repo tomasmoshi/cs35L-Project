@@ -10,15 +10,9 @@ import "./App.css";
 import Home from "../Features/Home/Home.jsx";
 import EventDisplay from "../Events/EventDisplay.jsx";
 import Signup from "../Features/Signup/Signup.jsx";
-<<<<<<< HEAD
 import UserMenu from "../Features/UserProfile/user_menu.jsx";
-=======
-import UserMenu from "../Features/UserProfile/userMenu.jsx";
 import Login from "../Features/Login/Login"; 
 import SearchBar from "../Features/SearchBar/SearchBar.jsx";
-
-
->>>>>>> 6eee88a0d22f8bfeea4d6d486b52e476d84c5666
 
 function App() {
   return (
@@ -54,8 +48,6 @@ function App() {
         </div>
       </Router>
     </UserProvider>
-    
   );
 }
-
 export default App;

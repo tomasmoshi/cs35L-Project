@@ -1,12 +1,30 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
 import images from "../../assets/images/user.png";
 import "../../App/App.css";
+import apiUsers from "../../Utils/apiUsers";
 
 const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const {user} = useContext(UserContext);
   const menuRef = useRef(null);
   const navigate = useNavigate();
+  const profileImageUrl = user?.profile_image ? `http://127.0.0.1:8000${user.profile_image}` : images;
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      try {
+        const data = await apiUsers("http://127.0.0.1:8000/api/users/me/", "GET");
+        setUser(data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchUserData();
+  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -25,7 +43,7 @@ const UserMenu = () => {
     <div className="user-dropdown-container" ref={menuRef}>
       {/* Profile Image - Click to Open Dropdown */}
       <img
-        src={images}
+        src={profileImageUrl}
         alt="Profile"
         className="profile-icon"
         onClick={toggleMenu}

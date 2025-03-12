@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import apiUsers from "../../../Utils/apiUsers";
 import "../../../App/App.css";
+import { UserContext } from "../../Context/UserContext";
 
 const EditProfileForm = ({ updatedUser, setUpdatedUser, setEditing, setUser }) => {
-  const [previewImage, setPreviewImage] = useState(null);
+ const {user,setUser} = useContext(UserContext);
 
   const handleInputChange = (e) => {
     setUpdatedUser({ ...updatedUser, [e.target.name]: e.target.value });
@@ -20,12 +21,10 @@ const EditProfileForm = ({ updatedUser, setUpdatedUser, setEditing, setUser }) =
   const handleSave = async () => {
     try {
       const formData = new FormData();
-      for (const key in updatedUser) {
-        formData.append(key, updatedUser[key]);
-      }
-
+      formData.append("profile_image", user.profile_image);
+      
       await apiUsers("http://127.0.0.1:8000/api/users/me/", "PUT", formData);
-      setUser(updatedUser);
+      setUser({ ...user, profile_image: formData.get("profile_image") }); // Update globally
       setEditing(false);
     } catch (err) {
       console.error("Error updating profile", err);

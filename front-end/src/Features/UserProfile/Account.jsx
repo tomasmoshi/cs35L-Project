@@ -1,29 +1,18 @@
-import React, { useEffect, useState } from "react";
-import images from "../../assets/images/user.png";
+import React, { use, useEffect, useState, useContext } from "react";
 import apiUsers from "../../Utils/apiUsers";
 import "../../App/App.css";
 import ProfileHeader from "./Profile_Header";
 import EventTabs from "./User_Events";
-
+import { UserContext } from "../Context/UserContext";
 const Account = () => {
-  const [user, setUser] = useState(null);
-  const [events, setEvents] = useState([]); // ✅ Store user's events
+  const {user, setUser} = useContext(UserContext);
+  const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchUserData = async () => {
-      if (!token) return;
-      try {
-        const data = await apiUsers("http://127.0.0.1:8000/api/users/me/", "GET");
-        if (data) {
-          setUser(data);
-          fetchUserEvents(data.id); // ✅ Fetch events created by the user
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-        setError("Failed to fetch user data.");
-      }
+      if(!user) return;
     };
 
     const fetchUserEvents = async (userId) => {
@@ -36,9 +25,8 @@ const Account = () => {
     };
 
     fetchUserData();
-  }, [token]);
+  }, [user]);
 
-  if (!user) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
