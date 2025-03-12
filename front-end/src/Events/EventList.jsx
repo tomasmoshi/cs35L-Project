@@ -26,7 +26,6 @@
 //     setSearchQuery(newValue);
 //     fetchEvents(`http://127.0.0.1:8000/api/events/?tags=${newValue}`);
 //   };
-
 //   return (
 //     <div className="events-container">
 //       <h2>Events</h2>
@@ -51,5 +50,6 @@
 //     </div>
 //   );
 // };
+
 
 // export default EventsList;
