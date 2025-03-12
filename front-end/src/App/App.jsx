@@ -14,9 +14,10 @@ import UserMenu from "../Features/UserProfile/userMenu.jsx";
 import Login from "../Features/Login/Login"; 
 import SearchBar from "../Features/SearchBar/SearchBar.jsx";
 
-
-
 function App() {
+  const handleSearch = (query) => {
+    console.log("Search query:", query);
+  };
   return (
     <UserProvider>
       <Router>
@@ -31,7 +32,7 @@ function App() {
               <ModalButton label="About Us" modalType="about" />
               <ModalButton label="Discover" modalType="discover" />
               <ModalButton label="Post event" modalType="post" />
-              <SearchBar onSearch={(query) => console.log("Search query:", query)} />
+              <SearchBar onSearch={handleSearch} />
               <div className="profile-icon nav-button-size">
                 <UserMenu />
               </div>
@@ -50,7 +51,6 @@ function App() {
         </div>
       </Router>
     </UserProvider>
-    
   );
 }
 
