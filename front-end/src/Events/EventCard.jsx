@@ -10,9 +10,8 @@ const EventCard = ({ event, preview = false }) => {
   
   return (
     <div className="event-card">
+      <div className="event-user">{event.author}</div>
       <h3 className="event-title">{event.title}</h3>
-      <br/>
-      <span className="event-user">Posted by: {event.author}</span>
       {event.image && (
         <img
           src={imageUrl}
@@ -20,19 +19,9 @@ const EventCard = ({ event, preview = false }) => {
           className="event-image"
         />
       )}
-      {!preview && <p className="event-text">{event.content}</p>}
-      {/* {event.tags && event.tags.length > 0 && (
-        <div className="event-tags">
-          <p>Tags: {event.tags.map((tag, index) => (
-            <span key={index} className="event-tag">
-              {tag}
-            </span>
-          ))}
-          </p>
-        </div>
-      )} */}
+      <div>{!preview && <p className="event-text">{event.content}</p>}</div>
       <div className="event-header-date">
-        <div >Date posted: {event.date_posted && (
+        <div >{event.date_posted && (
           <span className="event-date">
             {formatDate(event.date_posted)}
           </span>

@@ -23,19 +23,23 @@
     justify-content: space-between;
     font-size: 14px;
     color: #ffffff;
+    margin-top: 10px;
     margin-bottom: 10px;
     
   }
   
   /* Event User */
   .event-user {
-    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 30px;
     font-weight: bold;
-    color: #ffffff;
+    color: #4788e4;
+    font-size: 20px;
   }
   
   /* Event Date */
   .event-date {
+    margin-top: 10px;
     font-size: 13px;
     color: #ffffff;
   }
@@ -46,24 +50,26 @@
     font-weight: bold;
     margin-bottom: 10px;
     text-align: center;
-    color: #4788e4;
+    color: white;
   }
   
   /* Event Image */
   .event-image {
+    display: block;
+    margin: auto;
     width: 100%;
     height: auto;
     border-radius: 10px;
   }
   
   /* Event Description */
-  .event-text {
-    margin-top: 12px;
+  .event-card .event-text {
+    margin-top: 15px;
+    border: #ffffff;
     font-size: 15px;
     color: #ffffff;
     line-height: 1.5;
     white-space: pre-wrap;
-    
   }
   .preview .event-text {
     display: none;
