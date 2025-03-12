@@ -12,7 +12,7 @@ const EventCard = ({ event, preview = false }) => {
   ? event.author_profile_image.startsWith("http")
   ? event.author_profile_image
   : `http://localhost:8000${event.author_profile_image}`
-  : defaultpic; // Default image if none provided
+  : defaultpic;
   
   return (
     <div className="event-card">
@@ -47,3 +47,4 @@ const EventCard = ({ event, preview = false }) => {
 };
 
 export default EventCard;
+
