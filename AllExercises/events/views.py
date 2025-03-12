@@ -45,6 +45,5 @@ class CreateEventView(APIView):
         else:
             posts = Post.objects.all().order_by("-date_posted")
         serializer = PostSerializer(posts, many=True)
-        print(serializer.data)
-        return Response(serializer.data)
+        return Response(serializer.data, status=200)
 
