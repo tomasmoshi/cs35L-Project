@@ -27,8 +27,7 @@
     margin-bottom: 10px;
     
   }
-  
-  /* Event User */
+
   .event-user {
     margin-top: 20px;
     margin-bottom: 30px;
@@ -36,7 +35,17 @@
     color: #4788e4;
     font-size: 20px;
   }
-  
+  .event-user-profile {
+    display: flex; 
+    align-items: center; /* Aligns items in a single row */
+  }
+  .event-user-profile .profile-image {
+    width: 50px;  /* Adjusted size */
+    height: 50px;
+    border-radius: 90%; /* Circular shape */
+    object-fit: cover;
+    margin-right: 10px; /* Space between username and image */
+  }
   /* Event Date */
   .event-date {
     margin-top: 10px;

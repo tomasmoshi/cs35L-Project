@@ -18,7 +18,7 @@ const Account = () => {
         const data = await apiUsers("http://127.0.0.1:8000/api/users/me/", "GET");
         if (data) {
           setUser(data);
-          fetchUserEvents(data.id); // ✅ Fetch events created by the user
+          fetchUserEvents(data.id); 
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
