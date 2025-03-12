@@ -141,9 +141,8 @@ const Signup = ({onClose}) => {
   
 
   return (
-    <div className="modal-content">
+    <form onSubmit={handleSubmit} className="signup-form">
       <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit} className="signup-form">
         <div className="input-group">
           <input type="text" placeholder="First Name" name="first_name" required />
           <input type="text" placeholder="Last Name" name="last_name" required />
@@ -167,10 +166,9 @@ const Signup = ({onClose}) => {
         <label className="submit-btn">
           <input type="file" id="imageInput" accept="image/*" onChange={handleImageChange} />
           Upload Image
-        </label>
+          </label>
         <button type="submit" className="submit-btn">Sign Up</button>
-      </form>
-    </div>
+    </form>
   );
 };
 

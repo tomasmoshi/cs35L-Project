@@ -6,30 +6,28 @@ import HelpModal from "../Help/Help";
 import Login from "../Login/Login";
 import Discover from "../Discover/Discover";
 
-function ModalButton({ label, modalType }) {
+function ModalButton({ label, modalType, onClick }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const toggleModal = () => {
     if (modalType === "discover") {
       navigate("/Discover");
-    } 
-    if (modalType === "post"){
-      navigate("/post");
-    }
-    else {
+    } else if (modalType === "post") {
+      navigate("/eventform");
+    } else {
       setIsModalOpen(!isModalOpen);
     }
   };
 
   useEffect(() => {
     if (isModalOpen) {
-      document.body.style.overflow = "hidden";  // Lock body scroll
+      document.body.style.overflow = "hidden"; 
     } else {
-      document.body.style.overflow = "auto";    // Enable body scroll
+      document.body.style.overflow = "auto";   
     }
     return () => {
-      document.body.style.overflow = "auto";    // Clean up on component unmount
+      document.body.style.overflow = "auto";   
     };
   }, [isModalOpen]);
 

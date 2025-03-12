@@ -226,7 +226,7 @@ Modal Overlay .modal {
 }
 
 .modal-content {
-    background: rgb(16, 0, 0);
+    background: rgb(222, 222, 222);
     padding: 20px;
     border-radius: 10px;
     text-align: left;

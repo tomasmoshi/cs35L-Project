@@ -76,7 +76,7 @@ const Discover = () => {
         <div className="event-grid">
          {filteredEvents.map((event) => (
           // Pass event data via state and set preview to true (so description is hidden)
-          <Link to={`/event/${event.id}`} state={{ event }} key={event.id}>
+          <Link className="event-card-link" to={`/event/${event.id}`} state={{ event }} key={event.id}>
             <EventCard event={event} preview={true} />
           </Link>
         ))}
