@@ -117,4 +117,9 @@
     width: 75px;
     height: 75px;
     object-fit: contain;
-}
+    transition: transform 0.3s ease;
+  }
+
+  .category-icon:hover {
+    transform: scale(1.1);
+  }

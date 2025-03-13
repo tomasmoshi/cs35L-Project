@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../../App/App.css";
 
 const EventTabs = ({ events }) => {
   const [activeTab, setActiveTab] = useState("myEvents");

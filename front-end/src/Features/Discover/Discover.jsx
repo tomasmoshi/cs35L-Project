@@ -1,4 +1,3 @@
-// Discover.jsx
 import React, { useState, useEffect } from "react";
 import EventCard from "../../Events/EventCard";
 import { sendRequest } from "../../Utils/apiEvents";
@@ -10,6 +9,9 @@ import basketballIcon from "../../assets/images/Basketball.png";
 import volleyballIcon from "../../assets/images/Volleyball.png";
 import danceIcon from "../../assets/images/Dance.png";
 import yogaIcon from "../../assets/images/Yoga.png";
+import pingpongIcon from "../../assets/images/Pingpong.png";
+import tennisIcon from "../../assets/images/Tennis.png";
+import baseballIcon from "../../assets/images/Baseball.png";
 
 const Discover = () => {
   const [filteredEvents, setFilteredEvents] = useState([]);
@@ -31,7 +33,6 @@ const Discover = () => {
     }
   };
 
-  
   const handleCategoryClick = async (category) => {
     try {
       setLoading(true);
@@ -55,13 +56,16 @@ const Discover = () => {
     fetchEvents();
   }, []);
 
-  const categories = ["Soccer", "Football", "Basketball", "Volleyball", "Dance", "Yoga"];
+  const categories = ["Soccer", "Baseball", "Football", "Basketball", "Tennis", "Volleyball", "Pingpong", "Dance", "Yoga"];
 
   const categoryImages = {
     Soccer: soccerIcon,
+    Baseball: baseballIcon,
     Football: footballIcon,
     Basketball: basketballIcon,
+    Tennis: tennisIcon,
     Volleyball: volleyballIcon,
+    Pingpong: pingpongIcon,
     Dance: danceIcon,
     Yoga: yogaIcon,
   };
@@ -88,8 +92,14 @@ const Discover = () => {
       
       {!loading && filteredEvents.length > 0 && (
         <div className="event-grid">
-         {filteredEvents.map((event) => (
-            <Link to={`/event/${event.id}`} state={{ event }} key={event.id}>
+
+          {filteredEvents.map((event) => (
+            <Link
+              to={`/event/${event.id}`}
+              state={{ event }}
+              key={event.id}
+              className="event-card-link"
+            >
               <EventCard event={event} preview={true} />
             </Link>
           ))}
