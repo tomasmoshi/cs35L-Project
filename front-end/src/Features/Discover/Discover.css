@@ -105,3 +105,17 @@
 .event-card-link {
     text-decoration: none;
 }
+
+/* For category icons*/
+.category-button {
+    background: none !important;
+    border: none !important;
+    cursor: pointer;
+    padding: 20px !important;
+}
+
+.category-icon {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+}
