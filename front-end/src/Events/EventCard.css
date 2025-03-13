@@ -1,5 +1,4 @@
-/* eventCard.css */
-/* Event Card Container */
+
 
 .event-card {
     background: rgba(9, 12, 1, 0.254);
@@ -16,7 +15,6 @@
     transform: scale(1.02);
   }
   
-  /* Event Header (User + Date) */
   .event-header-date {
     display: flex;
     justify-content: space-between;

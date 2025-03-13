@@ -111,10 +111,9 @@ body {
 .profile-icon-wrapper {
   display: flex;
   align-items: center;
-  /* Ensures vertical alignment */
   justify-content: center;
   height: 100%;
-  /* Match other nav buttons */
+
 }
 
 .user-dropdown-container {
@@ -168,7 +167,7 @@ body {
 .dropdown-item:hover {
   background: #444;
   transform: translateX(5px);
-  /* Adds a slight hover effect */
+  
 }
 
 .dropdown-item:active {
@@ -223,3 +222,8 @@ body {
   color: #ccc;
   margin-bottom: 15px;
 }
+.navbar .nav-buttons .nav-button.home {
+  background-color: #007BFF;  
+  color: #fff;
+}
+

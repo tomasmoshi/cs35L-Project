@@ -19,8 +19,8 @@
     align-items: center;
     z-index: 1000;
     overflow-y: hidden;
-    padding: 25px;            /* Add padding to reveal the box-shadow */
-    box-sizing: border-box;   /* Ensure padding is included in the overall size */
+    padding: 25px;           
+    box-sizing: border-box;   
   }
     
 .help-modal .modal-content {
