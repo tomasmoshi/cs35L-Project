@@ -25,7 +25,7 @@ function App() {
         <div className="container">
           <nav className="navbar">
             <div className="navbar-brand">
-            <Link to ="/" className="navbar-brand" style = {{textDecoration: 'none'}}>
+            <Link to ="/" className="navbar-brand" style = {{textDecoration: 'none', color:"inherit"}}>
               <h1 className="logo">AllExercises</h1>
               </Link>
               </div>

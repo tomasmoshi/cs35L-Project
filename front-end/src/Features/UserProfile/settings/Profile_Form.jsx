@@ -1,10 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../Context/UserContext";
 import apiUsers from "../../../Utils/apiUsers";
+import "./Settings.css";
 
 const ProfileForm = ({ setEditing }) => {
-  const { user, setUser, refreshUser } = useContext(UserContext);
-  const [updatedUser, setUpdatedUser] = useState();
+  const { user, refreshUser } = useContext(UserContext);
+  const [updatedUser, setUpdatedUser] = useState({});
   const [previewImage, setPreviewImage] = useState(null);
   const [editing, setLocalEditing] = useState(setEditing !== undefined);
 
@@ -15,7 +16,6 @@ const ProfileForm = ({ setEditing }) => {
         first_name: user?.first_name || "",
         last_name: user?.last_name || "",
         email: user?.email || "",
-        bio: user?.bio || "",
       });
     }
   }, [user]);
@@ -35,12 +35,10 @@ const ProfileForm = ({ setEditing }) => {
   const handleSave = async () => {
     try {
       let formData = new FormData();
+      Object.keys(updatedUser).forEach((key) => {
+        if (updatedUser[key]) formData.append(key, updatedUser[key]);
+      });
 
-      if (updatedUser.username) formData.append("username", updatedUser.username);
-      if (updatedUser.first_name) formData.append("first_name", updatedUser.first_name);
-      if (updatedUser.last_name) formData.append("last_name", updatedUser.last_name);
-      if (updatedUser.email) formData.append("email", updatedUser.email);
-      if (updatedUser.bio) formData.append("bio", updatedUser.bio);
       if (updatedUser.profile_image instanceof File) {
         formData.append("profile_image", updatedUser.profile_image);
       }
@@ -60,37 +58,51 @@ const ProfileForm = ({ setEditing }) => {
   if (!user) return <p>Loading...</p>;
 
   return (
-    <div>
-      <h1>Profile Settings</h1>
-      <p>Update your profile information and preferences.</p>
+    <div className="settings-container">
+      <h1 className="settings-title">Profile Settings</h1>
+      <p className="settings-subtitle">Update your profile information and preferences.</p>
 
-      <div className="account-box">
-        <img 
-          src={previewImage || (user?.profile_image ? `http://127.0.0.1:8000${user.profile_image}` : "default.png")} 
-          alt="Profile" width={150} height={150} />
-        <p>Change Image</p>
-        {editing && <input type="file" onChange={handleImageChange} />}
+      {/* Profile Image Section */}
+      <div className="profile-image-container">
+        <div className="profile-image" style={{ backgroundImage: `url(${previewImage || user.profile_image || "default.png"})` }} />
+        {editing && (
+          <>
+            <label htmlFor="upload-input" className="change-image-btn">Change Your Profile Picture</label>
+            <input id="upload-input" type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
+          </>
+        )}
       </div>
 
-      <div className="account-details">
+      {/* Profile Details */}
+      <div className="settings-form">
         {!editing ? (
           <>
             <p><strong>Username:</strong> {user.username}</p>
             <p><strong>Email:</strong> {user.email}</p>
             <p><strong>First Name:</strong> {user.first_name}</p>
             <p><strong>Last Name:</strong> {user.last_name}</p>
-            <p><strong>Bio:</strong> {user.bio}</p>
-            <button onClick={() => setLocalEditing(true)}>Edit Profile</button>
+            <div className="settings-btn-container">
+              <button className="settings-btn save-btn" onClick={() => setLocalEditing(true)}>Edit Profile</button>
+            </div>
           </>
         ) : (
           <>
+            <label>Username</label>
             <input type="text" name="username" value={updatedUser.username} onChange={handleInputChange} />
+
+            <label>First Name</label>
             <input type="text" name="first_name" value={updatedUser.first_name} onChange={handleInputChange} />
+
+            <label>Last Name</label>
             <input type="text" name="last_name" value={updatedUser.last_name} onChange={handleInputChange} />
+
+            <label>Email</label>
             <input type="email" name="email" value={updatedUser.email} onChange={handleInputChange} />
-            <textarea name="bio" value={updatedUser.bio} onChange={handleInputChange} />
-            <button onClick={handleSave}>Save</button>
-            <button onClick={() => setLocalEditing(false)}>Cancel</button>
+
+            <div className="settings-btn-container">
+              <button className="settings-btn save-btn" onClick={handleSave}>Save</button>
+              <button className="settings-btn cancel-btn" onClick={() => setLocalEditing(false)}>Cancel</button>
+            </div>
           </>
         )}
       </div>
