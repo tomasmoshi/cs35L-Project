@@ -15,13 +15,10 @@ const ProfileHeader = ({ user, setEditing }) => {
       <div className="cover-photo"></div>
       <img src={profileImageUrl} alt="Profile" className="profile-pic" />
       <h2>{user.username}</h2>
-<<<<<<< HEAD:front-end/src/Features/UserProfile/ProfileHeader.jsx
       <p className="bio">{user.bio || "Add a bio..."}</p>
       <button onClick={() => setEditing(true)}>Edit Profile</button>
 
       {/* Account Details in Table Format */}
-=======
->>>>>>> c3a2d81de2768892b9c725a68d717bfa7053fe79:front-end/src/Features/UserProfile/Profile_Header.jsx
       <div className="account-details">
         <h2>Profile Details</h2>
         <table>

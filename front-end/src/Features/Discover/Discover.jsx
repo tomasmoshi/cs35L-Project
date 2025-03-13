@@ -9,6 +9,9 @@ import basketballIcon from "../../assets/images/Basketball.png";
 import volleyballIcon from "../../assets/images/Volleyball.png";
 import danceIcon from "../../assets/images/Dance.png";
 import yogaIcon from "../../assets/images/Yoga.png";
+import pingpongIcon from "../../assets/images/Pingpong.png";
+import baseBallIcon from "../../assets/images/Baseball.png";
+import tennisIcon from "../../assets/images/Tennis.png";
 
 const Discover = () => {
   const [filteredEvents, setFilteredEvents] = useState([]);
@@ -53,14 +56,17 @@ const Discover = () => {
     fetchEvents();
   }, []);
 
-  const categories = ["Soccer", "Football", "Basketball", "Volleyball", "Dance", "Yoga"];
+  const categories = ["Soccer", "Tennis", "Football", "Basketball", "Pingpong", "Volleyball", "Dance", "Baseball", "Yoga"];
 
   const categoryImages = {
     Soccer: soccerIcon,
+    Tennis: tennisIcon,
     Football: footballIcon,
     Basketball: basketballIcon,
+    Pingpong: pingpongIcon,
     Volleyball: volleyballIcon,
     Dance: danceIcon,
+    Baseball: baseBallIcon,
     Yoga: yogaIcon,
   };
 
