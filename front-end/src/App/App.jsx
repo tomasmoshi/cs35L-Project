@@ -30,9 +30,7 @@ function App() {
               </Link>
               </div>
             <div className="nav-buttons">
-            <Link to="/" className="nav-button">
-                Home
-              </Link>
+              <ModalButton label="Home" modalType="home" />
               <ModalButton label="Login" modalType="login" />
               <ModalButton label="Help" modalType="help" />
               <ModalButton label="About Us" modalType="about" />
@@ -45,7 +43,6 @@ function App() {
             </div>
           </nav>
           <Routes>
-            {}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login onClose={() =>window.history.back() } />} />
             <Route path="/eventform" element={<PostEvent onEventSubmitted={() => {}} />} />
