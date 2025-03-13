@@ -1,0 +1,129 @@
+/* settings.css */
+
+/* Main container */
+.settings-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: radial-gradient(circle at 50% 50%, #1c1c1c 0%, #000000 100%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+}
+
+/* Header title */
+.settings-title {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* Subtitle */
+.settings-subtitle {
+    font-size: 1.2rem;
+    color: #bbb;
+    margin-bottom: 20px;
+}
+
+/* Profile form section */
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Form input fields */
+.settings-form input,
+.settings-form textarea {
+    width: 90%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #222;
+    color: white;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.settings-form input:focus,
+.settings-form textarea:focus {
+    border-color: #4788e4;
+    box-shadow: 0 0 8px rgba(71, 136, 228, 0.4);
+}
+
+.profile-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Profile Image - Ensure the full image is visible */
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #4788e4;
+    background-size: contain;
+    /* Ensures the whole image fits inside */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #222;
+    /* Add a background in case the image has transparency */
+}
+
+.change-image-btn {
+    margin-top: 10px;
+    background: #4788e4;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.change-image-btn:hover {
+    background: #3465c1;
+}
+
+/* Buttons */
+.settings-btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.settings-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.save-btn {
+    background: #2b86d6;
+    color: white;
+}
+
+.save-btn:hover {
+    background: #1e65a5;
+    transform: scale(1.05);
+}
+
+.cancel-btn {
+    background: #444;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: #666;
+    transform: scale(1.05);
+}

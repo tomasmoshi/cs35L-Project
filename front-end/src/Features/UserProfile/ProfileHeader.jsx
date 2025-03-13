@@ -1,0 +1,52 @@
+import React from "react";
+import defaultImage from "../../assets/images/user.png"; // Default profile image
+import "./ProfileHeader.css"
+const ProfileHeader = ({ user, setEditing }) => {
+  if (!user) {
+    return <p>Loading...</p>;
+  }
+
+  const profileImageUrl = user.profile_image
+    ? `http://127.0.0.1:8000${user.profile_image}`
+    : defaultImage;
+
+  return (
+    <div className="profile-header">
+      <div className="cover-photo"></div>
+      <img src={profileImageUrl} alt="Profile" className="profile-pic" />
+      <h2>{user.username}</h2>
+<<<<<<< HEAD:front-end/src/Features/UserProfile/ProfileHeader.jsx
+      <p className="bio">{user.bio || "Add a bio..."}</p>
+      <button onClick={() => setEditing(true)}>Edit Profile</button>
+
+      {/* Account Details in Table Format */}
+=======
+>>>>>>> c3a2d81de2768892b9c725a68d717bfa7053fe79:front-end/src/Features/UserProfile/Profile_Header.jsx
+      <div className="account-details">
+        <h2>Profile Details</h2>
+        <table>
+          <tbody>
+            <tr>
+              <th>Username</th>
+              <td>{user.username}</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>{user.email}</td>
+            </tr>
+            <tr>
+              <th>First Name</th>
+              <td>{user.first_name}</td>
+            </tr>
+            <tr>
+              <th>Last Name</th>
+              <td>{user.last_name}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default ProfileHeader;

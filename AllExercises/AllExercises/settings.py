@@ -72,7 +72,9 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Vite's default dev server
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:5175",
 ]
 ROOT_URLCONF = "AllExercises.urls"
 

@@ -11,7 +11,6 @@ import danceIcon from "../../assets/images/Dance.png";
 import yogaIcon from "../../assets/images/Yoga.png";
 
 const Discover = () => {
-  console.log("Discover component rendered");
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -87,6 +86,7 @@ const Discover = () => {
       
       {!loading && filteredEvents.length > 0 && (
         <div className="event-grid">
+
           {filteredEvents.map((event) => (
             <Link
               to={`/event/${event.id}`}

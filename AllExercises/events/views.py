@@ -40,10 +40,15 @@ class CreateEventView(APIView):
 
     def get(self, request, *args, **kwargs):
         tag = request.query_params.get("tags", None)
+        author = request.query_params.get("author", None)
+        
         if tag:
             posts = Post.objects.filter(tags__name__icontains=tag).order_by("-date_posted")
         else:
             posts = Post.objects.all().order_by("-date_posted")
+        if author:
+            posts = posts.filter(author__id=author)
+            
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data, status=200)
 
