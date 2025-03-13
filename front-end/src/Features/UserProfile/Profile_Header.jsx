@@ -1,6 +1,7 @@
 import React from "react";
 import defaultImage from "../../assets/images/user.png"; // Default profile image
 
+
 // added user profile image to the user profile page
 const ProfileHeader = ({ user, setEditing }) => {
   if (!user) {
@@ -16,10 +17,6 @@ const ProfileHeader = ({ user, setEditing }) => {
       <div className="cover-photo"></div>
       <img src={profileImageUrl} alt="Profile" className="profile-pic" />
       <h2>{user.username}</h2>
-      <p className="bio">{user.bio || "Add a bio..."}</p>
-      <button onClick={() => setEditing(true)}>Edit Profile</button>
-
-      {/* User Details */}
       <div className="account-details">
         <h2>Profile Details</h2>
         <p><strong>Username:</strong> {user.username}</p>

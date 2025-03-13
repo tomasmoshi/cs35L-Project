@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import apiUsers from "../../Utils/apiUsers";
-import "../../App/App.css";
+// import "../../App/App.css";
+import "../UserProfile/user.css";
 import ProfileHeader from "./Profile_Header";
 import EventTabs from "./User_Events";
 import { UserContext } from "../Context/UserContext";
