@@ -17,7 +17,6 @@ const ProfileHeader = ({ user, setEditing }) => {
       <h2>{user.username}</h2>
       <p className="bio">{user.bio || "Add a bio..."}</p>
       <button onClick={() => setEditing(true)}>Edit Profile</button>
-
       {/* Account Details in Table Format */}
       <div className="account-details">
         <h2>Profile Details</h2>

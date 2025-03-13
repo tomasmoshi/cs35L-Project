@@ -55,7 +55,11 @@ const ProfileForm = ({ setEditing }) => {
     }
   };
 
-  if (!user) return <p>Loading...</p>;
+  if (!user) return (
+    <div className="loading">
+      <p>Loading...</p>
+    </div>
+    );
 
   return (
     <div className="settings-container">
