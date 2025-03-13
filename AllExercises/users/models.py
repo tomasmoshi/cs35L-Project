@@ -9,6 +9,7 @@ class UserProfile(models.Model):
     profile_image = models.ImageField(
         upload_to="profile_images/", blank=True, null=True
     )
-
+    biography = models.CharField(max_length=300, blank=True, null=True)
+    
     def __str__(self):
         return f"{self.user.username} Profile"
