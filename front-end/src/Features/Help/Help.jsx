@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./HelpModal.css";
+import "./Help.css";
 function Help({ onClose }) {
 
   useEffect(() => {
@@ -17,9 +17,9 @@ function Help({ onClose }) {
   }, [onClose]);
   
   return (
-    <div className="modal">
+    <div className="help-modal">
+      <button className="close-btn" onClick={onClose}>&times;</button>
       <div className="modal-content">
-        <button className="close-btn" onClick={onClose}>&times;</button>
         <h2>Welcome to AllExercises!</h2>
         <p>Here are some instructions to help you get started:</p>
         <ul>

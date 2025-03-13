@@ -1,8 +1,8 @@
 // Signup.jsx
 import React, { useState, useEffect } from "react";
 import { sendRequest } from "../../Utils/apiEvents";
-import "../Help/HelpModal.css";
 import "./Signup.css";
+
 
 const Signup = ({onClose}) => {
   const [usernameError, setUsernameError] = useState("");
@@ -141,34 +141,37 @@ const Signup = ({onClose}) => {
   
 
   return (
-    <form onSubmit={handleSubmit} className="signup-form">
-      <h2>Sign Up</h2>
-        <div className="input-group">
-          <input type="text" placeholder="First Name" name="first_name" required />
-          <input type="text" placeholder="Last Name" name="last_name" required />
-        </div>
-        <input type="text" placeholder="Username" name="username" required />
-        {usernameError && <p className="error">{usernameError}</p>}
-        <input type="email" placeholder="Email" name="email" required />
-        {emailError && <p className="error">{emailError}</p>}
-        <input type="password" placeholder="Password" name="password" required />
-        <input type="password" placeholder="Confirm Password" name="confirm_password" required />
-        {passwordError && <p className="error">{passwordError}</p>}
-        <div className="password-instructions">
-          <ul>
-            <li>Your password can't be too similar to your personal information.</li>
-            <li>Your password must contain at least 8 characters.</li>
-            <li>Your password can't be a commonly used password.</li>
-            <li>Your password can't be entirely numeric.</li>
-          </ul>
-        </div>
-        {preview && <img src={preview} alt="Profile Preview" className="image-preview" />}
-        <label className="submit-btn">
-          <input type="file" id="imageInput" accept="image/*" onChange={handleImageChange} />
-          Upload Image
-          </label>
-        <button type="submit" className="submit-btn">Sign Up</button>
-    </form>
+    <div className="signup-modal">
+      <button className="close-btn" onClick={onClose}>&times;</button>
+      <form onSubmit={handleSubmit} className="signup-form">
+        <h2>Sign Up</h2>
+          <div className="input-group">
+            <input type="text" placeholder="First Name" name="first_name" required />
+            <input type="text" placeholder="Last Name" name="last_name" required />
+          </div>
+          <input type="text" placeholder="Username" name="username" required />
+          {usernameError && <p className="error">{usernameError}</p>}
+          <input type="email" placeholder="Email" name="email" required />
+          {emailError && <p className="error">{emailError}</p>}
+          <input type="password" placeholder="Password" name="password" required />
+          <input type="password" placeholder="Confirm Password" name="confirm_password" required />
+          {passwordError && <p className="error">{passwordError}</p>}
+          <div className="password-instructions">
+            <ul>
+              <li>Your password can't be too similar to your personal information.</li>
+              <li>Your password must contain at least 8 characters.</li>
+              <li>Your password can't be a commonly used password.</li>
+              <li>Your password can't be entirely numeric.</li>
+            </ul>
+          </div>
+          {preview && <img src={preview} alt="Profile Preview" className="image-preview" />}
+          <label className="submit-btn">
+            <input type="file" id="imageInput" accept="image/*" onChange={handleImageChange} />
+            Upload Image
+            </label>
+          <button type="submit" className="submit-btn">Sign Up</button>
+      </form>
+    </div>
   );
 };
 
