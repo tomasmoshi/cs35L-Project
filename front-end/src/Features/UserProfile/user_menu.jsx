@@ -56,7 +56,7 @@ const UserMenu = () => {
             View Profile
           </button>
           <button className="dropdown-item" onClick={() => navigate("/settings")}>
-            Settings
+            Edit Profile
           </button>
           <button
             className="dropdown-item logout-btn"
