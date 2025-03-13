@@ -40,7 +40,6 @@ const EventForm = ({ onEventSubmitted, onClose }) => {
     formData.append("tags", JSON.stringify(tags));
     formData.append("image", image);
     if (!formData.get("title")|| !formData.get("content") || !image ) return;
-    setIsSubmitting(true);
     // Post event data (date_posted will be handled by the backend)
     const data = await sendRequest("http://127.0.0.1:8000/api/events/", "POST", formData);
     if (data) {
