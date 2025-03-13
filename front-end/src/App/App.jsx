@@ -30,6 +30,9 @@ function App() {
               </Link>
               </div>
             <div className="nav-buttons">
+            <Link to="/" className="nav-button">
+                Home
+              </Link>
               <ModalButton label="Login" modalType="login" />
               <ModalButton label="Help" modalType="help" />
               <ModalButton label="About Us" modalType="about" />

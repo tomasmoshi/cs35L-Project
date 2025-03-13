@@ -91,12 +91,7 @@
     outline: none;
 }
 
-/* Consistent Button Styles */
-/*
-* Padding helps with the size and width of the buttons
-* 
-*
-*/
+
 .login-btn,
 .help-btn,
 .about-us-btn {
@@ -109,7 +104,7 @@
     font-size: 14px;
     transition: 0.2s ease-in-out;
     margin-right: 5px;
-    /*gives space for the buttons*/
+    
 }
 
 .login-btn:hover,
@@ -119,7 +114,7 @@
     background: linear-gradient(135deg, #1e65a5, #2b86d6);
 }
 
-/* Search Section */
+
 .search-section {
     text-align: center;
     padding: 5a0px 20px;
@@ -169,7 +164,7 @@
     background: #1e65a5;
 }
 
-/* Event List */
+
 .event-list {
     margin-top: 40px;
     text-align: center;
@@ -205,7 +200,7 @@
     background: rgba(43, 134, 214, 0.2);
 }
 
-/* Modals */
+
 .modal {
     position: fixed;
     top: 0;
