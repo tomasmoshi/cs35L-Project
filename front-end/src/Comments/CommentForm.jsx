@@ -4,6 +4,10 @@ import { sendRequest } from "../Utils/apiEvents";
 
 const CommentForm = ({ commentAdd, eventId }) => {
   const [comment, setComment] = useState("");
+  const [user, setUser] = useState(null);
+
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

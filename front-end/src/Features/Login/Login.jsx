@@ -4,7 +4,6 @@ import "./Login.css";
 import Signup from "../Signup/Signup";
 import { sendLogin } from "../../Utils/apiLogin";
 
-
 function Login({ onClose }) {
   const [isSignUpMode, setIsSignUpMode] = useState(false);
   const [username, setUsername] = useState("");
@@ -29,7 +28,6 @@ function Login({ onClose }) {
     event.preventDefault();
     setErrorMsg("");
 
-    // Use sendRequest helper to post the JSON payload
     const data = await sendLogin(
       "http://127.0.0.1:8000/api/users/login/",
       "POST",
@@ -41,18 +39,21 @@ function Login({ onClose }) {
       localStorage.setItem("username", data.username);
       onClose();
     } else {
-        setErrorMsg(data && data.error ? data.error : "Login failed. Please try again.");
-       
-        //Shake button added
-        const button = document.querySelector(".submit-btn");
-        button.classList.add("shake-btn");
+      setErrorMsg(data && data.error ? data.error : "Login failed. Please try again.");
 
-        //Timeout for shake button 1s
-        setTimeout(() => {
-          button.classList.remove("shake-btn");
-        }, 1000);
+      const button = document.querySelector(".submit-btn");
+      button.classList.add("shake-btn");
+
+      setTimeout(() => {
+        button.classList.remove("shake-btn");
+      }, 1000);
     }
   };
+
+  
+  if (isSignUpMode) {
+    return <Signup onClose={onClose} />;
+  }
 
   return (
     <div className="login-modal">
@@ -60,43 +61,39 @@ function Login({ onClose }) {
         <button className="close-btn" onClick={onClose}>
           &times;
         </button>
-        {isSignUpMode ? (
-          <Signup onClose={onClose} />
-        ) : (
-          <>
-            <h2>Login</h2>
-            {errorMsg && <p className="error">{errorMsg}</p>}
-            <form onSubmit={handleLoginSubmit}>
-              <div className="input-container">
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={username}
-                  onChange={handleUsernameChange}
-                  required
-                />
-              </div>
-              <div className="input-container">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={handlePasswordChange}
-                  required
-                />
-              </div>
-              <div className="button-container">
-                <button type="submit" className="submit-btn">Login</button>
-              </div>
-            </form>
-          </>
-        )}
+        <>
+          <h2>Login</h2>
+          {errorMsg && <p className="error">{errorMsg}</p>}
+          <form onSubmit={handleLoginSubmit}>
+            <div className="input-container">
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={handleUsernameChange}
+                required
+              />
+            </div>
+            <div className="input-container">
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+            </div>
+            <div className="button-container">
+              <button type="submit" className="submit-btn">
+                Login
+              </button>
+            </div>
+          </form>
+        </>
         <p>
-          {isSignUpMode
-            ? "Already have an account? "
-            : "Don't have an account? "}
-          <a href="#" onClick={() => setIsSignUpMode(!isSignUpMode)}>
-            {isSignUpMode ? "Login" : "Sign up"}
+          {"Don't have an account? "}
+          <a href="#" onClick={() => setIsSignUpMode(true)}>
+            Sign up
           </a>
         </p>
       </div>

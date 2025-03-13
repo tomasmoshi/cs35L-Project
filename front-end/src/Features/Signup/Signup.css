@@ -1,193 +1,223 @@
 /* SIGN UP MODAL CONTAINER */
 .signup-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 1000px !important;
-    height: 1000px !important;
-    width: 100% !important;
-    height: 100% !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.5);
-    flex-direction: column;
-  }
-  
-  /* SIGN UP FORM INSIDE THE MODAL */
-  .signup-modal .signup-form {
-    width: 500px !important;     /* Fixed width */
-    height: 800px !important;    /* Fixed height */
-    margin: 15px;
-    border-radius: 12px;
-    background: radial-gradient(
-      circle at 30% 50%, 
-      #2e2e2e 0%, 
-      #000000 60%, 
-      #2e2e2e 100%
-    );
-    position: relative;
-    display: flex;
-    flex-direction: column;      /* Stack children vertically */
-    justify-content: flex-start; /* Start content at the top */
-    align-items: center;
-    overflow-y: auto;
-    box-sizing: border-box;
-  }
-  
-  /* CLOSE BUTTON FOR THE MODAL */
-  .signup-modal .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: #fff;
-    transition: transform 0.3s ease, color 0.3s ease;
-  }
-  
-  .signup-modal .close-btn:hover {
-    color: #2b86d6;
-    transform: scale(1.1);
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  flex-direction: column;
+}
+.signup-form {
+  position: relative;          /* So .close-btn is positioned relative to the form */
+  width: 400px !important;
+  height: 600px !important;
+  /* ...rest of your existing styles... */
+}
+.close-btn {
+  position: absolute;
+  top: 10px;      /* Adjust as needed */
+  right: 15px;    /* Adjust as needed */
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+/* SIGN UP FORM INSIDE THE MODAL */
+.signup-modal .signup-form {
+  width: 400px !important;        /* Reduced width */
+  height: 600px !important;       /* Reduced height */
+  margin: 15px;
+  padding-top: 20px; 
+  border-radius: 12px;
+  background: radial-gradient(
+    circle at 30% 50%, 
+    #2e2e2e 0%, 
+    #000000 60%, 
+    #2e2e2e 100%
+  );
+  position: relative;
+  display: flex;
+  flex-direction: column;         /* Stack children vertically */
+  justify-content: flex-start;    /* Start content at the top */
+  align-items: center;            /* Center elements horizontally */
+  overflow-y: auto;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px #4788e4; /* Blue border line shadow */
+}
 
-  
-  /* Input Group (First & Last Name) */
-  .input-group {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-  }
-  
-  .input-group input {
-    flex: 1;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    font-size: 14px;
-    outline: none;
-    box-sizing: border-box;
-  }
-  
-  .input-group input:focus {
-    border-color: #2b86d6;
-    box-shadow: 0 0 8px rgba(43, 134, 214, 0.4);
-  }
-  
-  /* General Input Styling */
-  .signup-form input[type="text"],
-  .signup-form input[type="email"],
-  .signup-form input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    font-size: 14px;
-    outline: none;
-    box-sizing: border-box;
-  }
-  
-  .signup-form input:focus {
-    border-color: #2b86d6;
-    box-shadow: 0 0 8px rgba(43, 134, 214, 0.4);
-  }
-  
-  /* Password Instructions */
-  .password-instructions {
-    text-align: left;
-    font-size: 12px;
-    color: #ccc;
-    width: 100%;
-    margin: 10px 0;
-    padding: 0 10%;
-  }
-  
-  .password-instructions ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .password-instructions li {
-    margin: 4px 0;
-  }
-  
-  /* Image Preview */
-  .image-preview {
-    width: 125px !important;
-    height: 125px !important;
-    object-fit: cover;
-    border-radius: 50%;
-    margin: 10px 0;
-    border: 2px solid #2b86d6;
-  }
-  
-  /* File Upload Button (Label) */
-  .file-upload-btn {
-    cursor: pointer;
-    padding: 10px 20px;
-    margin-top: 10px;
-    background: #2b86d6;
-    color: #fff;
-    border-radius: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease, transform 0.3s ease;
-  }
-  
-  .file-upload-btn:hover {
-    background: #1e65a5;
-    transform: scale(1.05);
-  }
-  
-  /* Submit Button */
-  .submit-btn {
-    width: 50%;
-    padding: 10px;
-    margin-top: 10px;
-    font-size: 16px;
-    border-radius: 20px;
-    background: #2b86d6;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .submit-btn:hover {
-    background: #1e65a5;
-    transform: scale(1.05);
-  }
-  
-  /* Error Messages */
-  .error {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-    text-align: center;
-  }
-  
-  /* Shake Animation */
-  @keyframes shake {
-    0% { transform: translateX(0); background-color: #e42f29; }
-    25% { transform: translateX(-5px); background-color: #e42f29; }
-    50% { transform: translateX(5px); background-color: #e42f29; }
-    75% { transform: translateX(-5px); background-color: #e42f29; }
-    100% { transform: translateX(0); background-color: #2b86d6; }
-  }
-  
-  .shake-btn {
-    animation: shake 0.25s ease-in-out 2.5;
-  }
-  
+/* CLOSE BUTTON FOR THE MODAL */
+.signup-modal .close-btn {
+  position: absolute;
+  left: calc(40% + 200px - 15px);  /*200px = half of 400px, then subtract an offset */
+  top: calc(50% - 300px + 10px);   /* 300px = half of 600px, then add an offset */
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
 
-  
-  
+.signup-modal .close-btn:hover {
+  color: #2b86d6;
+  transform: scale(1.1);
+}
+
+/* Input Group (First & Last Name) */
+.input-group {
+  display: flex;
+  gap: 10px;
+  width: 80%;           /* Fill 80% of the container width */
+  margin: 0 auto;       /* Center horizontally */
+}
+
+.input-group input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  border-color: #2b86d6;
+  box-shadow: 0 0 8px rgba(43, 134, 214, 0.4);
+}
+
+/* General Input Styling */
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+  width: 80%;             /* Fill 80% of the container width */
+  padding: 10px;          /* Reduced padding */
+  margin: 6px auto;       /* Center horizontally, smaller vertical space */
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.signup-form input:focus {
+  border-color: #2b86d6;
+  box-shadow: 0 0 8px rgba(43, 134, 214, 0.4);
+}
+
+/* Password Instructions */
+.password-instructions {
+  text-align: left;
+  font-size: 12px;
+  color: #ccc;
+  width: 80%;            /* Match input width */
+  margin: 10px auto;     /* Center horizontally */
+}
+
+.password-instructions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.password-instructions li {
+  margin: 4px 0;
+}
+
+/* Image Preview */
+.image-preview {
+  width: 64px !important;
+  height: 64px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* File Upload Button (Label) */
+.file-upload-btn {
+  cursor: pointer;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background: #2b86d6;
+  color: #fff;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.file-upload-btn:hover {
+  background: #1e65a5;
+  transform: scale(1.05);
+}
+
+/* Hide file input inside file-upload-btn */
+.file-upload-btn input[type="file"] {
+  display: none;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 50%;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  border-radius: 20px;
+  background: #2b86d6;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-btn:hover {
+  background: #1e65a5;
+  transform: scale(1.05);
+}
+
+/* Error Messages */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* Shake Animation */
+@keyframes shake {
+  0% { transform: translateX(0); background-color: #e42f29; }
+  25% { transform: translateX(-5px); background-color: #e42f29; }
+  50% { transform: translateX(5px); background-color: #e42f29; }
+  75% { transform: translateX(-5px); background-color: #e42f29; }
+  100% { transform: translateX(0); background-color: #2b86d6; }
+}
+
+.shake-btn {
+  animation: shake 0.25s ease-in-out 2.5;
+}
+
+.signup-form h2 {
+  margin-bottom: 20px; /* Adjust the value as needed */
+}
+.input-group {
+  margin-bottom: 20px; /* Adjust the value as needed */
+}
+
+/* Increase vertical spacing between all input fields */
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+  margin-bottom: 12px; /* Adjust the value as needed */
+}
