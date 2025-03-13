@@ -32,8 +32,15 @@ const SearchBar = ({ onSearchResults }) => {
   };
 
   useEffect(() => {
-    setShowResultsModal(false);
-  }, [location]);
+    const handleClose = (event) => {
+      if (event.type === "keydown" && event.key !== "Escape") return;
+      setShowResultsModal(false);
+      setFilteredEvents([]);
+    };
+
+    document.addEventListener("keydown", handleClose);
+    return () => document.removeEventListener("keydown", handleClose);
+  }, []);
 
   const closeResultsModal = () => {
     setShowResultsModal(false);

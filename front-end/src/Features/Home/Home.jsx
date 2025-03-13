@@ -1,4 +1,3 @@
-// src/Features/Home/Home.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
@@ -9,12 +8,15 @@ function Home() {
 
   const handleGetStartedClick = () => {
     const token = localStorage.getItem("token");
-
     if (token) {
       navigate("/eventform");
     } else {
       navigate("/login");
     }
+  };
+
+  const handleHomeClick = () => {
+    navigate("/");
   };
 
   return (
@@ -25,10 +27,11 @@ function Home() {
           Set up an event page and invite friends.
           Host a memorable event today.
         </p>
-        {}
         <button className="cta-button" onClick={handleGetStartedClick}>
           Get Started!
         </button>
+        {}
+        
       </div>
       
       <div className="hero-image">

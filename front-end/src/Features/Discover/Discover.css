@@ -4,7 +4,7 @@
     padding: 20px;
     text-align: center;
     
-    /* Background from Home.css copy pasted */
+    
     min-height: 100vh;
     background: radial-gradient(
         circle at 30% 50%, 
@@ -104,4 +104,18 @@
 }
 .event-card-link {
     text-decoration: none;
+}
+
+/* For category icons*/
+.category-button {
+    background: none !important;
+    border: none !important;
+    cursor: pointer;
+    padding: 20px !important;
+}
+
+.category-icon {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
 }

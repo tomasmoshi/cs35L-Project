@@ -1,4 +1,4 @@
-// src/App/App.jsx
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ModalButton from "../Features/ModalButton/ModalButton.jsx";
@@ -30,6 +30,9 @@ function App() {
               </Link>
               </div>
             <div className="nav-buttons">
+            <Link to="/" className="nav-button">
+                Home
+              </Link>
               <ModalButton label="Login" modalType="login" />
               <ModalButton label="Help" modalType="help" />
               <ModalButton label="About Us" modalType="about" />

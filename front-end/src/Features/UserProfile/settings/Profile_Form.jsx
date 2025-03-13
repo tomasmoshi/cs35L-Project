@@ -45,7 +45,7 @@ const ProfileForm = ({ setEditing }) => {
         formData.append("profile_image", updatedUser.profile_image);
       }
 
-      const response = await apiUsers("http://127.0.0.1:8000/api/users/me/", "PUT", formData, true);
+      const response = await apiUsers("http://127.0.0.1:8000/api/users/me/edit/", "PUT", formData, true);
 
       if (response) {
         await refreshUser();

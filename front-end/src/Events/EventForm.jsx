@@ -1,9 +1,9 @@
-// EventForm.js
+
 import React, { useState, useEffect } from "react";
 import "./EventForm.css";
 import { sendRequest } from "../Utils/apiEvents"; 
 const EventForm = ({ onEventSubmitted, onClose }) => {
-  const [image, setImage] = useState(null); // Store the file object
+  const [image, setImage] = useState(null); 
   const [preview, setPreview] = useState(null);
   const [tags, setTags] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,7 +27,7 @@ const EventForm = ({ onEventSubmitted, onClose }) => {
     const file = e.target.files[0];
     if (file) {
       setImage(file);
-      // Create a preview URL for the image
+      
       setPreview(URL.createObjectURL(file));
     }
   };
@@ -35,22 +35,19 @@ const EventForm = ({ onEventSubmitted, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!localStorage.getItem("token") && !localStorage.getItem("username")) return;
-    // Prepare form data; note that we pass the file object directly
     const formData = new FormData(e.currentTarget);
     formData.append("tags", JSON.stringify(tags));
     formData.append("image", image);
     if (!formData.get("title")|| !formData.get("content") || !image ) return;
-    // Post event data (date_posted will be handled by the backend)
+    setIsSubmitting(true);
     const data = await sendRequest("http://127.0.0.1:8000/api/events/", "POST", formData);
     if (data) {
       onEventSubmitted(data);
-      // Reset the form fields
       setImage(null);
       setTags("");
       setPreview(null);
-      e.target.reset(); // Resets the file input
+      e.target.reset(); 
       setIsSubmitting(false);
-      //console.log(onClose)
       if (onClose){
         onClose();
       }

@@ -65,13 +65,13 @@
 }
 
 .event-form .image-preview {
-  width: 480px !important;           /* Fixed width */
-  height: 480px !important;          /* Fixed height */
-  border-radius: 12px;    /* A bit more rounded for a nicer shape */
+  width: 480px !important;           
+  height: 480px !important;          
+  border-radius: 12px;    
   margin-top: 10px;
   border: 2px solid #2b86d6;
-  object-fit: cover;      /* Ensures the image fills the area nicely */
-  display: block;         /* Allows centering with auto margins */
+  object-fit: cover;      
+  display: block;         
   margin-left: auto;
   margin-right: auto;
 }
