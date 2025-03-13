@@ -1,4 +1,3 @@
-// Discover.jsx
 import React, { useState, useEffect } from "react";
 import EventCard from "../../Events/EventCard";
 import { sendRequest } from "../../Utils/apiEvents";
@@ -31,7 +30,6 @@ const Discover = () => {
     }
   };
 
-  
   const handleCategoryClick = async (category) => {
     try {
       setLoading(true);
@@ -88,8 +86,14 @@ const Discover = () => {
       
       {!loading && filteredEvents.length > 0 && (
         <div className="event-grid">
-         {filteredEvents.map((event) => (
-            <Link to={`/event/${event.id}`} state={{ event }} key={event.id}>
+
+          {filteredEvents.map((event) => (
+            <Link
+              to={`/event/${event.id}`}
+              state={{ event }}
+              key={event.id}
+              className="event-card-link"
+            >
               <EventCard event={event} preview={true} />
             </Link>
           ))}

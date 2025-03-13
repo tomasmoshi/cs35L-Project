@@ -15,7 +15,10 @@ function ModalButton({ label, modalType, onClick }) {
       navigate("/Discover");
     } else if (modalType === "post") {
       navigate("/eventform");
-    } else {
+    } 
+    else if (modalType==="home"){
+      navigate("/");
+    }else {
       setIsModalOpen(!isModalOpen);
     }
   };
