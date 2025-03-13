@@ -1,4 +1,4 @@
-Modal Overlay .modal {
+.modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -14,7 +14,6 @@ Modal Overlay .modal {
     padding: 20px;
 }
 
-/* Modal Content */
 .modal-content {
     background: white;
     padding: 20px;
@@ -31,7 +30,6 @@ Modal Overlay .modal {
     /* Ensures the modal fits on the screen */
 }
 
-/* Close Button */
 .close-btn {
     position: absolute;
     top: 10px;
@@ -48,7 +46,6 @@ Modal Overlay .modal {
     transform: scale(1.1);
 }
 
-/* Submit Button */
 .submit-btn {
     background: #2b86d6;
     color: white;
@@ -66,7 +63,6 @@ Modal Overlay .modal {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Nav Button Styles */
 .nav-button {
     background: linear-gradient(135deg, #2b86d6, #1e65a5);
     color: white;
@@ -85,7 +81,6 @@ Modal Overlay .modal {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Input Fields */
 .modal-content input {
     width: 80%;
     padding: 10px;
