@@ -1,14 +1,13 @@
 import React from "react";
 import defaultImage from "../../assets/images/user.png"; // Default profile image
-
-// added user profile image to the user profile page
+import "./ProfileHeader.css"
 const ProfileHeader = ({ user, setEditing }) => {
   if (!user) {
     return <p>Loading...</p>;
   }
 
-  const profileImageUrl = user.profile_image 
-    ? `http://127.0.0.1:8000${user.profile_image}` 
+  const profileImageUrl = user.profile_image
+    ? `http://127.0.0.1:8000${user.profile_image}`
     : defaultImage;
 
   return (
@@ -19,13 +18,29 @@ const ProfileHeader = ({ user, setEditing }) => {
       <p className="bio">{user.bio || "Add a bio..."}</p>
       <button onClick={() => setEditing(true)}>Edit Profile</button>
 
-      {/* User Details */}
+      {/* Account Details in Table Format */}
       <div className="account-details">
         <h2>Profile Details</h2>
-        <p><strong>Username:</strong> {user.username}</p>
-        <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>First Name:</strong> {user.first_name}</p>
-        <p><strong>Last Name:</strong> {user.last_name}</p>
+        <table>
+          <tbody>
+            <tr>
+              <th>Username</th>
+              <td>{user.username}</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>{user.email}</td>
+            </tr>
+            <tr>
+              <th>First Name</th>
+              <td>{user.first_name}</td>
+            </tr>
+            <tr>
+              <th>Last Name</th>
+              <td>{user.last_name}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );

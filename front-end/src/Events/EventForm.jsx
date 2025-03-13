@@ -51,7 +51,6 @@ const EventForm = ({ onEventSubmitted, onClose }) => {
       setPreview(null);
       e.target.reset(); // Resets the file input
       setIsSubmitting(false);
-      //console.log(onClose)
       if (onClose){
         onClose();
       }
