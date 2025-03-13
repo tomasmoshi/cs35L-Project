@@ -18,8 +18,8 @@
   margin-top: auto;
   border-radius: 12px;
   text-align: left;
-  backdrop-filter: blur(10px);
-  opacity: 0.8;
+  backdrop-filter: blur(2px);
+  opacity: 1;
   transition: transform 0.3s ease;
 }
 
