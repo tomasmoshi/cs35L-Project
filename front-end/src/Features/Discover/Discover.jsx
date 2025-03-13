@@ -15,7 +15,6 @@ import tennisIcon from "../../assets/images/Tennis.png";
 import baseballIcon from "../../assets/images/Baseball.png";
 
 const Discover = () => {
-  console.log("Discover component rendered");
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +34,6 @@ const Discover = () => {
     }
   };
 
-  
   const handleCategoryClick = async (category) => {
     try {
       setLoading(true);
@@ -95,13 +93,18 @@ const Discover = () => {
       
       {!loading && filteredEvents.length > 0 && (
         <div className="event-grid">
-         {filteredEvents.map((event) => (
-          // Pass event data via state and set preview to true (so description is hidden)
-          <Link to={`/event/${event.id}`} state={{ event }} key={event.id}>
-            <EventCard event={event} preview={true} />
-          </Link>
-        ))}
-      </div>
+
+          {filteredEvents.map((event) => (
+            <Link
+              to={`/event/${event.id}`}
+              state={{ event }}
+              key={event.id}
+              className="event-card-link"
+            >
+              <EventCard event={event} preview={true} />
+            </Link>
+          ))}
+        </div>
       )}
     </div>
   );
