@@ -12,24 +12,29 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 
+
 # Create your views here.
 
 
 class LoginUserView(APIView):
     permission_classes = [AllowAny]
+
     def post(self, request, *args, **kwargs):
         # Retrieve credentials from the request data
         username = request.data.get("username")
         password = request.data.get("password")
-        
+
         user = authenticate(request, username=username, password=password)
         if user is not None:
             token, created = Token.objects.get_or_create(user=user)
-            return Response({
-                "token": token.key,
-                "username": user.username,
-                "success": True,
-            }, status=status.HTTP_200_OK)
+            return Response(
+                {
+                    "token": token.key,
+                    "username": user.username,
+                    "success": True,
+                },
+                status=status.HTTP_200_OK,
+            )
         else:
             return Response(
                 {"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST
@@ -64,15 +69,32 @@ class CreateUserView(APIView, UserCreationForm):
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 class GetUserView(APIView):
     permission_classes = [IsAuthenticated]
+    parser_classes = (MultiPartParser, FormParser)  # Support file uploads
 
     def get(self, request, *args, **kwargs):
+        """Retrieve the logged-in user's profile."""
         try:
             user_profile = UserProfile.objects.get(user=request.user)
             serializer = UserDetailSerializer(user_profile)
             return Response(serializer.data, status=status.HTTP_200_OK)
+        except UserProfile.DoesNotExist:
+            return Response(
+                {"error": "User profile not found"}, status=status.HTTP_404_NOT_FOUND
+            )
+
+    def put(self, request, *args, **kwargs):
+        """Update the logged-in user's profile."""
+        try:
+            user_profile = UserProfile.objects.get(user=request.user)
+            serializer = UserDetailSerializer(
+                user_profile, data=request.data, partial=True
+            )
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except UserProfile.DoesNotExist:
             return Response(
                 {"error": "User profile not found"}, status=status.HTTP_404_NOT_FOUND

@@ -1,6 +1,5 @@
 // Login.jsx
 import React, { useState, useEffect } from "react";
-import "../Help/HelpModal.css";
 import "./Login.css";
 import Signup from "../Signup/Signup";
 import { sendLogin } from "../../Utils/apiLogin";
@@ -56,8 +55,8 @@ function Login({ onClose }) {
   };
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className="login-modal">
+      <div className="login-modal-content">
         <button className="close-btn" onClick={onClose}>
           &times;
         </button>

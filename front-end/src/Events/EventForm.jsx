@@ -79,13 +79,12 @@ const EventForm = ({ onEventSubmitted, onClose }) => {
         </label>
         
         {preview && <img src={preview} alt="Preview" className="image-preview" />}
-        
-        <textarea
-          placeholder="Write a short event description..."
-          name="content">
-
-        </textarea>
-        
+        <div className="event-form-content">
+          <textarea
+            placeholder="Write a short event description..."
+            name="content">
+          </textarea>
+        </div>
         <input type="text"
           placeholder="Tags (comma separated)"
           className="title-input"

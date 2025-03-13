@@ -4,6 +4,12 @@ import EventCard from "../../Events/EventCard";
 import { sendRequest } from "../../Utils/apiEvents";
 import "./Discover.css";
 import { Link } from "react-router-dom";
+import soccerIcon from "../../assets/images/Soccer.png";
+import footballIcon from "../../assets/images/Football.png";
+import basketballIcon from "../../assets/images/Basketball.png";
+import volleyballIcon from "../../assets/images/Volleyball.png";
+import danceIcon from "../../assets/images/Dance.png";
+import yogaIcon from "../../assets/images/Yoga.png";
 
 const Discover = () => {
   console.log("Discover component rendered");
@@ -52,6 +58,15 @@ const Discover = () => {
 
   const categories = ["Soccer", "Football", "Basketball", "Volleyball", "Dance", "Yoga"];
 
+  const categoryImages = {
+    Soccer: soccerIcon,
+    Football: footballIcon,
+    Basketball: basketballIcon,
+    Volleyball: volleyballIcon,
+    Dance: danceIcon,
+    Yoga: yogaIcon,
+  };
+
   return (
     <div className="discover-container">
       <h1>Discover Events</h1>
@@ -63,8 +78,8 @@ const Discover = () => {
         <h2>Browse by Category</h2>
         <div className="categories">
           {categories.map((cat) => (
-            <button key={cat} onClick={() => handleCategoryClick(cat)}>
-              {cat}
+            <button key={cat} onClick={() => handleCategoryClick(cat)} className="category-button">
+              <img src={categoryImages[cat]} alt={cat} className="category-icon" />
             </button>
           ))}
         </div>

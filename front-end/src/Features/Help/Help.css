@@ -1,4 +1,5 @@
-.about-modal {
+.help-modal {
+    margin-top: 15px;
     border-radius: 12px;
     background: radial-gradient(
       circle at 30% 50%, 
@@ -7,10 +8,10 @@
       #2e2e2e 100%
     );
     box-shadow: 0 4px 12px #4788e4;
-    width: 450px;   
-    height: 400px;
+    max-width: 500px;
+    max-height: 400px;
     position: fixed;
-    top: 30% !important;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
@@ -18,14 +19,14 @@
     align-items: center;
     z-index: 1000;
     overflow-y: hidden;
-    padding: 10px;            /* Add padding to reveal the box-shadow */
+    padding: 25px;            /* Add padding to reveal the box-shadow */
     box-sizing: border-box;   /* Ensure padding is included in the overall size */
-}
-
-.about-modal .about-content {
+  }
+    
+.help-modal .modal-content {
     overflow-y: auto;
-    width: 100%;   /* Use full width of parent minus padding */
-    height: 100%;  /* Use full height of parent minus padding */
+    width: 450px;
+    height: 350px;
     padding: 20px;
     background: radial-gradient(
         circle at 30% 50%, 
@@ -35,27 +36,30 @@
     );
     color: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px #4788e4;
 }
 
-
-.about-modal .close-btn {
+.help-modal .close-btn {
     position: absolute;
     top: 10px;
     right: 15px;
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 30px;
     cursor: pointer;
+    color: #fff;
 }
-
-.about-modal .about-content li {
+  
+.help-modal .modal-content ul {
+    list-style-position: inside;
+    padding-left: 20px;
+    margin-top: 30px;
+}
+  
+.help-modal .modal-content li {
     text-align: left;
     margin-bottom: 10px;
-  }
-.about-modal h2,.about-modal p {
+}
+.help-modal h2,.help-modal p {
     margin-top: 3px;
 }
-.about-modal p {
-    text-align: left;
-}
+  

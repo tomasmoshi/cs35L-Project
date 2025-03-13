@@ -40,3 +40,4 @@ class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
         fields = ["id", "username", "email", "first_name", "last_name", "profile_image"]
+

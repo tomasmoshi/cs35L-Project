@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import images from "../../assets/images/user.png";
+import React, { useEffect, useState, useContext } from "react";
 import apiUsers from "../../Utils/apiUsers";
 import "../../App/App.css";
 import ProfileHeader from "./Profile_Header";
 import EventTabs from "./User_Events";
+import { UserContext } from "../Context/UserContext";
 
 const Account = () => {
-  const [user, setUser] = useState(null);
-  const [events, setEvents] = useState([]); // ✅ Store user's events
+  const { user, setUser } = useContext(UserContext);
+  const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
+  const [editing, setEditing] = useState(false);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -16,10 +17,8 @@ const Account = () => {
       if (!token) return;
       try {
         const data = await apiUsers("http://127.0.0.1:8000/api/users/me/", "GET");
-        if (data) {
-          setUser(data);
-          fetchUserEvents(data.id); // ✅ Fetch events created by the user
-        }
+        setUser(data);
+        fetchUserEvents(data.id);
       } catch (error) {
         console.error("Error fetching user data:", error);
         setError("Failed to fetch user data.");
@@ -36,7 +35,7 @@ const Account = () => {
     };
 
     fetchUserData();
-  }, [token]);
+  }, [token, setUser]);
 
   if (!user) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -44,12 +43,11 @@ const Account = () => {
   return (
     <div className="account-container">
       {/* Profile Header */}
-      <ProfileHeader user={user} />
+      <ProfileHeader user={user} setEditing={setEditing} />
 
       {/* Show User's Events */}
       <h2 className="section-title">My Created Events</h2>
       <EventTabs events={events} />
-
     </div>
   );
 };

@@ -1,18 +1,32 @@
 import React from "react";
 import "./EventCard.css";
 import { formatDate } from "../Utils/DateHelper";
-
+import defaultpic from "../assets/images/user.png"
 const EventCard = ({ event, preview = false }) => {
 
   const imageUrl = event.image && event.image.startsWith("http")
     ? event.image
     : `http://localhost:8000${event.image}`;
+
+  const profileImageUrl = event.author_profile_image
+  ? event.author_profile_image.startsWith("http")
+  ? event.author_profile_image
+  : `http://localhost:8000${event.author_profile_image}`
+  : defaultpic;
   
   return (
     <div className="event-card">
+      <div className="event-user-profile">
+          <div>
+            <img 
+            src={profileImageUrl} 
+            alt={`${event.author_username}'s profile`} 
+            className="profile-image"
+            />
+          </div>
+          <div className="event-user">{event.author}</div>
+      </div>
       <h3 className="event-title">{event.title}</h3>
-      <br/>
-      <span className="event-user">Posted by: {event.author}</span>
       {event.image && (
         <img
           src={imageUrl}
@@ -20,19 +34,9 @@ const EventCard = ({ event, preview = false }) => {
           className="event-image"
         />
       )}
-      {!preview && <p className="event-text">{event.content}</p>}
-      {event.tags && event.tags.length > 0 && (
-        <div className="event-tags">
-          <p>Tags: {event.tags.map((tag, index) => (
-            <span key={index} className="event-tag">
-              {tag}
-            </span>
-          ))}
-          </p>
-        </div>
-      )}
-      <div className="event-header">
-        <div >Date posted: {event.date_posted && (
+      <div>{!preview && <p className="event-text">{event.content}</p>}</div>
+      <div className="event-header-date">
+        <div >{event.date_posted && (
           <span className="event-date">
             {formatDate(event.date_posted)}
           </span>
@@ -43,3 +47,4 @@ const EventCard = ({ event, preview = false }) => {
 };
 
 export default EventCard;
+

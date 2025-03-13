@@ -1,41 +1,136 @@
 /*Log in button spacing and container spacing */
-.input-container {
+/* LOGIN MODAL CONTAINER */
+.login-modal {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    max-height: 400px;
+    background: radial-gradient(
+      circle at 30% 50%, 
+      #2e2e2e 0%, 
+      #000000 60%, 
+      #2e2e2e 100%
+    );
+    box-shadow: 0 4px 12px #4788e4;
+    border-radius: 12px;
+    padding: 25px;
+    box-sizing: border-box;
+    z-index: 1000;
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* CONTENT WRAPPER INSIDE THE MODAL */
+  .login-modal-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* CLOSE BUTTON */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  .close-btn:hover {
+    color: #2b86d6;
+    transform: scale(1.1);
+  }
+  
+  /* HEADINGS */
+  .login-modal-content h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #fff;
+  }
+  
+  /* INPUT CONTAINER & INPUTS */
+  .input-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 50px;
-    align-items: center;
-}
-
-.button-container {
+    margin-bottom: 15px;
+  }
+  
+  .input-container input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  /* BUTTON CONTAINER & SUBMIT BUTTON */
+  .button-container {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 50px;
     margin-top: 20px;
-    margin-bottom: 50px;
-}
-
-.submit-btn {
+    margin-bottom: 20px;
+  }
+  
+  .submit-btn {
     width: 50%;
-}
-
-
-/*Styling for shake feature and login fail color*/
-.error {
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    background: #2b86d6;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background: #1f6bb5;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* ERROR MESSAGE */
+  .error {
     color: red;
     text-align: center;
     margin-top: 10px;
-}
-
-@keyframes shake {
+  }
+  
+  /* SHAKE ANIMATION */
+  @keyframes shake {
     0% { transform: translateX(0); background-color: #e42f29; }
     25% { transform: translateX(-5px); background-color: #e42f29; }
     50% { transform: translateX(5px); background-color: #e42f29; }
     75% { transform: translateX(-5px); background-color: #e42f29; }
     100% { transform: translateX(0); background-color: #2b86d6; }
-}
-
-.shake-btn {
+  }
+  
+  .shake-btn {
     animation: shake 0.25s ease-in-out 2.5;
-}
+  }
+  
+  /* LINK STYLING */
+  .login-modal a {
+    color: #2b86d6;
+    text-decoration: none;
+  }
+  
+  .login-modal a:hover {
+    text-decoration: underline;
+  }
+  

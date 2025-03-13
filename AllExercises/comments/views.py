@@ -9,22 +9,26 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.shortcuts import get_object_or_404
 from events.models import Post
+
+
 class CommentViewSet(APIView):
-    
+
     parser_classes = (MultiPartParser, FormParser)
     permission_classes = [permissions.AllowAny]  # Change permissions as needed
-    
+
     def get_permissions(self):
         if self.request.method == "POST":
             return [IsAuthenticated()]  # Only authenticated users can post
         return [AllowAny()]  # Anyone can view events
-    
+
     def post(self, request, *args, **kwargs):
         data = request.data.copy()
         # Assume the client sends an 'event' field with the Post's ID.
-        event_id = data.get('event')
+        event_id = data.get("event")
         if not event_id:
-            return Response({'error': 'Event id is required.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"error": "Event id is required."}, status=status.HTTP_400_BAD_REQUEST
+            )
 
         event_instance = get_object_or_404(Post, id=event_id)
 
