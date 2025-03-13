@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   margin: 0 1rem;
+  padding-top: 9px;
 }
 
 .searchbar-input {
@@ -25,7 +26,7 @@
 }
 
 .searchbar-button {
-  padding: 0.5rem 1rem;
+  margin-top: 0px;
   font-size: 1rem;
   background-color: #e91e63; 
   color: #fff;
