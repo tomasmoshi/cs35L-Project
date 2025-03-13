@@ -1,6 +1,6 @@
 // src/App/App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ModalButton from "../Features/ModalButton/ModalButton.jsx";
 import Discover from "../Features/Discover/Discover.jsx";
 import Account from "../Features/UserProfile/Account.jsx";
@@ -13,7 +13,7 @@ import Signup from "../Features/Signup/Signup.jsx";
 import UserMenu from "../Features/UserProfile/user_menu.jsx";
 import Login from "../Features/Login/Login"; 
 import SearchBar from "../Features/SearchBar/SearchBar.jsx";
-import AccountSettings from "../Features/UserProfile/settings/Account_Settings.jsx";
+import AccountSettings from "../Features/UserProfile/settings/Profile_Form.jsx";
 
 function App() {
   const handleSearch = (query) => {
@@ -25,7 +25,9 @@ function App() {
         <div className="container">
           <nav className="navbar">
             <div className="navbar-brand">
+            <Link to ="/" className="navbar-brand" style = {{textDecoration: 'none'}}>
               <h1 className="logo">AllExercises</h1>
+              </Link>
               </div>
             <div className="nav-buttons">
               <ModalButton label="Login" modalType="login" />
