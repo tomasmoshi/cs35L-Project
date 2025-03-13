@@ -32,7 +32,7 @@ const Discover = () => {
     }
   };
 
-  // Fetch events based on category
+  
   const handleCategoryClick = async (category) => {
     try {
       setLoading(true);

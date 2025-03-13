@@ -106,3 +106,20 @@ body {
     transform: rotateY(360deg);
   }
 }
+
+
+.home-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #e91e63; 
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem; 
+}
+
+.home-button:hover {
+  background-color: #c2185b; 
+}
