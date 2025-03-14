@@ -60,7 +60,7 @@ const Account = () => {
       {!loading && events.length > 0 && (
         <div className="event-grid">
          {events.map((event) => (
-            <Link to={`/event/${event.id}`} state={{ event }} key={event.id}>
+            <Link to={`/event/${event.id}`} state={{ event }} key={event.id} className="account-event-display">
               <EventCard event={event} preview={true} />
             </Link>
           ))}

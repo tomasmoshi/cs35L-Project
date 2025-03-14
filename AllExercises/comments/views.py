@@ -41,7 +41,10 @@ class CommentViewSet(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, *args, **kwargs):
-        # If a user is authenticated, associate the comment with them.
-        comment = Comment.objects.all().order_by("-date_posted")
-        serializer = CommentSerializer(comment, many=True)
+        event_id = request.query_params.get("event")
+        if event_id:
+            comments = Comment.objects.filter(event__id=event_id).order_by("-date_posted")
+        else:
+            comments = Comment.objects.all().order_by("-date_posted")
+        serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)

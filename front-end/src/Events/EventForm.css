@@ -65,8 +65,10 @@
 }
 
 .event-form .image-preview {
-  width: 480px !important;           
-  height: 480px !important;          
+  max-width: 480;
+  width: 100% !important;   
+  max-height: 480;        
+  height: 100% !important;          
   border-radius: 12px;    
   margin-top: 10px;
   border: 2px solid #2b86d6;

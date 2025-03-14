@@ -1,13 +1,14 @@
 from rest_framework import serializers
 from taggit.serializers import TagListSerializerField, TaggitSerializer
 from .models import Post
-from users.models import UserProfile  # Import UserProfile model
-        
+from users.models import UserProfile 
+from comments.serializers import CommentSerializer
+
 class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
     tags = TagListSerializerField()
     author = serializers.CharField(source="author.username", read_only=True)
     author_profile_image = serializers.SerializerMethodField()
-    
+    comments = CommentSerializer(many=True, read_only=True) 
     class Meta:
         model = Post
         fields = [
@@ -19,6 +20,7 @@ class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
             "tags",
             "author",
             "author_profile_image",
+            "comments",
         ]
     def get_author_profile_image(self, obj):
         try:

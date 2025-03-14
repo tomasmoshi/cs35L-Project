@@ -23,4 +23,7 @@
       left: 100%;
     }
   }
+.account-container .account-event-display{
+    text-decoration: none;
+}
   
