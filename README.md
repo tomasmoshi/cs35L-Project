@@ -37,7 +37,8 @@ Quit the server with CONTROL-C.
 
 1. Start by navigating to the `cs35l-project/front-end`
 2. Make sure you have `node.js` installed. You can install `node.js` from : `https://nodejs.org/en/download`
-3. Start a new terminal and make sure you have not closed the `back-end` terminal, then run the following commands:
+3. To use the Google Map API please use the `.env` and assign the `VITE_GOOGLE_MAPS_API_KEY` with your API key which you can provide it through [Google Maps API](https://mapsplatform.google.com/lp/maps-apis/?utm_source=google&utm_medium=cpc&utm_campaign=gmp25_us_search_dev&gad_source=1&gclsrc=aw.ds).
+4. Start a new terminal and make sure you have not closed the `back-end` terminal, then run the following commands:
 - First:
 ```python
 npm install
@@ -46,7 +47,7 @@ npm install
 ```python
 npm run dev
 ```
-4. You should see the following in your terminal:
+5. You should see the following in your terminal:
 ```python
 > front-end@0.0.0 dev
 > vite
@@ -58,7 +59,7 @@ npm run dev
   ➜  Network: use --host to expose
   ➜  press h + enter to show help
 ```
-5. Go ahead and click on the provided link in the console bar `http://localhost:5173/` and you should be able to view the website. 
+6. Go ahead and click on the provided link in the console bar `http://localhost:5173/` and you should be able to view the website. 
 
 
 
