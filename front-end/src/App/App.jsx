@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ModalButton from "../Features/ModalButton/ModalButton.jsx";
 import Discover from "../Features/Discover/Discover.jsx";
@@ -16,9 +15,12 @@ import SearchBar from "../Features/SearchBar/SearchBar.jsx";
 import AccountSettings from "../Features/UserProfile/settings/Profile_Form.jsx";
 
 function App() {
-  const handleSearch = (query) => {
-    console.log("Search query:", query);
+  const [activeModal, setActiveModal] = useState(null);
+
+  const handleToggleModal = (modalType) => {
+    setActiveModal((prev) => (prev === modalType ? null : modalType));
   };
+
   return (
     <UserProvider>
       <Router>
@@ -30,13 +32,13 @@ function App() {
               </Link>
               </div>
             <div className="nav-buttons">
-              <ModalButton label="Home" modalType="home" />
-              <ModalButton label="Login" modalType="login" />
-              <ModalButton label="Help" modalType="help" />
-              <ModalButton label="About Us" modalType="about" />
-              <ModalButton label="Discover" modalType="discover" />
-              <ModalButton label="Post event" modalType="post" />
-              <SearchBar onSearch={handleSearch} />
+            <ModalButton label="Home" modalType="home" onToggle={handleToggleModal} activeModal={activeModal} />
+              <ModalButton label="Login" modalType="login" onToggle={handleToggleModal} activeModal={activeModal} />
+              <ModalButton label="Help" modalType="help" onToggle={handleToggleModal} activeModal={activeModal} />
+              <ModalButton label="About Us" modalType="about" onToggle={handleToggleModal} activeModal={activeModal} />
+              <ModalButton label="Discover" modalType="discover" onToggle={handleToggleModal} activeModal={activeModal} />
+              <ModalButton label="Post event" modalType="post" onToggle={handleToggleModal} activeModal={activeModal} />
+              <SearchBar onSearch={(query) => console.log("Search query:", query)} />
               <div className="profile-icon nav-button-size">
                 <UserMenu />
               </div>
