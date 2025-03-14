@@ -21,7 +21,7 @@ const ProfileHeader = ({ user, setUser }) => {
       <h2>{user.username}</h2>
 
       {/* Always Show Bio - Ensure it's updated when edited */}
-      <p className="bio">{user.bio ? user.bio : "Add a bio..."}</p>
+      <p className="bio">{user.biography ? user.biography : "Add a bio..."}</p>
 
       {/* Always Show User Details */}
       <div className="account-details">

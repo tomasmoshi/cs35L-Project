@@ -5,15 +5,16 @@ import "./Settings.css";
 
 const ProfileForm = ({ setEditing, setUser }) => {
   const { user, refreshUser } = useContext(UserContext);
+  const [image, setImage] = useState(null); 
+
   const [updatedUser, setUpdatedUser] = useState({
     username: "",
     first_name: "",
     last_name: "",
     email: "",
-    bio: "",
-    profile_image: null,
+    biography: "",
   });
-  const [previewImage, setPreviewImage] = useState(null);
+  const [previewImage, setPreview] = useState(null);
 
   useEffect(() => {
     if (user) {
@@ -22,8 +23,7 @@ const ProfileForm = ({ setEditing, setUser }) => {
         first_name: user?.first_name || "",
         last_name: user?.last_name || "",
         email: user?.email || "",
-        bio: user?.bio || "",
-        profile_image: user?.profile_image || null,
+        biography: user?.biography || "",
       });
     }
   }, [user]);
@@ -35,8 +35,9 @@ const ProfileForm = ({ setEditing, setUser }) => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setPreviewImage(URL.createObjectURL(file));
-      setUpdatedUser({ ...updatedUser, profile_image: file });
+      setImage(file);
+      
+      setPreview(URL.createObjectURL(file));
     }
   };
 
@@ -46,16 +47,17 @@ const ProfileForm = ({ setEditing, setUser }) => {
       Object.keys(updatedUser).forEach((key) => {
         if (updatedUser[key]) formData.append(key, updatedUser[key]);
       });
-
-      if (updatedUser.profile_image instanceof File) {
-        formData.append("profile_image", updatedUser.profile_image);
+      if (image){
+        formData.append("profile_image", image);
       }
+    // Ensure `profile_image` is explicitly set to null if no new file is chosen
+
 
       const response = await apiUsers("http://127.0.0.1:8000/api/users/me/edit/", "PUT", formData, true);
 
       if (response) {
         await refreshUser();
-        setUser((prevUser) => ({ ...prevUser, bio: updatedUser.bio })); // Update user state with new bio
+        // setUser((user) => ({ ...user, biography: updatedUser.biography })); // Update user state with new bio
         setEditing(false);
       }
     } catch (error) {
@@ -70,7 +72,7 @@ const ProfileForm = ({ setEditing, setUser }) => {
 
       {/* Profile Image Section */}
       <div className="profile-image-container">
-        <div className="profile-image" style={{ backgroundImage: `url(${previewImage || user.profile_image || "default.png"})` }} />
+        <div className="profile-image" style={{ backgroundImage: `url(${previewImage || "default.png"})` }} />
         <label htmlFor="upload-input" className="change-image-btn">Change Your Profile Picture</label>
         <input id="upload-input" type="file" accept="image/*" onChange={handleImageChange} style={{ display: "none" }} />
       </div>
@@ -90,7 +92,7 @@ const ProfileForm = ({ setEditing, setUser }) => {
         <input type="email" name="email" value={updatedUser.email} onChange={handleInputChange} />
 
         <label>Bio</label>
-        <textarea name="bio" value={updatedUser.bio} onChange={handleInputChange} placeholder="Add a short bio..." />
+        <textarea name="biography" value={updatedUser.biography} onChange={handleInputChange} placeholder="Add a short bio..." />
 
         <div className="settings-btn-container">
           <button className="settings-btn save-btn" onClick={handleSave}>Save</button>
