@@ -1,121 +1,64 @@
-# Git Branching and Pull Requests Guide
+<h1 style="text-align:center;color:#e0004e">Welcome to AllExercises</h1>
 
-This guide provides a structured workflow for creating branches, submitting pull requests, and using essential Git commands for branching and rebasing.
+<h2 style="color:#202345">What does AllExercises do?</h2>
+<p>As students in CS35L course we believed that there should be a social media platform that encourages people to meet outside and participate in fun activities such as playing tennis, soccer and etc.
+</p>
+<p>AllExcersises web application will allow users to post their exercise events, post comment about those events. Users are able to post only if they sign up or login to the website. They can upload a picture, a title and also tag their post manually or use our automated tagging system that will choose keywords from the post's content.
+</p>
+<p>We believed that goal of this application is to bring people out together therefore we implemented comments to allow people to communicate about an event.
+</p>
 
----
+<h2 style="color:#202345">How to deploy the application?</h2>
 
-## 📌 1. Branch Naming Convention
-When creating a new branch, follow the naming format:  
-**`Dev/Name/Branch`**  
+Our web application includes two separate parts, `front-end` and `back-end`. `front-end` is in `react` and `back-end` is using `django` as their frameworks.
 
-### ✅ Example:
-```bash
-git checkout -b Dev/JohnDoe/FeatureX
+<h3 style="color:#202345">How to deploy backend?</h3>
+
+1. Download `python 13.2.0` or use `anaconda` for your python. 
+    - Make a new virtual environment and activate it.
+        - You can follow this installation guide and on how to activate your virtual environment.
+        - `https://docs.python.org/3/library/venv.html`
+
+2. After activating your environment:
+- Start a new `bash` terminal.
+        - run the `setup.sh` in `cs35-project/AllExercises`
+- You should see the following in your terminal:
+```python
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+March 14, 2025 - 04:42:28
+Django version 5.1.4, using settings 'AllExercises.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
 ```
-This ensures clarity on who is working on which feature.
+<h3 style="color:#202345">How to deploy Front-end?</h3>
 
----
-
-## 🚀 2. How to Submit a Pull Request (PR)
-
-Follow these steps to submit a PR correctly:
-
-### **Step 1: Ensure Your Branch is Up to Date**
-```bash
-git checkout Dev/YourName/FeatureX  # Switch to your feature branch
-git pull origin main  # Ensure your branch is up to date with main
+1. Start by navigating to the `cs35l-project/front-end`
+2. Make sure you have `node.js` installed. You can install `node.js` from : `https://nodejs.org/en/download`
+3. Start a new terminal and make sure you have not closed the `back-end` terminal, then run the following commands:
+- First:
+```python
+npm install
 ```
-
-### **Step 2: Push Your Branch to Remote Repository**
-```bash
-git push origin Dev/YourName/FeatureX
+- Second:
+```python
+npm run dev
 ```
+4. You should see the following in your terminal:
+```python
+> front-end@0.0.0 dev
+> vite
 
-### **Step 3: Create a Pull Request**
-1. Go to your repository on **GitHub/GitLab/Bitbucket**.
-2. Navigate to the **"Pull Requests"** section.
-3. Click **"New Pull Request"**.
-4. Select your branch (`Dev/YourName/FeatureX`) as the source.
-5. Set `main` or `develop` as the target branch.
-6. Add a **clear title** and **detailed description** of your changes.
-7. Click **"Create Pull Request"** and request reviews.
 
-### **Step 4: Address Feedback & Merge**
-- Review comments from team members.
-- Make necessary changes and push again (`git push origin Dev/YourName/FeatureX`).
-- Once approved, **merge your PR**.
+  VITE v6.1.0  ready in 150 ms
 
----
-
-## 🔀 3. Essential Git Branching & Rebasing Commands
-
-### **Creating and Switching Branches**
-```bash
-git checkout -b Dev/YourName/NewFeature  # Create and switch to a new branch
-git checkout main  # Switch back to main
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
 ```
+5. Go ahead and click on the provided link in the console bar `http://localhost:5173/` and you should be able to view the website. 
 
-### **Pushing Your Changes**
-```bash
-git add .  # Stage all changes
-git commit -m "Your commit message"  # Commit changes
-git push origin Dev/YourName/NewFeature  # Push to remote branch
-```
-
-### **Fetching and Rebasing (Keeping Your Branch Updated)**
-```bash
-git fetch origin main  # Fetch latest changes from main
-git rebase origin/main  # Rebase your branch onto main
-```
-
-### **Handling Merge Conflicts During Rebase**
-If you encounter conflicts while rebasing:
-```bash
-git status  # Identify conflicting files
-# Manually resolve conflicts in the files
-git add resolved_file.txt  # Mark conflicts as resolved
-git rebase --continue  # Continue rebase process
-```
-
-### **Merging a Branch**
-```bash
-git checkout main  # Switch to main branch
-git merge Dev/YourName/NewFeature  # Merge changes
-git push origin main  # Push merged changes
-```
-
-### **Deleting a Branch After Merge**
-```bash
-git branch -d Dev/YourName/NewFeature  # Delete local branch
-git push origin --delete Dev/YourName/NewFeature  # Delete remote branch
-```
-
----
-
-## 🎯 4. Additional Best Practices
-
-✔️ **Always keep your branch up to date** with the latest changes from `main`.  
-✔️ **Write clear commit messages** that describe your changes.  
-✔️ **Resolve merge conflicts carefully** and test after rebasing.  
-✔️ **Avoid pushing directly to `main`**—always use feature branches and PRs.  
-✔️ **Keep your branches small** and focused on a single feature or bug fix.  
-
-## Django commands:
-- To install the chores headers:
-```pip install django-cors-headers```
-- To run the django server:
-```python manage.py runserver```
-- To creat a new app:
-```python manage.py startapp name-of-the-app```
-- Install django-taggit:
-```pip install django-taggit```
-- Install django-taggit-serializer:
-```pip install django-taggit-serializer```
-- Locate the file in your virtual environment:
-```.../lib/python3.13/site-packages/taggit_serializer/serializers.py```
-edit the following line:
-```from django.utils.translation import ugettext_lazy as _```
-to 
-```from django.utils.translation import gettext_lazy as _```
 
 
