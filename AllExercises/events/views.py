@@ -25,7 +25,7 @@ class CreateEventView(APIView):
         return [AllowAny()]  # Anyone can view events
 
     def post(self, request, *args, **kwargs):
-        data = request.data.copy()
+        data = request.data
         # Convert the tags field from JSON string to a Python object
         data["tags"] = json.loads(data["tags"]) if data.get("tags") else []
         new_tags = generate_tags(data["content"])
