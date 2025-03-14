@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import defaultImage from "../../assets/images/user.png"; // Default profile image
-import "./ProfileHeader.css"
-const ProfileHeader = ({ user, setEditing }) => {
+import "./ProfileHeader.css";
+import ProfileForm from "./settings/Profile_Form";
+
+const ProfileHeader = ({ user, setUser }) => {
+  const [editing, setEditing] = useState(false);
+
   if (!user) {
     return <p>Loading...</p>;
   }
@@ -15,10 +19,11 @@ const ProfileHeader = ({ user, setEditing }) => {
       <div className="cover-photo"></div>
       <img src={profileImageUrl} alt="Profile" className="profile-pic" />
       <h2>{user.username}</h2>
-      <p className="bio">{user.bio || "Add a bio..."}</p>
-      <button onClick={() => setEditing(true)}>Edit Profile</button>
 
-      {/* Account Details in Table Format */}
+      {/* Always Show Bio - Ensure it's updated when edited */}
+      <p className="bio">{user.biography ? user.biography : "Add a bio..."}</p>
+
+      {/* Always Show User Details */}
       <div className="account-details">
         <h2>Profile Details</h2>
         <table>
@@ -42,6 +47,13 @@ const ProfileHeader = ({ user, setEditing }) => {
           </tbody>
         </table>
       </div>
+
+      {/* Edit Profile Section */}
+      {!editing ? (
+        <button onClick={() => setEditing(true)}>Edit Profile</button>
+      ) : (
+        <ProfileForm setEditing={setEditing} setUser={setUser} />
+      )}
     </div>
   );
 };

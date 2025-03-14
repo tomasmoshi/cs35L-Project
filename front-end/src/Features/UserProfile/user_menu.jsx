@@ -2,12 +2,11 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import images from "../../assets/images/user.png";
-import "../../App/App.css";
 import apiUsers from "../../Utils/apiUsers";
 
 const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, setUser } = useContext(UserContext); // Get user and setUser from UserContext
+  const { user, setUser } = useContext(UserContext);
   const menuRef = useRef(null);
   const navigate = useNavigate();
   const profileImageUrl = user?.profile_image ? `http://127.0.0.1:8000${user.profile_image}` : images;
@@ -54,9 +53,6 @@ const UserMenu = () => {
         <div className="dropdown-menu">
           <button className="dropdown-item" onClick={() => navigate("/account")}>
             View Profile
-          </button>
-          <button className="dropdown-item" onClick={() => navigate("/settings")}>
-            Settings
           </button>
           <button
             className="dropdown-item logout-btn"

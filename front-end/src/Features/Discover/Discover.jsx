@@ -65,6 +65,7 @@ const Discover = () => {
     Basketball: basketballIcon,
     Pingpong: pingpongIcon,
     Volleyball: volleyballIcon,
+    Pingpong: pingpongIcon,
     Dance: danceIcon,
     Baseball: baseBallIcon,
     Yoga: yogaIcon,

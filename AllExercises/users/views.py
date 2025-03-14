@@ -108,6 +108,7 @@ class EditUserView(APIView):
         try:
             user_profile = UserProfile.objects.get(user=request.user)
             serializer = UserEditSerializer(user_profile, data=request.data, partial=True)
+            print(serializer.initial_data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_200_OK)
