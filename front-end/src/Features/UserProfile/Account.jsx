@@ -33,7 +33,7 @@ const Account = () => {
       setLoading(true);
       try {
         const eventData = await apiUsers(`http://127.0.0.1:8000/api/events/?author=${userId}`, "GET");
-        console.log(eventData);
+        
         setEvents(eventData);
       } catch (error) {
         console.error("Error fetching user events:", error);

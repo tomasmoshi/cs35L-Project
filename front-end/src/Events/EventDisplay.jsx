@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import EventCard from "./EventCard";
 import { sendRequest } from "../Utils/apiEvents.jsx";
 import CommentList from "../Comments/CommentList.jsx";
+import GoogleMapComponent from "../Features/GoogleMap/GoogleMap"; // Same component as before
 import "./EventDisplay.css";
 
 const EventDisplay = () => {
@@ -41,6 +42,14 @@ const EventDisplay = () => {
         {event ? (
           <>
             <EventCard event={event} preview={false} />
+            {event.latitude && event.longitude && (
+              <div className="event-map" style={{ height: "400px", margin: "1rem 0" }}>
+                <GoogleMapComponent 
+                  initialCenter={{ lat: event.latitude, lng: event.longitude }} 
+                  readOnly={true}
+                />
+              </div>
+            )}
             <CommentList eventId={event.id} />
           </>
         ) : (
@@ -52,4 +61,3 @@ const EventDisplay = () => {
 };
 
 export default EventDisplay;
-

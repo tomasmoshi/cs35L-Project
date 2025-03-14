@@ -11,21 +11,28 @@ const PostEvent = ({ onEventSubmitted, onClose }) => {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
-  // If your parent doesn't pass an "open" prop, assume the modal is open when this component mounts.
   const [mapKey, setMapKey] = useState(0);
   const [showMap, setShowMap] = useState(false);
+  const [location, setLocation] = useState(null);
 
   // When the modal is rendered, wait briefly then mount the map.
   useEffect(() => {
-    const timer = setTimeout(() => setShowMap(true), 500); // Adjust delay to your modal's open duration
+    const timer = setTimeout(() => setShowMap(true), 500); // Adjust delay as needed
     return () => clearTimeout(timer);
   }, []);
 
+  // Callback from the GoogleMapComponent to capture the selected location.
+  const handleLocationSelect = (coords) => {
+    setLocation(coords);
+  
+  };
+
+  // Merge the location into the event data when the event form is submitted.
   const handleEventSubmitted = (eventData) => {
     if (onEventSubmitted) {
       onEventSubmitted(eventData);
     }
-    // Remount the map if needed by forcing a new key.
+    // Optionally, force the map to remount if needed.
     setMapKey((prevKey) => prevKey + 1);
   };
 
@@ -43,10 +50,20 @@ const PostEvent = ({ onEventSubmitted, onClose }) => {
       {token ? (
         <div className="event-form-wrapper">
           <div className="event-form-container">
-            <EventForm onEventSubmitted={handleEventSubmitted} onClose={handleClose} />
+            <EventForm
+              onEventSubmitted={handleEventSubmitted}
+              onClose={handleClose}
+              location={location} 
+            />
           </div>
           <div className="google-map-container">
-            {showMap && <GoogleMapComponent key={mapKey} />}
+            {showMap && (
+              <GoogleMapComponent
+                key={mapKey}
+                onLocationSelect={handleLocationSelect}
+                readOnly={false}
+              />
+            )}
           </div>
         </div>
       ) : (
