@@ -15,7 +15,9 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE
     )  # models.CASCADE will delete all the posts for a user when the user is deleted
-    tags = TaggableManager()  # Adds tagging support
+    tags = TaggableManager()  
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
 
     def author_profile_image(self):
         try:

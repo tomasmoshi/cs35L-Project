@@ -21,6 +21,8 @@ class PostSerializer(TaggitSerializer, serializers.ModelSerializer):
             "author",
             "author_profile_image",
             "comments",
+            "latitude",
+            "longitude",
         ]
     def get_author_profile_image(self, obj):
         try:
