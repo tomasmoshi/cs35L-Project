@@ -1,56 +1,35 @@
-
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import AboutUs from "../AboutUs/AboutUs";
 import HelpModal from "../Help/Help";
 import Login from "../Login/Login";
 import Discover from "../Discover/Discover";
 
-function ModalButton({ label, modalType, onClick }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function ModalButton({ label, modalType, onToggle, activeModal }) {
   const navigate = useNavigate();
 
-  const toggleModal = () => {
-    if (modalType === "discover") {
-      navigate("/Discover");
-    } else if (modalType === "post") {
-      navigate("/eventform");
-    } 
-    else if (modalType==="home"){
-      navigate("/");
-    }else {
-      setIsModalOpen(!isModalOpen);
+  const handleClick = () => {
+    if (["discover", "post", "home"].includes(modalType)) {
+      onToggle(null);
+      setTimeout(() => {
+        if (modalType === "discover") navigate("/Discover");
+        else if (modalType === "post") navigate("/eventform");
+        else if (modalType === "home") navigate("/");
+      }, 100);
+    } else {
+      onToggle(modalType);
     }
   };
 
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden"; 
-    } else {
-      document.body.style.overflow = "auto";   
-    }
-    return () => {
-      document.body.style.overflow = "auto";   
-    };
-  }, [isModalOpen]);
-
   return (
     <>
-      <button className="nav-button" onClick={toggleModal}>
+      <button className="nav-button" onClick={handleClick}>
         {label}
       </button>
 
-      {isModalOpen && modalType === "login" && (
-        <Login onClose={toggleModal} />
-      )}
-
-      {isModalOpen && modalType === "about" && (
-        <AboutUs onClose={toggleModal} />
-      )}
-      
-      {isModalOpen && modalType === "help" && (
-        <HelpModal onClose={toggleModal} />
-      )}
+      {activeModal === "login" && modalType === "login" && <Login onClose={() => onToggle(null)} />}
+      {activeModal === "about" && modalType === "about" && <AboutUs onClose={() => onToggle(null)} />}
+      {activeModal === "help" && modalType === "help" && <HelpModal onClose={() => onToggle(null)} />}
     </>
   );
 }
